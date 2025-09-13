@@ -8,4 +8,7 @@ public class Part extends Asset {
     private String SerialNumber;
 
 
+    public Part(Integer assetId, String assetName, String assetType, Integer cyclesSinceNew, String timeSinceNew) {
+        super(assetId, assetName, assetType, cyclesSinceNew, timeSinceNew);
+    }
 }
