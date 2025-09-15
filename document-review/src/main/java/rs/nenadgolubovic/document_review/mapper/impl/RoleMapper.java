@@ -1,8 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.RoleDto;
-import mapper.Mapper;
-import model.Role;
+
+import rs.nenadgolubovic.document_review.dto.RoleDto;
+import rs.nenadgolubovic.document_review.entity.Role;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class RoleMapper implements Mapper<RoleDto, Role> {
     @Override

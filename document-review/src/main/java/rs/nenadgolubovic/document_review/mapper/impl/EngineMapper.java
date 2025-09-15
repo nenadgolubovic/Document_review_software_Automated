@@ -1,8 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.EngineDto;
-import mapper.Mapper;
-import model.Engine;
+
+import rs.nenadgolubovic.document_review.dto.EngineDto;
+import rs.nenadgolubovic.document_review.entity.Engine;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class EngineMapper implements Mapper<EngineDto, Engine> {
 

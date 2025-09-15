@@ -1,9 +1,10 @@
-package service.impl;
+package rs.nenadgolubovic.document_review.service.impl;
 
-import dto.AssetDto;
-import mapper.impl.AssetMapper;
-import repository.AssetRepository;
-import service.AssetService;
+
+import rs.nenadgolubovic.document_review.dto.AssetDto;
+import rs.nenadgolubovic.document_review.mapper.impl.AssetMapper;
+import rs.nenadgolubovic.document_review.repository.impl.AssetRepository;
+import rs.nenadgolubovic.document_review.service.AssetService;
 
 import java.util.List;
 

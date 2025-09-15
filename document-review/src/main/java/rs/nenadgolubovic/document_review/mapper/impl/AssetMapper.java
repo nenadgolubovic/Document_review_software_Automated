@@ -1,8 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.AssetDto;
-import mapper.Mapper;
-import model.Asset;
+
+import rs.nenadgolubovic.document_review.dto.AssetDto;
+import rs.nenadgolubovic.document_review.entity.Asset;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class AssetMapper implements Mapper<AssetDto, Asset> {
     @Override

@@ -1,4 +1,4 @@
-package dto;
+package rs.nenadgolubovic.document_review.dto;
 
 import java.io.Serializable;
 import java.util.Objects;

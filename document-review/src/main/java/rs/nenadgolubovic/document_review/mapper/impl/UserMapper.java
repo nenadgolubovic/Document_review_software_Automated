@@ -1,8 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.UserDto;
-import mapper.Mapper;
-import model.User;
+
+import rs.nenadgolubovic.document_review.dto.UserDto;
+import rs.nenadgolubovic.document_review.entity.User;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class UserMapper implements Mapper<UserDto, User> {
     @Override

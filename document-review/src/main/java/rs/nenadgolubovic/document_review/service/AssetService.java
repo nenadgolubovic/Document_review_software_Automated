@@ -1,6 +1,6 @@
-package service;
+package rs.nenadgolubovic.document_review.service;
 
-import dto.AssetDto;
+import rs.nenadgolubovic.document_review.dto.AssetDto;
 
 import java.util.List;
 

@@ -1,8 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.PartDto;
-import mapper.Mapper;
-import model.Part;
+
+import rs.nenadgolubovic.document_review.dto.PartDto;
+import rs.nenadgolubovic.document_review.entity.Part;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class PartMapper implements Mapper<PartDto, Part> {
     @Override

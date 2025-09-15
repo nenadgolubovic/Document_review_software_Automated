@@ -1,9 +1,16 @@
-package model;
+package rs.nenadgolubovic.document_review.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+@Entity
 public class Role {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
     private String roleName;
 

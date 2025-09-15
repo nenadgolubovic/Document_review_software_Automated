@@ -1,9 +1,16 @@
-package model;
+package rs.nenadgolubovic.document_review.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+@Entity
 public abstract class Asset {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer assetId;
     protected String assetName;
     protected String assetType;

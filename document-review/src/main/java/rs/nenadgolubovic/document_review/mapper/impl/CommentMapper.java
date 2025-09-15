@@ -1,7 +1,9 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.CommentDto;
-import mapper.Mapper;
+
+
+import rs.nenadgolubovic.document_review.dto.CommentDto;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 import java.awt.*;
 

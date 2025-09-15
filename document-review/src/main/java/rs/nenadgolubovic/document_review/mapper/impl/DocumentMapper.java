@@ -1,8 +1,8 @@
-package mapper.impl;
+package rs.nenadgolubovic.document_review.mapper.impl;
 
-import dto.DocumentDto;
-import mapper.Mapper;
-import model.Document;
+import rs.nenadgolubovic.document_review.dto.DocumentDto;
+import rs.nenadgolubovic.document_review.entity.Document;
+import rs.nenadgolubovic.document_review.mapper.Mapper;
 
 public class DocumentMapper implements Mapper<DocumentDto, Document> {
 

@@ -1,6 +1,7 @@
-package dto;
+package rs.nenadgolubovic.document_review.dto;
 
-import model.Role;
+
+import rs.nenadgolubovic.document_review.entity.Role;
 
 import java.util.Objects;
 
