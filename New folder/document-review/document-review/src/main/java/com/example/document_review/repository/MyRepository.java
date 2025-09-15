@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface MyRepository <E, Id> {
     void save(E entity);
-    E findById(String id);
-    List<E> findAll();
+    E findById(Integer id);
+    List<E> findAll() throws Exception;
     void delete(String id);
     void update(E entity);
 }
