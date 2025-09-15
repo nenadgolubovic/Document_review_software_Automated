@@ -9,13 +9,16 @@ public class CommentDto {
     private Integer userId;
     private String commentTitle;
     private LocalDateTime commentDate;
+    private boolean isApproved;
+    private Integer rate;
 
-    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate) {
+    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, Integer rate) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;
         this.commentTitle = commentTitle;
         this.commentDate = commentDate;
+        this.isApproved = false;
     }
 
     public CommentDto() {
@@ -62,28 +65,34 @@ public class CommentDto {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "CommentDto{" +
-                "commentId=" + commentId +
-                ", comment='" + comment + '\'' +
-                ", userId=" + userId +
-                ", commentTitle='" + commentTitle + '\'' +
-                ", commentDate=" + commentDate +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentDto that = (CommentDto) o;
-        return Objects.equals(commentId, that.commentId) && Objects.equals(comment, that.comment) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate);
+        return isApproved == that.isApproved && Objects.equals(commentId, that.commentId) && Objects.equals(comment, that.comment) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate);
+    }
+
+
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, comment, userId, commentTitle, commentDate);
+        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate);
     }
 }

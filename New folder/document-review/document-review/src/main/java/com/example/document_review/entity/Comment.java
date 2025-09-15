@@ -17,17 +17,24 @@ public class Comment {
     private Integer userId;
     private String commentTitle;
     private LocalDateTime commentDate;
+    private boolean isApproved;
+    private Integer rate;
 
-    public Comment(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate) {
+    public Comment(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;
         this.commentTitle = commentTitle;
         this.commentDate = commentDate;
+        this.isApproved = isApproved;
+        this.rate = rate;
     }
 
     public Comment() {
     }
+
+
+
 
     @Override
     public String toString() {
@@ -37,22 +44,10 @@ public class Comment {
                 ", userId=" + userId +
                 ", commentTitle='" + commentTitle + '\'' +
                 ", commentDate=" + commentDate +
+                ", isApproved=" + isApproved +
+                ", rate=" + rate +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment1 = (Comment) o;
-        return Objects.equals(commentId, comment1.commentId) && Objects.equals(comment, comment1.comment) && Objects.equals(userId, comment1.userId) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(commentId, comment, userId, commentTitle, commentDate);
-    }
-
     public Integer getCommentId() {
         return commentId;
     }
@@ -91,5 +86,35 @@ public class Comment {
 
     public void setCommentTitle(String commentTitle) {
         this.commentTitle = commentTitle;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
+
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment1 = (Comment) o;
+        return isApproved == comment1.isApproved && Objects.equals(commentId, comment1.commentId) && Objects.equals(comment, comment1.comment) && Objects.equals(userId, comment1.userId) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate) && Objects.equals(rate, comment1.rate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate);
     }
 }

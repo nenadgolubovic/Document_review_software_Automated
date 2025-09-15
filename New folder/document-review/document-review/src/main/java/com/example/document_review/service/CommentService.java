@@ -12,6 +12,5 @@ public interface CommentService {
     void update(CommentDto commentDto);
     void approveComment(CommentDto commentDto);
     void rejectComment(CommentDto commentDto);
-    void rateComment(CommentDto commentDto);
-
+    void rateComment(CommentDto commentDto, Integer rate);
 }
