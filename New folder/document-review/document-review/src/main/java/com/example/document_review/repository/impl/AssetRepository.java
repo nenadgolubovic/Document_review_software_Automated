@@ -5,9 +5,11 @@ import com.example.document_review.repository.AssetSpringDataRepository;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AssetRepository implements MyRepository <Asset, Integer> {
 
     @PersistenceContext
