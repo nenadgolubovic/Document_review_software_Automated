@@ -15,22 +15,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private Role role;
-
-    public UserDto() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDto userDto = (UserDto) o;
-        return Objects.equals(userId, userDto.userId) && Objects.equals(username, userDto.username) && Objects.equals(password, userDto.password) && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(role, userDto.role);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, username, password, firstName, lastName, role);
-    }
+    private String email;
 
     @Override
     public String toString() {
@@ -41,7 +26,37 @@ public class UserDto {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role=" + role +
+                ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(userId, userDto.userId) && Objects.equals(username, userDto.username) && Objects.equals(password, userDto.password) && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(role, userDto.role) && Objects.equals(email, userDto.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, username, password, firstName, lastName, role, email);
+    }
+
+
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
+    public UserDto() {
     }
 
     public Integer getUserId() {

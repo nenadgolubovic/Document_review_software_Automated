@@ -5,6 +5,7 @@ import com.example.document_review.mapper.Mapper;
 
 import java.awt.*;
 
+@org.springframework.stereotype.Component
 public class CommentMapper implements Mapper<CommentDto, Component> {
     @Override
     public Component toEntity(CommentDto componentDto) {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DocumentService {
     void save(DocumentDto document);
-    List<Document> findAll();
+    List<DocumentDto> findAllDocuments();
     DocumentDto findById(long id);
     void deleteById(long id);
     void changeStatus(long id, boolean status);

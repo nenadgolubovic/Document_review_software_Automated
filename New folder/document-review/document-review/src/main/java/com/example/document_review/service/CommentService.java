@@ -13,4 +13,5 @@ public interface CommentService {
     void approveComment(CommentDto commentDto);
     void rejectComment(CommentDto commentDto);
     void rateComment(CommentDto commentDto, Integer rate);
+
 }

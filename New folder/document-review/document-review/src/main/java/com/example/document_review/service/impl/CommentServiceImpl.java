@@ -1,6 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.CommentDto;
+import com.example.document_review.dto.UserDto;
 import com.example.document_review.service.CommentService;
 
 import java.util.List;
@@ -53,5 +54,6 @@ public class CommentServiceImpl implements CommentService {
             commentDto.setRate(rate);
         }
     }
+
 
 }
