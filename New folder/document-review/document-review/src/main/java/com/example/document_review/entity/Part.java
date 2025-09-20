@@ -1,17 +1,19 @@
 package com.example.document_review.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+@Entity
 public class Part extends Asset {
 
     private String name;
     private String partNumber;
     private String description;
-    private String SerialNumber;
+    private String serialNumber;
 
 
     public Part(Integer assetId, String assetName, String assetType, Integer cyclesSinceNew, String timeSinceNew) {
@@ -46,12 +48,10 @@ public class Part extends Asset {
     }
 
     public String getSerialNumber() {
-        return SerialNumber;
+        return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        SerialNumber = serialNumber;
-    }
+    public void setSerialNumber(String serialNumber) { this.serialNumber = serialNumber;}
 
     @Override
     public String toString() {
@@ -59,7 +59,7 @@ public class Part extends Asset {
                 "name='" + name + '\'' +
                 ", partNumber='" + partNumber + '\'' +
                 ", description='" + description + '\'' +
-                ", SerialNumber='" + SerialNumber + '\'' +
+                ", SerialNumber='" + serialNumber + '\'' +
                 '}';
     }
 
@@ -69,11 +69,11 @@ public class Part extends Asset {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Part part = (Part) o;
-        return Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(SerialNumber, part.SerialNumber);
+        return Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(serialNumber, part.serialNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, partNumber, description, SerialNumber);
+        return Objects.hash(super.hashCode(), name, partNumber, description, serialNumber);
     }
 }

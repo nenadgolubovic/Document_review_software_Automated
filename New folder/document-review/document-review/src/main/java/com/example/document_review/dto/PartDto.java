@@ -6,13 +6,13 @@ public class PartDto {
     private String name;
     private String partNumber;
     private String description;
-    private String SerialNumber;
+    private String serialNumber;
 
     public PartDto(String name, String partNumber, String description, String serialNumber) {
         this.name = name;
         this.partNumber = partNumber;
         this.description = description;
-        SerialNumber = serialNumber;
+        this.serialNumber = serialNumber;
     }
 
     public PartDto() {
@@ -43,11 +43,11 @@ public class PartDto {
     }
 
     public String getSerialNumber() {
-        return SerialNumber;
+        return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
-        SerialNumber = serialNumber;
+        this.serialNumber = serialNumber;
     }
 
     @Override
@@ -55,12 +55,12 @@ public class PartDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PartDto partDto = (PartDto) o;
-        return Objects.equals(name, partDto.name) && Objects.equals(partNumber, partDto.partNumber) && Objects.equals(description, partDto.description) && Objects.equals(SerialNumber, partDto.SerialNumber);
+        return Objects.equals(name, partDto.name) && Objects.equals(partNumber, partDto.partNumber) && Objects.equals(description, partDto.description) && Objects.equals(serialNumber, partDto.serialNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, partNumber, description, SerialNumber);
+        return Objects.hash(name, partNumber, description, serialNumber);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class PartDto {
                 "name='" + name + '\'' +
                 ", partNumber='" + partNumber + '\'' +
                 ", description='" + description + '\'' +
-                ", SerialNumber='" + SerialNumber + '\'' +
+                ", SerialNumber='" + serialNumber + '\'' +
                 '}';
     }
 }

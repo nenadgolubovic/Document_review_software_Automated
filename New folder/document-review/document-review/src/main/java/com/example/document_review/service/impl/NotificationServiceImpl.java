@@ -40,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService {
         message.setTo(userDto.getEmail());
         message.setSubject("Notification in Document Review Software");
         message.setText(commentDto.getComment());
-        mailSender.send(message);
+//        mailSender.send(message);
 
     }
 

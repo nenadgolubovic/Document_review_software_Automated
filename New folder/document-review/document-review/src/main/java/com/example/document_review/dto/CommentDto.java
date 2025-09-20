@@ -12,7 +12,7 @@ public class CommentDto {
     private boolean isApproved;
     private Integer rate;
 
-    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, Integer rate) {
+    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;

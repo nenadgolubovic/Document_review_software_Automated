@@ -1,16 +1,29 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.CommentDto;
-import com.example.document_review.dto.UserDto;
+import com.example.document_review.mapper.impl.CommentMapper;
+import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.service.CommentService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
-    @Override
-    public void save(CommentDto commentDto) {
+    private final CommentMapper commentMapper;
+    private final CommentRepository commentRepository;
 
+    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository) {
+        this.commentMapper = commentMapper;
+        this.commentRepository = commentRepository;
+    }
+
+    @Override
+    @Transactional
+    public void save(CommentDto commentDto) {
+        commentRepository.save(commentMapper.toEntity(commentDto));
     }
 
     @Override

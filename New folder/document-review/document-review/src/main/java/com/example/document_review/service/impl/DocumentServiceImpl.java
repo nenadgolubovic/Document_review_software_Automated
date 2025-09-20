@@ -18,7 +18,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public List<Document> findAllDocuments() {
+    public List<DocumentDto> findAllDocuments() {
         return List.of();
     }
 
