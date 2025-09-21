@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserService {
     void register(UserDto userDto);
     UserDto findById(long id);
-
+    void loginUser(UserDto userDto);
 }

@@ -3,6 +3,7 @@ package com.example.document_review.repository.impl;
 import com.example.document_review.entity.Comment;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
 
     @Override
     public Comment findById(Integer id) {
-        return null;
+        return entityManager.find(Comment.class, id);
     }
 
     @Override
@@ -42,7 +43,19 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
     }
 
     @Override
-    public void update(Comment entity) {
-
+    public void update(Comment comment) {
+        if (comment == null || comment.getCommentId() == null) {
+            throw new IllegalArgumentException("Comment or Comment ID must not be null");
+        }
+        Comment existingComment = entityManager.find(Comment.class, comment.getCommentId());
+        if (existingComment == null) {
+            throw new EntityNotFoundException("Comment with ID " + comment.getCommentId() + " not found");
+        }
+        existingComment.setComment(comment.getComment());
+        existingComment.setCommentTitle(comment.getCommentTitle());
+        existingComment.setUserId(comment.getUserId());
+        existingComment.setCommentDate(comment.getCommentDate());
+        existingComment.setApproved(comment.isApproved());
+        existingComment.setRate(comment.getRate());
     }
 }

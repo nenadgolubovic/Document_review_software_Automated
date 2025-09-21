@@ -10,8 +10,8 @@ public interface CommentService {
     CommentDto findById(long id);
     void deleteById(long id);
     void update(CommentDto commentDto);
-    void approveComment(CommentDto commentDto);
-    void rejectComment(CommentDto commentDto);
+    void approveComment(Integer id);
+    void rejectComment(Integer id);
     void rateComment(CommentDto commentDto, Integer rate);
 
 }

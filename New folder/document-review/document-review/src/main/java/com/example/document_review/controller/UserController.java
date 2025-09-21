@@ -24,6 +24,15 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
 
     }
+    @GetMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestParam String username,
+                                            @RequestParam String password) {
+        UserDto userDto = new UserDto();
+        userDto.setUsername(username);
+        userDto.setPassword(password);
+        userService.loginUser(userDto);
+        return ResponseEntity.ok("User logged in successfully");
+    }
 
 
 }

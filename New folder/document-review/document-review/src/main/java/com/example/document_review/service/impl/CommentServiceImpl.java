@@ -1,6 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.CommentDto;
+import com.example.document_review.entity.Comment;
 import com.example.document_review.mapper.impl.CommentMapper;
 import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.service.CommentService;
@@ -48,18 +49,25 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void approveComment(CommentDto commentDto) {
-        if (!commentDto.isApproved()) {
-            commentDto.setApproved(true);
+    @Transactional
+    public void approveComment(Integer id)
+    {
+
+        Comment comment = commentRepository.findById(id);
+        if (!comment.isApproved()) {
+            comment.setApproved(true);
         }
+        commentRepository.update(comment);
     }
 
     @Override
-    public void rejectComment(CommentDto commentDto) {
-        if (commentDto.isApproved()) {
-            commentDto.setApproved(false);
+    @Transactional
+    public void rejectComment(Integer id) {
+        Comment comment = commentRepository.findById(id);
+        if (comment.isApproved()) {
+            comment.setApproved(false);
         }
-
+        commentRepository.update(comment);
     }
 
     @Override

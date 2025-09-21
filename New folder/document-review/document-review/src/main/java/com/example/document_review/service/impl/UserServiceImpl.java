@@ -25,11 +25,17 @@ public class UserServiceImpl implements UserService {
     public void register(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         userRepository.save(user);
-        
+
     }
 
     @Override
     public UserDto findById(long id) {
         return null;
+    }
+
+    @Override
+    public void loginUser(UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        userRepository.findByUsername(user.getUsername());
     }
 }

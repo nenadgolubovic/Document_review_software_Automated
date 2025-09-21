@@ -1,10 +1,11 @@
 package com.example.document_review.entity;
-
+import java.nio.file.Path;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,16 +18,25 @@ public class Document {
     private String documentType;
     private LocalDate documentDate;
     private Integer assetId;
+    private String documentRoute;
 
-    public Document(Integer documentId, String documentName, String documentType, LocalDate documentDate, Integer assetId) {
+    public Document(Integer documentId, String documentName, String documentType, LocalDate documentDate, Integer assetId,String documentRoute) {
         this.documentId = documentId;
         this.documentName = documentName;
         this.documentType = documentType;
         this.documentDate = documentDate;
         this.assetId = assetId;
+        this.documentRoute = documentRoute;
     }
 
     public Document() {
+    }
+    public String getDocumentRoute() {
+        return documentRoute;
+    }
+
+    public void setDocumentRoute(String documentRoute) {
+        this.documentRoute = documentRoute;
     }
 
     public Integer getDocumentId() {
@@ -68,6 +78,18 @@ public class Document {
     public void setAssetId(Integer assetId) {
         this.assetId = assetId;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Document document = (Document) o;
+        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(documentType, document.documentType) && Objects.equals(documentDate, document.documentDate) && Objects.equals(assetId, document.assetId) && Objects.equals(documentRoute, document.documentRoute);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(documentId, documentName, documentType, documentDate, assetId, documentRoute);
+    }
 
     @Override
     public String toString() {
@@ -77,19 +99,7 @@ public class Document {
                 ", documentType='" + documentType + '\'' +
                 ", documentDate=" + documentDate +
                 ", assetId=" + assetId +
+                ", documentRoute='" + documentRoute + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Document document = (Document) o;
-        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(documentType, document.documentType) && Objects.equals(documentDate, document.documentDate) && Objects.equals(assetId, document.assetId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(documentId, documentName, documentType, documentDate, assetId);
     }
 }
