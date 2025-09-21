@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentService {
     void save(CommentDto commentDto);
-    List<CommentDto> findAll();
+    List<CommentDto> findAll() throws Exception;
     CommentDto findById(long id);
     void deleteById(long id);
     void update(CommentDto commentDto);

@@ -5,23 +5,25 @@ import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class UserRepository implements MyRepository {
+public class UserRepository implements MyRepository <User, Integer>{
 
     @PersistenceContext
     private EntityManager em;
 
 
     @Override
-    public void save(Object entity) {
-
+    @Transactional
+    public void save(User entity) {
+        em.persist(entity);
     }
 
     @Override
-    public Object findById(Integer id) {
+    public User findById(Integer id) {
         return null;
     }
 
@@ -36,9 +38,10 @@ public class UserRepository implements MyRepository {
     }
 
     @Override
-    public void update(Object entity) {
+    public void update(User entity) {
 
     }
+
 
     public User findByUsername(String username) {
         return em.createQuery(

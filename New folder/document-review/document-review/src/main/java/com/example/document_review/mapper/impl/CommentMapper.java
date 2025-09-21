@@ -16,6 +16,6 @@ public class CommentMapper implements Mapper<CommentDto, Comment> {
 
     @Override
     public CommentDto toDto(Comment comment) {
-        return new CommentDto(null, comment.getCommentTitle(), comment.getUserId(), comment.getComment(), comment.getCommentDate(), comment.isApproved(), comment.getRate());
+        return new CommentDto(comment.getCommentId(), comment.getCommentTitle(), comment.getUserId(), comment.getComment(), comment.getCommentDate(), comment.isApproved(), comment.getRate());
     }
 }

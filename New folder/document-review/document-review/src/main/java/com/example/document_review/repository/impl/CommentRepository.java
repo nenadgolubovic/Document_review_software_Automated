@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -27,7 +28,12 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
 
     @Override
     public List<Comment> findAll() throws Exception {
-        return List.of();
+        List<Comment> comments = entityManager.createQuery("select c from Comment c", Comment.class)
+                .getResultList();
+        if (comments.isEmpty()) {
+            throw new Exception("Comment not found");
+        }
+        return comments;
     }
 
     @Override
