@@ -49,12 +49,18 @@ public class DocumentController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<DocumentDto> getById(@PathVariable Long id) {
-        DocumentDto document = documentService.findById(id);
-        if (document != null) {
-            return ResponseEntity.ok(document);
+    public ResponseEntity<DocumentDto> getById(@PathVariable Integer id) {
+        DocumentDto documentDto = documentService.findById(id);
+        if (documentDto != null) {
+            return ResponseEntity.ok(documentDto);
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<DocumentDto> deleteById(@PathVariable Integer id) {
+        documentService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

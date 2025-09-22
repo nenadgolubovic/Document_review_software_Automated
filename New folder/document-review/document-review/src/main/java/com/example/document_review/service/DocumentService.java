@@ -13,9 +13,9 @@ public interface DocumentService {
 
     List<Document> findAll();
 
-    DocumentDto findById(long id);
-    void deleteById(long id);
-    void changeStatus(long id, boolean status);
+    DocumentDto findById(Integer id);
+    DocumentDto deleteById(Integer id);
+    void changeStatus(Integer id, boolean status);
     DocumentDto assignAsset(AssetDto assetDto, DocumentDto documentDto);
     DocumentDto reassignAsset(AssetDto assetDto, DocumentDto documentDto);
     void uploadDocument(MultipartFile file, DocumentDto documentDto);

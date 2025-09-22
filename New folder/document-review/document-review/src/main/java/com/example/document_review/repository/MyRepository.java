@@ -12,6 +12,6 @@ public interface MyRepository <E, Id> {
     void save(E entity);
     E findById(Integer id);
     List<E> findAll() throws Exception;
-    void delete(String id);
+    void delete(Integer id);
     void update(E entity);
 }

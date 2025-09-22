@@ -31,7 +31,7 @@ public class EngineRepository implements MyRepository <Engine, Integer>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
 
     }
 

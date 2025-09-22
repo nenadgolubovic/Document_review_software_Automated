@@ -1,6 +1,5 @@
 package com.example.document_review.repository.impl;
 
-import com.example.document_review.entity.Comment;
 import com.example.document_review.entity.Document;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
@@ -23,7 +22,9 @@ public class DocumentRepository implements MyRepository <Document, Integer>{
 
     @Override
     public Document findById(Integer id) {
-        return null;
+        return entityManager.find(Document.class, id);
+
+
     }
 
     @Override
@@ -37,12 +38,13 @@ public class DocumentRepository implements MyRepository <Document, Integer>{
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(Integer id) {
+        entityManager.remove(findById(id));
     }
 
     @Override
     public void update(Document entity) {
 
     }
+
 }

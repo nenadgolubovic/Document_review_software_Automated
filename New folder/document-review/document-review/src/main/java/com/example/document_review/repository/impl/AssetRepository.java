@@ -38,7 +38,7 @@ public class AssetRepository implements MyRepository <Asset, Integer> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
 
     }
 

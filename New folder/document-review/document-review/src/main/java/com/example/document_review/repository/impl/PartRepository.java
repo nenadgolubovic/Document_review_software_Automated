@@ -29,7 +29,7 @@ public class PartRepository implements MyRepository <Part, Integer> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
 
     }
 

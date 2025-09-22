@@ -2,12 +2,10 @@ package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.AssetDto;
 import com.example.document_review.dto.DocumentDto;
-import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.Document;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,17 +83,19 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public DocumentDto findById(long id) {
+    public DocumentDto findById(Integer id) {
+        return documentMapper.toDto(documentRepository.findById(id));
+    }
+
+    @Override
+    @Transactional
+    public DocumentDto deleteById(Integer id) {
+        documentRepository.delete(id);
         return null;
     }
 
     @Override
-    public void deleteById(long id) {
-
-    }
-
-    @Override
-    public void changeStatus(long id, boolean status) {
+    public void changeStatus(Integer id, boolean status) {
 
     }
 

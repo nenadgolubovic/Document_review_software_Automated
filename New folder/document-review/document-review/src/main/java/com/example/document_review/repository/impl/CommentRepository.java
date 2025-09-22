@@ -38,7 +38,7 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
 
     }
 
