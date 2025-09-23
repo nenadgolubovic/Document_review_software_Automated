@@ -8,19 +8,56 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Part extends Asset {
-
+public abstract class Part {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String partId;
     private String name;
     private String partNumber;
     private String description;
     private String serialNumber;
+    private String type;
+    private String cyclesSinceNew;
+    private String timeSinceNew;
 
-
-    public Part(Integer assetId, String assetName, String assetType, Integer cyclesSinceNew, String timeSinceNew) {
-        super(assetId, assetName, assetType, cyclesSinceNew, timeSinceNew);
+    public Part(String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew) {
+        this.name = name;
+        this.partNumber = partNumber;
+        this.description = description;
+        this.serialNumber = serialNumber;
+        this.type = type;
+        this.cyclesSinceNew = cyclesSinceNew;
+        this.timeSinceNew = timeSinceNew;
     }
+
     public Part() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Part{" +
+                "name='" + name + '\'' +
+                ", partNumber='" + partNumber + '\'' +
+                ", description='" + description + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", cyclesSinceNew='" + cyclesSinceNew + '\'' +
+                ", timeSinceNew='" + timeSinceNew + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Part part = (Part) o;
+        return Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(serialNumber, part.serialNumber) && Objects.equals(type, part.type) && Objects.equals(cyclesSinceNew, part.cyclesSinceNew) && Objects.equals(timeSinceNew, part.timeSinceNew);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew);
     }
 
     public String getName() {
@@ -51,29 +88,33 @@ public class Part extends Asset {
         return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) { this.serialNumber = serialNumber;}
-
-    @Override
-    public String toString() {
-        return "Part{" +
-                "name='" + name + '\'' +
-                ", partNumber='" + partNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", SerialNumber='" + serialNumber + '\'' +
-                '}';
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Part part = (Part) o;
-        return Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(serialNumber, part.serialNumber);
+    public String getType() {
+        return type;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), name, partNumber, description, serialNumber);
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCyclesSinceNew() {
+        return cyclesSinceNew;
+    }
+
+    public void setCyclesSinceNew(String cyclesSinceNew) {
+        this.cyclesSinceNew = cyclesSinceNew;
+    }
+
+    public String getTimeSinceNew() {
+        return timeSinceNew;
+    }
+
+    public void setTimeSinceNew(String timeSinceNew) {
+        this.timeSinceNew = timeSinceNew;
     }
 }
+
+

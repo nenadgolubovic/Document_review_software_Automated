@@ -1,10 +1,6 @@
 package com.example.document_review.repository;
 
 
-import com.example.document_review.entity.Engine;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 

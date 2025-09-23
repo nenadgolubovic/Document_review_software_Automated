@@ -1,6 +1,5 @@
 package com.example.document_review.service;
 
-import com.example.document_review.dto.AssetDto;
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.entity.Document;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,8 +15,6 @@ public interface DocumentService {
     DocumentDto findById(Integer id);
     DocumentDto deleteById(Integer id);
     void changeStatus(Integer id, boolean status);
-    DocumentDto assignAsset(AssetDto assetDto, DocumentDto documentDto);
-    DocumentDto reassignAsset(AssetDto assetDto, DocumentDto documentDto);
     void uploadDocument(MultipartFile file, DocumentDto documentDto);
 
 }

@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
     @GetMapping("/login")
-    public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> loadUserByUsername(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userDto);
     }
 

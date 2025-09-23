@@ -17,7 +17,7 @@ public class Document {
     private String documentName;
     private String documentType;
     private LocalDate documentDate;
-    private Integer assetId;
+    private Integer partId;
     private String documentRoute;
 
     public Document(Integer documentId, String documentName, String documentType, LocalDate documentDate, Integer assetId,String documentRoute) {
@@ -25,7 +25,7 @@ public class Document {
         this.documentName = documentName;
         this.documentType = documentType;
         this.documentDate = documentDate;
-        this.assetId = assetId;
+        this.partId = assetId;
         this.documentRoute = documentRoute;
     }
 
@@ -72,23 +72,23 @@ public class Document {
     }
 
     public Integer getAssetId() {
-        return assetId;
+        return partId;
     }
 
     public void setAssetId(Integer assetId) {
-        this.assetId = assetId;
+        this.partId = assetId;
     }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Document document = (Document) o;
-        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(documentType, document.documentType) && Objects.equals(documentDate, document.documentDate) && Objects.equals(assetId, document.assetId) && Objects.equals(documentRoute, document.documentRoute);
+        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(documentType, document.documentType) && Objects.equals(documentDate, document.documentDate) && Objects.equals(partId, document.partId) && Objects.equals(documentRoute, document.documentRoute);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(documentId, documentName, documentType, documentDate, assetId, documentRoute);
+        return Objects.hash(documentId, documentName, documentType, documentDate, partId, documentRoute);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Document {
                 ", documentName='" + documentName + '\'' +
                 ", documentType='" + documentType + '\'' +
                 ", documentDate=" + documentDate +
-                ", assetId=" + assetId +
+                ", assetId=" + partId +
                 ", documentRoute='" + documentRoute + '\'' +
                 '}';
     }

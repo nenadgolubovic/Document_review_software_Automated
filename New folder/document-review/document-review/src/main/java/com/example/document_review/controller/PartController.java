@@ -1,10 +1,9 @@
 package com.example.document_review.controller;
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.service.PartService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -23,4 +22,13 @@ public class PartController {
         partService.save(partDto);
     }
 
+    @GetMapping
+    public List<PartDto> getAll() {
+     return partService.getAll();
+    }
+
+    @GetMapping
+    public PartDto getById(@RequestParam int id) {
+        return partService.getById(id);
+    }
 }

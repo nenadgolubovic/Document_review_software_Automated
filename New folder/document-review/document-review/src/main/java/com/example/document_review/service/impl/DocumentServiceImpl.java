@@ -1,6 +1,5 @@
 package com.example.document_review.service.impl;
 
-import com.example.document_review.dto.AssetDto;
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.entity.Document;
 import com.example.document_review.mapper.impl.DocumentMapper;
@@ -97,16 +96,6 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public void changeStatus(Integer id, boolean status) {
 
-    }
-
-    @Override
-    public DocumentDto assignAsset(AssetDto assetDto, DocumentDto documentDto) {
-        return null;
-    }
-
-    @Override
-    public DocumentDto reassignAsset(AssetDto assetDto, DocumentDto documentDto) {
-        return null;
     }
 
 
