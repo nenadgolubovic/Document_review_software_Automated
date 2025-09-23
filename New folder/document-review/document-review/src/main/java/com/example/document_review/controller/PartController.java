@@ -22,12 +22,12 @@ public class PartController {
         partService.save(partDto);
     }
 
-    @GetMapping
-    public List<PartDto> getAll() {
+    @GetMapping("getAll")
+    public List<PartDto> getAll() throws Exception {
      return partService.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/getById")
     public PartDto getById(@RequestParam int id) {
         return partService.getById(id);
     }

@@ -2,20 +2,34 @@ package com.example.document_review.dto;
 
 import java.util.Objects;
 
-public class PartDto {
+public abstract class PartDto {
+
+
+    private Integer partId;
     private String name;
     private String partNumber;
     private String description;
     private String serialNumber;
-
-    public PartDto(String name, String partNumber, String description, String serialNumber) {
-        this.name = name;
-        this.partNumber = partNumber;
-        this.description = description;
-        this.serialNumber = serialNumber;
-    }
+    private String type;
 
     public PartDto() {
+
+    }
+
+    public String getCyclesSinceNew() {
+        return cyclesSinceNew;
+    }
+
+    public void setCyclesSinceNew(String cyclesSinceNew) {
+        this.cyclesSinceNew = cyclesSinceNew;
+    }
+
+    public Integer getPartId() {
+        return partId;
+    }
+
+    public void setPartId(Integer partId) {
+        this.partId = partId;
     }
 
     public String getName() {
@@ -50,26 +64,63 @@ public class PartDto {
         this.serialNumber = serialNumber;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTimeSinceNew() {
+        return timeSinceNew;
+    }
+
+    public void setTimeSinceNew(String timeSinceNew) {
+        this.timeSinceNew = timeSinceNew;
+    }
+
+    private String cyclesSinceNew;
+    private String timeSinceNew;
+
+
+
+    public PartDto(Integer partId, String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew) {
+        this.partId = partId;
+        this.name = name;
+        this.partNumber = partNumber;
+        this.description = description;
+        this.serialNumber = serialNumber;
+        this.type = type;
+        this.cyclesSinceNew = cyclesSinceNew;
+        this.timeSinceNew = timeSinceNew;
+    }
+    @Override
+    public String
+    toString() {
+        return "PartDto{" +
+                "partId=" + partId +
+                ", name='" + name + '\'' +
+                ", partNumber='" + partNumber + '\'' +
+                ", description='" + description + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", cyclesSinceNew='" + cyclesSinceNew + '\'' +
+                ", timeSinceNew='" + timeSinceNew + '\'' +
+                '}';
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PartDto partDto = (PartDto) o;
-        return Objects.equals(name, partDto.name) && Objects.equals(partNumber, partDto.partNumber) && Objects.equals(description, partDto.description) && Objects.equals(serialNumber, partDto.serialNumber);
+        return Objects.equals(partId, partDto.partId) && Objects.equals(name, partDto.name) && Objects.equals(partNumber, partDto.partNumber) && Objects.equals(description, partDto.description) && Objects.equals(serialNumber, partDto.serialNumber) && Objects.equals(type, partDto.type) && Objects.equals(cyclesSinceNew, partDto.cyclesSinceNew) && Objects.equals(timeSinceNew, partDto.timeSinceNew);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, partNumber, description, serialNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "PartDto{" +
-                "name='" + name + '\'' +
-                ", partNumber='" + partNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", SerialNumber='" + serialNumber + '\'' +
-                '}';
+        return Objects.hash(partId, name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew);
     }
 }
+
+

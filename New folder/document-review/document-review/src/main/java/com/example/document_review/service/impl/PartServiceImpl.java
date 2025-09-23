@@ -7,6 +7,8 @@ import com.example.document_review.service.PartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PartServiceImpl implements PartService {
 
@@ -23,5 +25,18 @@ public class PartServiceImpl implements PartService {
     public void save(PartDto partDto) {
         partRepository.save(partMapper.toEntity(partDto));
 
+    }
+
+    @Override
+    public PartDto getById(int id) {
+        return partMapper.toDto(partRepository.findById(id));
+    }
+
+    @Override
+    public List<PartDto> getAll() throws Exception {
+        return partRepository.findAll()
+                .stream()
+                .map(partMapper::toDto)
+                .toList();
     }
 }

@@ -8,5 +8,5 @@ public interface PartService{
     void save(PartDto partDto);
 
     PartDto getById(int id);
-    List<PartDto> getAll();
+    List<PartDto> getAll() throws Exception;
 }

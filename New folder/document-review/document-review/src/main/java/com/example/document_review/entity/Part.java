@@ -11,7 +11,7 @@ import java.util.Objects;
 public abstract class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String partId;
+    private Integer partId;
     private String name;
     private String partNumber;
     private String description;
