@@ -1,7 +1,6 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.BasicPartDto;
-import com.example.document_review.dto.CommentDto;
 import com.example.document_review.mapper.impl.BasicPartMapper;
 import com.example.document_review.repository.impl.BasicPartRepository;
 import com.example.document_review.service.BasicPartService;
@@ -27,13 +26,24 @@ public class BasicPartServiceImpl implements BasicPartService {
     public void save(BasicPartDto basicPartDto) {
         basicPartRepository.save(basicPartMapper.toEntity(basicPartDto));
     }
+
+    @Override
+    public void update(Integer basicPartId) {
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer partId) throws Exception {
+        basicPartRepository.delete(partId);
+    }
+
     @Override
     public List<BasicPartDto> getAll() throws Exception {
         return basicPartRepository.findAll().stream().map(entity -> basicPartMapper.toDto(entity)).collect(Collectors.toList());
     }
 
     @Override
-    public BasicPartDto getById(int id) {
+    public BasicPartDto getById(Integer id) {
         return basicPartMapper.toDto(basicPartRepository.findById(id));
     }
 }

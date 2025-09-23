@@ -3,6 +3,7 @@ package com.example.document_review.controller;
 import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.CommentDto;
 import com.example.document_review.dto.PartDto;
+import com.example.document_review.entity.BasicPart;
 import com.example.document_review.entity.Part;
 import com.example.document_review.service.BasicPartService;
 import com.example.document_review.service.PartService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/part/basic")
@@ -26,10 +28,14 @@ public class BasicPartController {
     }
 
 
-    @GetMapping("/{id}")
-    public BasicPartDto getById(@PathVariable  int id) {
-        return basicPartService.getById(id);
-
+    @GetMapping("/{basicPartId}")
+    public ResponseEntity<BasicPartDto> getById(@PathVariable Integer basicPartId) {
+        BasicPartDto dto = basicPartService.getById(basicPartId);
+        if (dto != null) {
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/all")
@@ -41,5 +47,21 @@ public class BasicPartController {
     public void save(@RequestBody BasicPartDto basicPartDto) {
         basicPartService.save(basicPartDto);
     }
+
+    @DeleteMapping("/{basicPartId}")
+    public ResponseEntity<String> delete(@PathVariable Integer basicPartId) throws Exception {
+        BasicPartDto existingBasicPartId = this.basicPartService.getById(basicPartId);
+        if (existingBasicPartId != null) {
+            this.basicPartService.delete(basicPartId);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{basicPartId}")
+    public void update(@PathVariable Integer basicPartId) {
+        basicPartService.update(basicPartId);
+    }
+
 
 }

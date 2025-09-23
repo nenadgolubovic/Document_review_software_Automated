@@ -1,7 +1,7 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Comment;
+import com.example.document_review.entity.FanBlade;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,48 +11,46 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class BasicPartRepository implements MyRepository<BasicPart, Integer> {
+public class FanBladeRepository implements MyRepository<FanBlade, Integer> {
+
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void save(BasicPart entity) {
+    public void save(FanBlade entity) {
         entityManager.persist(entity);
     }
 
 
     @Override
-    public BasicPart findById(Integer id) {
-        return entityManager.find(BasicPart.class, id);
+    public FanBlade findById(Integer id) {
+        return entityManager.find(FanBlade.class, id);
     }
 
     @Override
-    public List<BasicPart> findAll() throws Exception {
-    List<BasicPart> basicParts = entityManager.createQuery("select bp from BasicPart bp", BasicPart.class)
-            .getResultList();
-        if (basicParts.isEmpty()) {
+    public List<FanBlade> findAll() throws Exception {
+        List<FanBlade> fanBlades = entityManager.createQuery("select bp from FanBlade bp", FanBlade.class)
+                .getResultList();
+        if (fanBlades.isEmpty()) {
             throw new Exception("Comment not found");
         }
-        return basicParts;
+        return fanBlades;
     }
 
     @Override
     public void delete(Integer id) throws Exception {
-        BasicPart basicPart = entityManager.find(BasicPart.class, id);
+        FanBlade fanBlade = entityManager.find(FanBlade.class, id);
 
-        if (basicPart != null) {
-            entityManager.remove(basicPart);
+        if (fanBlade != null) {
+            entityManager.remove(fanBlade);
         } else {
             throw new EntityNotFoundException("Basic Part not found");
         }
     }
 
     @Override
-    public void update(BasicPart entity) {
+    public void update(FanBlade entity) {
 
     }
-
 }
-
-
