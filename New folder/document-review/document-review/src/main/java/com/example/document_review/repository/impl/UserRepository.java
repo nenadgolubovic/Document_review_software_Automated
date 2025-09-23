@@ -44,10 +44,11 @@ public class UserRepository implements MyRepository <User, Integer>{
 
 
     public User findByUsername(String username) {
-        return em.createQuery(
+        List<User> users = em.createQuery(
                         "SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username)
-                .getSingleResult();
+                .getResultList();
+        return users.isEmpty() ? null : users.get(0);
     }
 
 }
