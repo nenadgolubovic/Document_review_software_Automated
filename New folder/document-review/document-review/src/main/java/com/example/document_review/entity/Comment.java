@@ -1,9 +1,6 @@
 package com.example.document_review.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -15,38 +12,37 @@ public class Comment {
     private Integer commentId;
     private String comment;
     private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "document_id", nullable = false)
+    private Document document;
     private String commentTitle;
     private LocalDateTime commentDate;
     private boolean isApproved;
     private Integer rate;
 
-    public Comment(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
+    public Comment(Integer commentId, String comment, Integer userId, Document document, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;
+        this.document = document;
         this.commentTitle = commentTitle;
         this.commentDate = commentDate;
         this.isApproved = isApproved;
         this.rate = rate;
     }
 
+
     public Comment() {
+
     }
 
 
+    public Document getDocument() {
+        return document;
+    }
 
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "commentId=" + commentId +
-                ", comment='" + comment + '\'' +
-                ", userId=" + userId +
-                ", commentTitle='" + commentTitle + '\'' +
-                ", commentDate=" + commentDate +
-                ", isApproved=" + isApproved +
-                ", rate=" + rate +
-                '}';
+    public void setDocument(Document document) {
+        this.document = document;
     }
     public Integer getCommentId() {
         return commentId;
@@ -105,16 +101,32 @@ public class Comment {
         this.rate = rate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment1 = (Comment) o;
-        return isApproved == comment1.isApproved && Objects.equals(commentId, comment1.commentId) && Objects.equals(comment, comment1.comment) && Objects.equals(userId, comment1.userId) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate) && Objects.equals(rate, comment1.rate);
+        return isApproved == comment1.isApproved && Objects.equals(commentId, comment1.commentId) && Objects.equals(comment, comment1.comment) && Objects.equals(userId, comment1.userId) && Objects.equals(document, comment1.document) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate) && Objects.equals(rate, comment1.rate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate);
+        return Objects.hash(commentId, comment, userId, document, commentTitle, commentDate, isApproved, rate);
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", comment='" + comment + '\'' +
+                ", userId=" + userId +
+                ", document=" + document +
+                ", commentTitle='" + commentTitle + '\'' +
+                ", commentDate=" + commentDate +
+                ", isApproved=" + isApproved +
+                ", rate=" + rate +
+                '}';
+    }
+
 }

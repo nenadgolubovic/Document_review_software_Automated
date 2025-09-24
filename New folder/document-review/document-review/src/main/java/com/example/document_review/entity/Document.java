@@ -1,12 +1,12 @@
 package com.example.document_review.entity;
 import java.nio.file.Path;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,28 +15,24 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer documentId;
     private String documentName;
-    private String documentType;
-    private LocalDate documentDate;
-    private Integer partId;
+    @ManyToOne
+    @JoinColumn(name = "part_id", nullable = false)
+    private Part part;
     private String documentRoute;
+    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+    private LocalDate documentDate;
 
-    public Document(Integer documentId, String documentName, String documentType, LocalDate documentDate, Integer assetId,String documentRoute) {
+    public Document(Integer documentId, String documentName, Part part, String documentRoute, List<Comment> comments, LocalDate documentDate) {
         this.documentId = documentId;
         this.documentName = documentName;
-        this.documentType = documentType;
-        this.documentDate = documentDate;
-        this.partId = assetId;
+        this.part = part;
         this.documentRoute = documentRoute;
+        this.comments = comments;
+        this.documentDate = documentDate;
     }
 
     public Document() {
-    }
-    public String getDocumentRoute() {
-        return documentRoute;
-    }
-
-    public void setDocumentRoute(String documentRoute) {
-        this.documentRoute = documentRoute;
     }
 
     public Integer getDocumentId() {
@@ -47,20 +43,36 @@ public class Document {
         this.documentId = documentId;
     }
 
-    public String getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
-
     public String getDocumentName() {
         return documentName;
     }
 
     public void setDocumentName(String documentName) {
         this.documentName = documentName;
+    }
+
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    public String getDocumentRoute() {
+        return documentRoute;
+    }
+
+    public void setDocumentRoute(String documentRoute) {
+        this.documentRoute = documentRoute;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public LocalDate getDocumentDate() {
@@ -71,24 +83,17 @@ public class Document {
         this.documentDate = documentDate;
     }
 
-    public Integer getAssetId() {
-        return partId;
-    }
-
-    public void setAssetId(Integer assetId) {
-        this.partId = assetId;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Document document = (Document) o;
-        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(documentType, document.documentType) && Objects.equals(documentDate, document.documentDate) && Objects.equals(partId, document.partId) && Objects.equals(documentRoute, document.documentRoute);
+        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(part, document.part) && Objects.equals(documentRoute, document.documentRoute) && Objects.equals(comments, document.comments) && Objects.equals(documentDate, document.documentDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(documentId, documentName, documentType, documentDate, partId, documentRoute);
+        return Objects.hash(documentId, documentName, part, documentRoute, comments, documentDate);
     }
 
     @Override
@@ -96,10 +101,10 @@ public class Document {
         return "Document{" +
                 "documentId=" + documentId +
                 ", documentName='" + documentName + '\'' +
-                ", documentType='" + documentType + '\'' +
-                ", documentDate=" + documentDate +
-                ", assetId=" + partId +
+                ", part=" + part +
                 ", documentRoute='" + documentRoute + '\'' +
+                ", comments=" + comments +
+                ", documentDate=" + documentDate +
                 '}';
     }
 }

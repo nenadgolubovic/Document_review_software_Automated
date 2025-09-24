@@ -1,10 +1,9 @@
 package com.example.document_review.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,8 +18,12 @@ public abstract class Part {
     private String type;
     private String cyclesSinceNew;
     private String timeSinceNew;
+    @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Document> documents = new ArrayList<>();
 
-    public Part(String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew) {
+
+    public Part(Integer partId, String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
+        this.partId = partId;
         this.name = name;
         this.partNumber = partNumber;
         this.description = description;
@@ -28,36 +31,21 @@ public abstract class Part {
         this.type = type;
         this.cyclesSinceNew = cyclesSinceNew;
         this.timeSinceNew = timeSinceNew;
+        this.documents = documents;
     }
+
 
     public Part() {
 
     }
 
-    @Override
-    public String toString() {
-        return "Part{" +
-                "name='" + name + '\'' +
-                ", partNumber='" + partNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", type='" + type + '\'' +
-                ", cyclesSinceNew='" + cyclesSinceNew + '\'' +
-                ", timeSinceNew='" + timeSinceNew + '\'' +
-                '}';
+
+    public Integer getPartId() {
+        return partId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Part part = (Part) o;
-        return Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(serialNumber, part.serialNumber) && Objects.equals(type, part.type) && Objects.equals(cyclesSinceNew, part.cyclesSinceNew) && Objects.equals(timeSinceNew, part.timeSinceNew);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew);
+    public void setPartId(Integer partId) {
+        this.partId = partId;
     }
 
     public String getName() {
@@ -114,6 +102,42 @@ public abstract class Part {
 
     public void setTimeSinceNew(String timeSinceNew) {
         this.timeSinceNew = timeSinceNew;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Part part = (Part) o;
+        return Objects.equals(partId, part.partId) && Objects.equals(name, part.name) && Objects.equals(partNumber, part.partNumber) && Objects.equals(description, part.description) && Objects.equals(serialNumber, part.serialNumber) && Objects.equals(type, part.type) && Objects.equals(cyclesSinceNew, part.cyclesSinceNew) && Objects.equals(timeSinceNew, part.timeSinceNew) && Objects.equals(documents, part.documents);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(partId, name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew, documents);
+    }
+
+    @Override
+    public String toString() {
+        return "Part{" +
+                "partId=" + partId +
+                ", name='" + name + '\'' +
+                ", partNumber='" + partNumber + '\'' +
+                ", description='" + description + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", cyclesSinceNew='" + cyclesSinceNew + '\'' +
+                ", timeSinceNew='" + timeSinceNew + '\'' +
+                ", documents=" + documents +
+                '}';
     }
 }
 

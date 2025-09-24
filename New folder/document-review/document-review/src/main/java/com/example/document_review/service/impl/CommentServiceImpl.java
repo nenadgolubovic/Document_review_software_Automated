@@ -71,11 +71,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void rateComment(CommentDto commentDto, Integer rate) {
-        if (commentDto.getRate() == null) {
-            commentDto.setRate(rate);
+    @Transactional
+    public void rateComment(Integer commentId, Integer rate) {
+        Comment comment = commentRepository.findById(commentId);
+        comment.setRate(rate);
+
         }
     }
 
-
-}

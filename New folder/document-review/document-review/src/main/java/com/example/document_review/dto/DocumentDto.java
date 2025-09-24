@@ -1,37 +1,37 @@
 package com.example.document_review.dto;
 
+import com.example.document_review.entity.Comment;
+import com.example.document_review.entity.Part;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DocumentDto {
     private Integer documentId;
     private String documentName;
-    private String documentType;
-    private LocalDate documentDate;
-    private Integer assetId;
     private String documentRoute;
+    private Part part;
+    private List<Comment> comments = new ArrayList<>();
+    private LocalDate documentDate;
 
-    public DocumentDto(Integer documentId, String documentName, String documentType, LocalDate documentDate, Integer assetId, String documentRoute) {
+    public DocumentDto(Integer documentId, String documentName, String documentRoute, Part part, List<Comment> comments, LocalDate documentDate) {
         this.documentId = documentId;
         this.documentName = documentName;
-        this.documentType = documentType;
-        this.documentDate = documentDate;
-        this.assetId = assetId;
         this.documentRoute = documentRoute;
+        this.part = part;
+        this.comments = comments;
+        this.documentDate = documentDate;
     }
 
     public DocumentDto() {
     }
-
-    public String getDocumentRoute() {
-        return documentRoute;
-    }
-    public void setDocumentRoute(String documentRoute) {
-        this.documentRoute = documentRoute;
-    }
-
-
 
     public Integer getDocumentId() {
         return documentId;
@@ -49,6 +49,30 @@ public class DocumentDto {
         this.documentName = documentName;
     }
 
+    public String getDocumentRoute() {
+        return documentRoute;
+    }
+
+    public void setDocumentRoute(String documentRoute) {
+        this.documentRoute = documentRoute;
+    }
+
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public LocalDate getDocumentDate() {
         return documentDate;
     }
@@ -57,46 +81,28 @@ public class DocumentDto {
         this.documentDate = documentDate;
     }
 
-    public String getDocumentType() {
-        return documentType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DocumentDto that = (DocumentDto) o;
+        return Objects.equals(documentId, that.documentId) && Objects.equals(documentName, that.documentName) && Objects.equals(documentRoute, that.documentRoute) && Objects.equals(part, that.part) && Objects.equals(comments, that.comments) && Objects.equals(documentDate, that.documentDate);
     }
 
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
+    @Override
+    public int hashCode() {
+        return Objects.hash(documentId, documentName, documentRoute, part, comments, documentDate);
     }
-
-    public Integer getAssetId() {
-        return assetId;
-    }
-
-    public void setAssetId(Integer assetId) {
-        this.assetId = assetId;
-    }
-
 
     @Override
     public String toString() {
         return "DocumentDto{" +
                 "documentId=" + documentId +
                 ", documentName='" + documentName + '\'' +
-                ", documentType='" + documentType + '\'' +
-                ", documentDate=" + documentDate +
-                ", assetId=" + assetId +
                 ", documentRoute='" + documentRoute + '\'' +
+                ", part=" + part +
+                ", comments=" + comments +
+                ", documentDate=" + documentDate +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DocumentDto that = (DocumentDto) o;
-        return Objects.equals(documentId, that.documentId) && Objects.equals(documentName, that.documentName) && Objects.equals(documentType, that.documentType) && Objects.equals(documentDate, that.documentDate) && Objects.equals(assetId, that.assetId) && Objects.equals(documentRoute, that.documentRoute);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(documentId, documentName, documentType, documentDate, assetId, documentRoute);
-    }
-
 }

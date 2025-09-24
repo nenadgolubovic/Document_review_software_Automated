@@ -37,4 +37,11 @@ public class CommentController {
         commentService.rejectComment(commentId);
         return ResponseEntity.ok("Comment rejected successfully");
     }
+
+    @PutMapping("/rateComment/{commentId}/{newRate}")
+    public ResponseEntity<String> rateComment(@PathVariable Integer commentId,
+                                              @PathVariable Integer newRate) {
+        commentService.rateComment(commentId, newRate);
+        return ResponseEntity.ok("Comment rate successfully");
+    }
 }
