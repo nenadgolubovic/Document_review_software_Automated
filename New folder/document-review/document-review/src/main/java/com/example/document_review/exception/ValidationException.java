@@ -1,4 +1,7 @@
 package com.example.document_review.exception;
 
-public class ValidationException extends Throwable {
+public class ValidationException extends RuntimeException {
+    public ValidationException(String message) {
+        super(message);
+    }
 }
