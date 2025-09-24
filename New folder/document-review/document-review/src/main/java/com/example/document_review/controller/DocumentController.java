@@ -17,7 +17,7 @@ import java.util.List;
 @RestController()
 public class DocumentController {
 
-    private DocumentService documentService;
+    private final DocumentService documentService;
     public DocumentController(DocumentService documentService) {
         this.documentService = documentService;
     }
@@ -36,7 +36,7 @@ public class DocumentController {
         }
     }
 
-    
+
     @GetMapping("/getAll")
     public ResponseEntity<List<DocumentDto>> getAll() throws Exception {
         List<DocumentDto> documents = documentService.findAllDocuments();
