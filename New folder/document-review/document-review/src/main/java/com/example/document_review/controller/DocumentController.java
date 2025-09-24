@@ -3,6 +3,7 @@ package com.example.document_review.controller;
 
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.exception.EntityNotFoundException;
+
 import com.example.document_review.service.DocumentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +36,7 @@ public class DocumentController {
         }
     }
 
-
-
+    
     @GetMapping("/getAll")
     public ResponseEntity<List<DocumentDto>> getAll() throws Exception {
         List<DocumentDto> documents = documentService.findAllDocuments();
