@@ -2,20 +2,13 @@ package com.example.document_review.controller;
 
 
 import com.example.document_review.dto.DocumentDto;
-import com.example.document_review.entity.Document;
 import com.example.document_review.exception.EntityNotFoundException;
-import com.example.document_review.mapper.impl.DocumentMapper;
-import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 
@@ -30,7 +23,7 @@ public class DocumentController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadDocument(@RequestPart("document") MultipartFile document)
-                                                 {
+                                                  {
         try {
             DocumentDto documentDto = new DocumentDto();
             documentService.uploadDocument(document, documentDto);
@@ -51,7 +44,7 @@ public class DocumentController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<DocumentDto> getById(@PathVariable Integer id) {
+    public ResponseEntity<DocumentDto> getById(@PathVariable Integer id) throws Exception {
         DocumentDto documentDto = documentService.findById(id);
         if (documentDto != null) {
             return ResponseEntity.ok(documentDto);

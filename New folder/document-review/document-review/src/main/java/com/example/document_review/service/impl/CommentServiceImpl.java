@@ -2,6 +2,7 @@ package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.CommentDto;
 import com.example.document_review.entity.Comment;
+import com.example.document_review.exception.ValidationException;
 import com.example.document_review.mapper.impl.CommentMapper;
 import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.service.CommentService;
@@ -27,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void save(CommentDto commentDto) {
+    public void save(CommentDto commentDto) throws ValidationException {
         commentSaveValidator.validate(commentDto);
         commentRepository.save(commentMapper.toEntity(commentDto));
     }
@@ -54,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void approveComment(Integer id)
+    public void approveComment(Integer id) throws Exception
     {
 
         Comment comment = commentRepository.findById(id);
@@ -66,17 +67,23 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void rejectComment(Integer id) {
-        Comment comment = commentRepository.findById(id);
-        if (comment.isApproved()) {
-            comment.setApproved(false);
+    public void rejectComment(Integer id) throws Exception{
+        try{
+            Comment comment = commentRepository.findById(id);
+            if (comment.isApproved()) {
+                comment.setApproved(false);
+            }
+            commentRepository.update(comment);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
-        commentRepository.update(comment);
+
+
     }
 
     @Override
     @Transactional
-    public void rateComment(Integer commentId, Integer rate) {
+    public void rateComment(Integer commentId, Integer rate) throws Exception{
         Comment comment = commentRepository.findById(commentId);
         comment.setRate(rate);
 

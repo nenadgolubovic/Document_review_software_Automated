@@ -3,11 +3,9 @@ import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -35,10 +33,28 @@ public class UserController {
 
         return ResponseEntity.ok(user);
     }
-    @GetMapping("/login")
-    public ResponseEntity<UserDto> loadUserByUsername(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userDto);
+    @PostMapping("/login")
+    public ResponseEntity<String> loadUserByUsername(@RequestBody UserDto userDto) {
+        try{
+            User user = userService.loginUser(userDto);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            }
+            return ResponseEntity.ok("Login successful for user: " + user.getUsername());
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser(@RequestBody UserDto userDto, Principal principal) {
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
+        }
+        return ResponseEntity.ok("Logout successful for user: " + userDto.getUsername());
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserDto userDto) {

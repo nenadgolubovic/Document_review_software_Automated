@@ -1,17 +1,11 @@
 package com.example.document_review.controller;
 
 import com.example.document_review.dto.BasicPartDto;
-import com.example.document_review.dto.CommentDto;
-import com.example.document_review.dto.PartDto;
-import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Part;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.BasicPartService;
-import com.example.document_review.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,7 +25,7 @@ public class BasicPartController {
 
 
     @GetMapping("/{basicPartId}")
-    public ResponseEntity<BasicPartDto> getById(@PathVariable Integer basicPartId) {
+    public ResponseEntity<BasicPartDto> getById(@PathVariable Integer basicPartId) throws Exception {
         BasicPartDto dto = basicPartService.getById(basicPartId);
         if (dto != null) {
             return ResponseEntity.ok(dto);

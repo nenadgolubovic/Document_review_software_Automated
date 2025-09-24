@@ -10,8 +10,6 @@ import com.example.document_review.validator.impl.RegistrationValidator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -44,10 +42,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void loginUser(UserDto userDto) {
+    public User loginUser(UserDto userDto) {
         logInValidator.validate(userDto);
         User user = userMapper.toEntity(userDto);
         userRepository.findByUsername(user.getUsername());
+        return user;
     }
 
     @Override

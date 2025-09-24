@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class LogInValidator implements Validator <UserDto> {
     @Override
     public void validate(UserDto userDto) throws ValidationException {
-        if (userDto.getUsername() == null || userDto.getEmail().isEmpty()) {
+        if (userDto.getUsername() == null || userDto.getUsername().isEmpty()) {
             throw new ValidationException("Username is empty");
         }
         if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {

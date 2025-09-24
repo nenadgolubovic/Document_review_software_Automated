@@ -1,6 +1,5 @@
 package com.example.document_review.controller;
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.BasicPartService;
@@ -21,13 +20,13 @@ public class FanBladeController {
     @Autowired
     private FanBladeService fanBladeService;
 
-    public FanBladeController(BasicPartService basicPartService) {
+    public FanBladeController(FanBladeService fanBladeService) {
         this.fanBladeService = fanBladeService;
     }
 
 
     @GetMapping("/{fanBladeId}")
-    public ResponseEntity<FanBladeDto> getById(@PathVariable Integer fanBladeId) {
+    public ResponseEntity<FanBladeDto> getById(@PathVariable Integer fanBladeId) throws Exception {
         FanBladeDto fanBladeDto = fanBladeService.getById(fanBladeId);
         if (fanBladeDto != null) {
             return ResponseEntity.ok(fanBladeDto);
