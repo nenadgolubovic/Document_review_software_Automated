@@ -5,6 +5,7 @@ import com.example.document_review.entity.Comment;
 import com.example.document_review.mapper.impl.CommentMapper;
 import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.service.CommentService;
+import com.example.document_review.validator.impl.CommentSaveValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,15 +17,18 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;
+    private final CommentSaveValidator commentSaveValidator;
 
-    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, CommentSaveValidator commentSaveValidator) {
         this.commentMapper = commentMapper;
         this.commentRepository = commentRepository;
+        this.commentSaveValidator = commentSaveValidator;
     }
 
     @Override
     @Transactional
     public void save(CommentDto commentDto) {
+        commentSaveValidator.validate(commentDto);
         commentRepository.save(commentMapper.toEntity(commentDto));
     }
 

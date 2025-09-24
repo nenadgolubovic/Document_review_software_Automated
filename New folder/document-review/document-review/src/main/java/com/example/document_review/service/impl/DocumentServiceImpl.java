@@ -5,6 +5,8 @@ import com.example.document_review.entity.Document;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
+import com.example.document_review.validator.impl.DocumentFileValidator;
+import com.example.document_review.validator.impl.DocumentSaveValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,15 +25,25 @@ public class DocumentServiceImpl implements DocumentService {
 
     private DocumentRepository documentRepository;
     private DocumentMapper documentMapper;
+    private DocumentSaveValidator documentSaveValidator;
+    private DocumentFileValidator documentFileValidator;
 
-    public DocumentServiceImpl(DocumentMapper documentMapper, DocumentRepository documentRepository) {
-        this.documentMapper = documentMapper;
+    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSaveValidator documentSaveValidator, DocumentFileValidator documentFileValidator) {
         this.documentRepository = documentRepository;
+        this.documentMapper = documentMapper;
+        this.documentSaveValidator = documentSaveValidator;
+        this.documentFileValidator = documentFileValidator;
     }
+
+
+
 
     @Override
     @Transactional
     public void uploadDocument(MultipartFile document, DocumentDto documentDto) {
+
+        documentSaveValidator.validate(documentDto);
+        documentFileValidator.validate(document);
 
         if (document == null || document.isEmpty()) {
             throw new IllegalArgumentException("File name is invalid");
