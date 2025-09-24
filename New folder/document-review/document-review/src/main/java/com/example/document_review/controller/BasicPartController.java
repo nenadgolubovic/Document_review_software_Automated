@@ -5,6 +5,7 @@ import com.example.document_review.dto.CommentDto;
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.BasicPart;
 import com.example.document_review.entity.Part;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.BasicPartService;
 import com.example.document_review.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +63,10 @@ public class BasicPartController {
     @PutMapping("/{basicPartId}")
     public void update(@PathVariable Integer basicPartId) {
         basicPartService.update(basicPartId);
+    }
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ResponseStatusException handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
 

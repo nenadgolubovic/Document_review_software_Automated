@@ -3,6 +3,7 @@ package com.example.document_review.controller;
 
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.entity.Document;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -62,5 +64,9 @@ public class DocumentController {
     public ResponseEntity<DocumentDto> deleteById(@PathVariable Integer id) {
         documentService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ResponseStatusException handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 }

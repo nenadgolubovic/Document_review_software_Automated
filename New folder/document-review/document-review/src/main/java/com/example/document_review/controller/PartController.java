@@ -1,7 +1,10 @@
 package com.example.document_review.controller;
 import com.example.document_review.dto.PartDto;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.PartService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -30,5 +33,9 @@ public class PartController {
     @GetMapping("/getById")
     public PartDto getById(@RequestParam int id) {
         return partService.getById(id);
+    }
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ResponseStatusException handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 }

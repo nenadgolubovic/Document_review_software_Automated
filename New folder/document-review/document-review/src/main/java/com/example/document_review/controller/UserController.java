@@ -1,11 +1,14 @@
 package com.example.document_review.controller;
 import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.UserService;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -45,6 +48,11 @@ public class UserController {
         }
         userService.register(userDto);
         return ResponseEntity.ok("User registered successfully");
+    }
+
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ResponseStatusException handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
 
