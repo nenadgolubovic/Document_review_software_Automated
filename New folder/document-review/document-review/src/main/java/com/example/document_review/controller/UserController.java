@@ -1,4 +1,5 @@
 package com.example.document_review.controller;
+import com.example.document_review.dto.LoggedUserDto;
 import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
 import com.example.document_review.exception.EntityNotFoundException;
@@ -34,16 +35,14 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> loadUserByUsername(@RequestBody UserDto userDto) {
+    public ResponseEntity<LoggedUserDto> loadUserByUsername(@RequestBody UserDto userDto) {
         try{
             User user = userService.loginUser(userDto);
-            if (user == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-            }
-            return ResponseEntity.ok("Login successful for user: " + user.getUsername());
+            LoggedUserDto loggedUser = new LoggedUserDto(user.getUsername());
+            return ResponseEntity.ok(loggedUser);
         }
         catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

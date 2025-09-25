@@ -36,6 +36,9 @@ public class SecurityConfig  {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user/register").permitAll()
                         .requestMatchers("/user/login").permitAll()
+                        .requestMatchers("/comment").permitAll()
+                        .requestMatchers("/part/basic").permitAll()
+                        .requestMatchers("/part/fanBlades").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

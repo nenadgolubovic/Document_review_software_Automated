@@ -8,11 +8,9 @@ import com.example.document_review.mapper.impl.UserMapper;
 import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.repository.impl.UserRepository;
 import com.example.document_review.service.NotificationService;
-import com.example.document_review.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
-import org.springframework.mail.javamail.JavaMailSender;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -2,6 +2,7 @@ package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.UserMapper;
 import com.example.document_review.repository.impl.UserRepository;
 import com.example.document_review.service.UserService;
@@ -29,10 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(UserDto userDto) {
+
         registrationValidator.validate(userDto);
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         User user = userMapper.toEntity(userDto);
         userRepository.save(user);
+
 
     }
 
@@ -42,10 +45,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User loginUser(UserDto userDto) {
+    public User loginUser(UserDto userDto) throws EntityNotFoundException {
         logInValidator.validate(userDto);
         User user = userMapper.toEntity(userDto);
-        userRepository.findByUsername(user.getUsername());
+        User loginUser = userRepository.findByUsername(user.getUsername());
+        if(loginUser == null) {
+            throw new EntityNotFoundException("User not found");
+        }
         return user;
     }
 
