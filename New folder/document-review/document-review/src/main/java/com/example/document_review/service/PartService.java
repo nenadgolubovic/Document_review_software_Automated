@@ -9,4 +9,6 @@ public interface PartService{
 
     PartDto getById(int id);
     List<PartDto> getAll() throws Exception;
+
+    void delete(Integer id) throws Exception;
 }

@@ -1,8 +1,10 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.DocumentDto;
+import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.Document;
 import com.example.document_review.mapper.impl.DocumentMapper;
+import com.example.document_review.mapper.impl.PartMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
 import com.example.document_review.validator.impl.DocumentFileValidator;
@@ -23,16 +25,20 @@ import java.util.stream.Collectors;
 @Service
 public class DocumentServiceImpl implements DocumentService {
 
+    private final PartServiceImpl partServiceImpl;
+    private final PartMapper partMapper;
     private DocumentRepository documentRepository;
     private DocumentMapper documentMapper;
     private DocumentSaveValidator documentSaveValidator;
     private DocumentFileValidator documentFileValidator;
 
-    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSaveValidator documentSaveValidator, DocumentFileValidator documentFileValidator) {
+    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, DocumentSaveValidator documentSaveValidator, DocumentFileValidator documentFileValidator, PartServiceImpl partServiceImpl, PartMapper partMapper) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
         this.documentSaveValidator = documentSaveValidator;
         this.documentFileValidator = documentFileValidator;
+        this.partServiceImpl = partServiceImpl;
+        this.partMapper = partMapper;
     }
 
 
@@ -42,6 +48,8 @@ public class DocumentServiceImpl implements DocumentService {
     @Transactional
     public void uploadDocument(MultipartFile document, DocumentDto documentDto) {
 
+        PartDto part = partServiceImpl.getById(documentDto.getPartId());
+        documentDto.setPart(partMapper.toEntity(part));
         documentSaveValidator.validate(documentDto);
         documentFileValidator.validate(document);
 

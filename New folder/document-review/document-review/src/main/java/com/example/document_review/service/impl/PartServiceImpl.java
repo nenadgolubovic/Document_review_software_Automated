@@ -38,4 +38,10 @@ public class PartServiceImpl implements PartService {
         return partRepository.findAll().stream().map(entity -> partMapper.toDto(entity)).collect(Collectors.toList());
 
     }
+
+    @Override
+    @Transactional
+    public void delete(Integer partId) throws Exception {
+        partRepository.delete(partId);
+    }
 }

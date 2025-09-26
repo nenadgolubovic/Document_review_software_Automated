@@ -1,5 +1,7 @@
 package com.example.document_review.dto;
 
+import com.example.document_review.entity.Enums.PartType;
+
 import java.util.Objects;
 
 public class PartDto {
@@ -10,7 +12,7 @@ public class PartDto {
     private String partNumber;
     private String description;
     private String serialNumber;
-    private String type;
+    private PartType type;
 
     public PartDto() {
 
@@ -64,11 +66,11 @@ public class PartDto {
         this.serialNumber = serialNumber;
     }
 
-    public String getType() {
+    public PartType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PartType type) {
         this.type = type;
     }
 
@@ -85,7 +87,7 @@ public class PartDto {
 
 
 
-    public PartDto(Integer partId, String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew) {
+    public PartDto(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew) {
         this.partId = partId;
         this.name = name;
         this.partNumber = partNumber;

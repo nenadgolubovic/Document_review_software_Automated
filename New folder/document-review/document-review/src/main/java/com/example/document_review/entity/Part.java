@@ -1,5 +1,6 @@
 package com.example.document_review.entity;
 
+import com.example.document_review.entity.Enums.PartType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ public abstract class Part {
     private String partNumber;
     private String description;
     private String serialNumber;
-    private String type;
+    private PartType type;
     private String cyclesSinceNew;
     private String timeSinceNew;
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
 
 
-    public Part(Integer partId, String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
+    public Part(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
         this.partId = partId;
         this.name = name;
         this.partNumber = partNumber;
@@ -80,11 +81,11 @@ public abstract class Part {
         this.serialNumber = serialNumber;
     }
 
-    public String getType() {
+    public PartType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PartType type) {
         this.type = type;
     }
 

@@ -23,6 +23,8 @@ public class DocumentMapper implements Mapper<DocumentDto, Document> {
         document.setPart(documentDto.getPart());
         document.setDocumentRoute(documentDto.getDocumentRoute());
         document.setComments(documentDto.getComments());
+        document.setPartId(documentDto.getPartId());
+        document.setDocumentDate(documentDto.getDocumentDate());
 
         return document;
 

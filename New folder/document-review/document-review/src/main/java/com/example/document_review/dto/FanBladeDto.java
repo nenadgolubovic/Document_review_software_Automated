@@ -1,5 +1,7 @@
 package com.example.document_review.dto;
 
+import com.example.document_review.entity.Enums.PartType;
+
 import java.util.Objects;
 
 
@@ -14,7 +16,7 @@ public class FanBladeDto extends PartDto{
         this.momentWeight = momentWeight;
     }
 
-    public FanBladeDto(Integer partId, String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew, String momentWeight) {
+    public FanBladeDto(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, String momentWeight) {
         super(partId, name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew);
         this.momentWeight = momentWeight;
     }

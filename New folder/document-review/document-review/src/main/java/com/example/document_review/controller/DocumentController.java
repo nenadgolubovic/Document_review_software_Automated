@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/document")
 @RestController()
 public class DocumentController {
@@ -23,10 +23,15 @@ public class DocumentController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadDocument(@RequestPart("document") MultipartFile document)
-                                                  {
+    public ResponseEntity<String> uploadDocument( @RequestPart("partId") String partIdStr,@RequestPart("document") MultipartFile document)
+    {
         try {
+            int partId = Integer.parseInt(partIdStr);
+
             DocumentDto documentDto = new DocumentDto();
+            documentDto.setPartId(partId);
+            documentDto.setDocumentName(document.getOriginalFilename());
+            documentDto.setDocumentRoute(document.getOriginalFilename());
             documentService.uploadDocument(document, documentDto);
             return ResponseEntity.ok("File uploaded successfully: " + document.getOriginalFilename());
         } catch (IllegalArgumentException e) {

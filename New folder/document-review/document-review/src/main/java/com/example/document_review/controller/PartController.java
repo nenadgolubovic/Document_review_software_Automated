@@ -36,6 +36,17 @@ public class PartController {
     public PartDto getById(@RequestParam int id) {
         return partService.getById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) throws Exception {
+        PartDto existingPart = this.partService.getById(id);
+        if (existingPart != null) {
+            this.partService.delete(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @ExceptionHandler(value = EntityNotFoundException.class)
     public ResponseStatusException handleEntityNotFoundException(EntityNotFoundException ex) {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());

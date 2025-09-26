@@ -42,6 +42,8 @@ public class SecurityConfig  {
                         .requestMatchers("/part/fanBlades/all").permitAll()
                         .requestMatchers("/part/all").permitAll()
                         .requestMatchers("/comment/all").permitAll()
+                        .requestMatchers("/part/{id}").permitAll()
+                        .requestMatchers("/document/upload").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

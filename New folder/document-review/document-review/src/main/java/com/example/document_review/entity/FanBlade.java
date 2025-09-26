@@ -1,6 +1,7 @@
 package com.example.document_review.entity;
 
 
+import com.example.document_review.entity.Enums.PartType;
 import jakarta.persistence.Entity;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 public class FanBlade extends Part {
-    public FanBlade(Integer partId ,String name, String partNumber, String description, String serialNumber, String type, String cyclesSinceNew, String timeSinceNew, String momentWeight, List<Document> documents) {
+    public FanBlade(Integer partId , String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, String momentWeight, List<Document> documents) {
         super(partId, name, partNumber, description, serialNumber, type, cyclesSinceNew, timeSinceNew, documents);
         this.momentWeight = momentWeight;
     }

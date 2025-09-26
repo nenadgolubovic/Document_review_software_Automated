@@ -1,9 +1,7 @@
 package com.example.document_review.entity;
-import java.nio.file.Path;
 
 import jakarta.persistence.*;
 
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +14,23 @@ public class Document {
     private Integer documentId;
     private String documentName;
     @ManyToOne
-    @JoinColumn(name = "part_id", nullable = false)
+    @JoinColumn(name = "part_id", insertable = false, updatable = false)
     private Part part;
+    @Column(name = "part_id")
+    private Integer partId;
     private String documentRoute;
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
     private LocalDate documentDate;
 
-    public Document(Integer documentId, String documentName, Part part, String documentRoute, List<Comment> comments, LocalDate documentDate) {
+    public Document(Integer documentId, String documentName, Part part, String documentRoute, List<Comment> comments, LocalDate documentDate, Integer partId) {
         this.documentId = documentId;
         this.documentName = documentName;
         this.part = part;
         this.documentRoute = documentRoute;
         this.comments = comments;
         this.documentDate = documentDate;
+        this.partId = partId;
     }
 
     public Document() {
@@ -81,6 +82,14 @@ public class Document {
 
     public void setDocumentDate(LocalDate documentDate) {
         this.documentDate = documentDate;
+    }
+
+    public Integer getPartId() {
+        return partId;
+    }
+
+    public void setPartId(Integer partId) {
+        this.partId = partId;
     }
 
     @Override

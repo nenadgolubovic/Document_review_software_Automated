@@ -20,17 +20,23 @@ public class DocumentDto {
     private Part part;
     private List<Comment> comments = new ArrayList<>();
     private LocalDate documentDate;
+    private Integer partId;
 
-    public DocumentDto(Integer documentId, String documentName, String documentRoute, Part part, List<Comment> comments, LocalDate documentDate) {
+    public DocumentDto(Integer documentId, String documentName, String documentRoute, Part part, List<Comment> comments, LocalDate documentDate,Integer partId) {
         this.documentId = documentId;
         this.documentName = documentName;
         this.documentRoute = documentRoute;
         this.part = part;
         this.comments = comments;
         this.documentDate = documentDate;
+        this.partId = partId;
     }
 
     public DocumentDto() {
+    }
+
+    public DocumentDto(Integer documentId) {
+        this.documentId = documentId;
     }
 
     public Integer getDocumentId() {
@@ -73,6 +79,7 @@ public class DocumentDto {
         this.comments = comments;
     }
 
+
     public LocalDate getDocumentDate() {
         return documentDate;
     }
@@ -81,17 +88,24 @@ public class DocumentDto {
         this.documentDate = documentDate;
     }
 
+    public void setPartId(Integer partId) {
+        this.partId = partId;
+    }
+
+    public Integer getPartId() {
+        return partId;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DocumentDto that = (DocumentDto) o;
-        return Objects.equals(documentId, that.documentId) && Objects.equals(documentName, that.documentName) && Objects.equals(documentRoute, that.documentRoute) && Objects.equals(part, that.part) && Objects.equals(comments, that.comments) && Objects.equals(documentDate, that.documentDate);
+        return Objects.equals(documentId, that.documentId) && Objects.equals(documentName, that.documentName) && Objects.equals(documentRoute, that.documentRoute) && Objects.equals(part, that.part) && Objects.equals(partId, that.partId) && Objects.equals(comments, that.comments) && Objects.equals(documentDate, that.documentDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(documentId, documentName, documentRoute, part, comments, documentDate);
+        return Objects.hash(documentId, documentName, documentRoute, part, comments, documentDate,partId);
     }
 
     @Override
