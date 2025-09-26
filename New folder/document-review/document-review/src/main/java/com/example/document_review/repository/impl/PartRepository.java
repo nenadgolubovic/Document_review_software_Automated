@@ -1,5 +1,7 @@
 package com.example.document_review.repository.impl;
 
+import com.example.document_review.entity.Document;
+import com.example.document_review.entity.FanBlade;
 import com.example.document_review.entity.Part;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
@@ -25,7 +27,12 @@ public class PartRepository implements MyRepository <Part, Integer> {
 
     @Override
     public List<Part> findAll() throws Exception {
-        return List.of();
+        List<Part> parts = entityManager.createQuery("select bp from Part bp", Part.class)
+                .getResultList();
+        if (parts.isEmpty()) {
+            throw new Exception("Comment not found");
+        }
+        return parts;
     }
 
     @Override

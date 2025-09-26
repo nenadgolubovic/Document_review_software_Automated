@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PartServiceImpl implements PartService {
@@ -34,9 +35,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public List<PartDto> getAll() throws Exception {
-        return partRepository.findAll()
-                .stream()
-                .map(partMapper::toDto)
-                .toList();
+        return partRepository.findAll().stream().map(entity -> partMapper.toDto(entity)).collect(Collectors.toList());
+
     }
 }

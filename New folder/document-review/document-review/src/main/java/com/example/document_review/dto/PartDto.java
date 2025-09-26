@@ -2,7 +2,7 @@ package com.example.document_review.dto;
 
 import java.util.Objects;
 
-public abstract class PartDto {
+public class PartDto {
 
 
     private Integer partId;

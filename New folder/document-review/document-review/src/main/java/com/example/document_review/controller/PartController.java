@@ -1,8 +1,10 @@
 package com.example.document_review.controller;
+import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.PartService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,9 +27,9 @@ public class PartController {
         partService.save(partDto);
     }
 
-    @GetMapping("getAll")
-    public List<PartDto> getAll() throws Exception {
-     return partService.getAll();
+    @GetMapping("/all")
+    public ResponseEntity<List<PartDto>> findAll() throws Exception {
+        return new ResponseEntity<>(partService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/getById")
