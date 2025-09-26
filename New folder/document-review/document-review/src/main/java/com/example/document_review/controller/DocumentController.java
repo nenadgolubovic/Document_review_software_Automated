@@ -48,6 +48,12 @@ public class DocumentController {
         return ResponseEntity.ok(documents);
     }
 
+    @GetMapping("/get/part/{id}")
+    public ResponseEntity<List<DocumentDto>> getByPartId(@PathVariable Integer id) throws Exception {
+        List<DocumentDto> documents = documentService.getByPartId(id);
+        return ResponseEntity.ok(documents);
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<DocumentDto> getById(@PathVariable Integer id) throws Exception {
         DocumentDto documentDto = documentService.findById(id);

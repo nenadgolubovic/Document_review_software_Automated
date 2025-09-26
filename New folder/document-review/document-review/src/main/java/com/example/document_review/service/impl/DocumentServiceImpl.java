@@ -86,6 +86,12 @@ public class DocumentServiceImpl implements DocumentService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<DocumentDto> getByPartId(Integer id) {
+        return documentRepository.getByPartId(id).stream().map(entity -> documentMapper.toDto(entity)).collect(Collectors.toList());
+    }
+
     @Override
     public void save(DocumentDto document) {
 

@@ -47,4 +47,11 @@ public class DocumentRepository implements MyRepository <Document, Integer>{
 
     }
 
+    public List<Document> getByPartId(Integer id) {
+        List<Document> documents = entityManager.createQuery(
+                        "SELECT d FROM Document d WHERE d.partId = :id", Document.class)
+                .setParameter("id", id)
+                .getResultList();
+        return documents;
+    }
 }

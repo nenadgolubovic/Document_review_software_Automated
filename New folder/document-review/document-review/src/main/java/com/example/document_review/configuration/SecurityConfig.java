@@ -44,6 +44,8 @@ public class SecurityConfig  {
                         .requestMatchers("/comment/all").permitAll()
                         .requestMatchers("/part/{id}").permitAll()
                         .requestMatchers("/document/upload").permitAll()
+                        .requestMatchers("/document/getAll").permitAll()
+                        .requestMatchers("/document/get/part/{id}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

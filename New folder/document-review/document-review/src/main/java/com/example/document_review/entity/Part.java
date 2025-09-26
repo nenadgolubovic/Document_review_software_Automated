@@ -137,7 +137,7 @@ public abstract class Part {
                 ", type='" + type + '\'' +
                 ", cyclesSinceNew='" + cyclesSinceNew + '\'' +
                 ", timeSinceNew='" + timeSinceNew + '\'' +
-                ", documents=" + documents +
+                ", documentsCount=" + (documents != null ? documents.size() : 0) +
                 '}';
     }
 }

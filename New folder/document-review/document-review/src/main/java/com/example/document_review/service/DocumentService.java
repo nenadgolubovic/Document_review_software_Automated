@@ -9,12 +9,11 @@ import java.util.List;
 public interface DocumentService {
     void save(DocumentDto document);
     List<DocumentDto> findAllDocuments() throws Exception;
-
     List<Document> findAll();
-
     DocumentDto findById(Integer id);
     DocumentDto deleteById(Integer id);
     void changeStatus(Integer id, boolean status);
     void uploadDocument(MultipartFile file, DocumentDto documentDto);
+    List<DocumentDto> getByPartId(Integer id);
 
 }
