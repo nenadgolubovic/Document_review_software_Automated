@@ -1,15 +1,14 @@
 package com.example.document_review.service.impl;
-
 import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
-import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.UserMapper;
 import com.example.document_review.repository.impl.UserRepository;
 import com.example.document_review.service.UserService;
-import com.example.document_review.validator.impl.LogInValidator;
 import com.example.document_review.validator.impl.RegistrationValidator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,14 +17,15 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final RegistrationValidator registrationValidator;
-    private final LogInValidator logInValidator;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper, UserRepository userRepository, RegistrationValidator registrationValidator, LogInValidator logInValidator) {
+
+    public UserServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper, UserRepository userRepository, RegistrationValidator registrationValidator, BCryptPasswordEncoder passwordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.registrationValidator = registrationValidator;
-        this.logInValidator = logInValidator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -44,14 +44,15 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public User loginUser(UserDto userDto) throws EntityNotFoundException {
-        logInValidator.validate(userDto);
-        User user = userMapper.toEntity(userDto);
-        User loginUser = userRepository.findByUsername(user.getUsername());
-        if(loginUser == null) {
-            throw new EntityNotFoundException("User not found");
+
+    public User loginUser(UserDto userDto) {
+
+        User user = userRepository.findByUsername(userDto.getUsername());
+        if (user == null || !passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
         }
+
+
         return user;
     }
 

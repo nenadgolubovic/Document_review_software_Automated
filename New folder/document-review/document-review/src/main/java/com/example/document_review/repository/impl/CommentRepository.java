@@ -7,8 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -58,5 +57,14 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
         existingComment.setCommentDate(comment.getCommentDate());
         existingComment.setApproved(comment.isApproved());
         existingComment.setRate(comment.getRate());
+    }
+
+    public List<Comment> getAllByDocumentIdAndUserId(Integer documentId, Integer userId) {
+        List<Comment> comments = entityManager
+                .createQuery("select c from Comment c where c.documentId = :documentId and c.userId = :userId", Comment.class)
+                .setParameter("documentId", documentId)
+                .setParameter("userId", userId)
+                .getResultList();
+        return comments;
     }
 }

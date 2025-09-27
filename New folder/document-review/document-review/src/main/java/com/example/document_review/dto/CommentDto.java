@@ -13,9 +13,9 @@ public class CommentDto {
     private LocalDateTime commentDate;
     private boolean isApproved;
     private Integer rate;
-    private Document document;
+    private Integer documentId;
 
-    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate, Document document) {
+    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate, Integer documentId) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;
@@ -23,7 +23,7 @@ public class CommentDto {
         this.commentDate = commentDate;
         this.isApproved = isApproved;
         this.rate = rate;
-        this.document = document;
+        this.documentId = documentId;
     }
 
     public CommentDto() {}
@@ -38,7 +38,7 @@ public class CommentDto {
                 ", commentDate=" + commentDate +
                 ", isApproved=" + isApproved +
                 ", rate=" + rate +
-                ", document=" + document +
+                ", documentId=" + documentId +
                 '}';
     }
     @Override
@@ -46,12 +46,12 @@ public class CommentDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentDto that = (CommentDto) o;
-        return isApproved == that.isApproved && Objects.equals(commentId, that.commentId) && Objects.equals(comment, that.comment) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate) && Objects.equals(rate, that.rate) && Objects.equals(document, that.document);
+        return isApproved == that.isApproved && Objects.equals(commentId, that.commentId) && Objects.equals(comment, that.comment) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate) && Objects.equals(rate, that.rate) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate, document);
+        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate, documentId);
     }
 
 
@@ -111,12 +111,13 @@ public class CommentDto {
     public void setRate(Integer rate) {
         this.rate = rate;
     }
-    public Document getDocument() {
-        return document;
+
+    public Integer getDocumentId() {
+        return documentId;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setDocumentId(Integer documentId) {
+        this.documentId = documentId;
     }
 
 }

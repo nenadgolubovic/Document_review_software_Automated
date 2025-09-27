@@ -1,4 +1,5 @@
 package com.example.document_review.validator.impl;
+import com.example.document_review.entity.Document;
 import com.example.document_review.exception.ValidationException;
 import com.example.document_review.validator.Validator;
 import org.springframework.stereotype.Component;
@@ -21,5 +22,13 @@ public class DocumentFileValidator implements Validator<MultipartFile> {
         if (!originalFileName.endsWith(".pdf") && !originalFileName.endsWith(".docx")) {
             throw new ValidationException("Unsupported file type. Only PDF or DOCX allowed");
         }
+    }
+
+    public void validateDocument(Document document) {
+
+        if(document == null){
+            throw new ValidationException("Not assigned Document to comment");
+        }
+
     }
 }

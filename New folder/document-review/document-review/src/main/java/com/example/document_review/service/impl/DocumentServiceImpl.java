@@ -9,6 +9,7 @@ import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.DocumentService;
 import com.example.document_review.validator.impl.DocumentFileValidator;
 import com.example.document_review.validator.impl.DocumentSaveValidator;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.core.io.UrlResource;
 
 
 @Service
@@ -90,6 +92,18 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public List<DocumentDto> getByPartId(Integer id) {
         return documentRepository.getByPartId(id).stream().map(entity -> documentMapper.toDto(entity)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Resource getDocumentByName(String filename) throws IOException{
+
+        Path path = Paths.get("C:/Users/Nikola/.../document/" + filename);
+        Resource resource = new UrlResource(path.toUri());
+
+        if (!resource.exists() || !resource.isReadable()) {
+            return null;
+        }
+        return resource;
     }
 
     @Override

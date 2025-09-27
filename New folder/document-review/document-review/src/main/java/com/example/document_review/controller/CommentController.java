@@ -26,14 +26,23 @@ public class CommentController {
         commentService.save(commentDto);
     }
 
+    @GetMapping("/getAllByDocumentIdAndUserId/{documentId}/{userId}")
+    public ResponseEntity<List<CommentDto>> getAllByDocumentIdAndUserId(
+           @PathVariable Integer documentId,
+           @PathVariable Integer userId) {
+        return new ResponseEntity<>(commentService.getAllByDocumentIdAndUserId(documentId, userId), HttpStatus.OK);
+
+    }
+
+
 
     @GetMapping("/all")
     public ResponseEntity<List<CommentDto>> findAll() throws Exception {
         return new ResponseEntity<>(commentService.findAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/approve")
-    public ResponseEntity<String> approveComment(@RequestBody Integer commentId) throws Exception {
+    @PutMapping("/approve/{commentId}")
+    public ResponseEntity<String> approveComment(@PathVariable Integer commentId) throws Exception {
         commentService.approveComment(commentId);
         return ResponseEntity.ok("Comment approved successfully");
     }

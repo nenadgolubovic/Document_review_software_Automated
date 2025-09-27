@@ -19,8 +19,8 @@ public class Document {
     @Column(name = "part_id")
     private Integer partId;
     private String documentRoute;
-    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Comment> comments = new ArrayList<>();
     private LocalDate documentDate;
 
     public Document(Integer documentId, String documentName, Part part, String documentRoute, List<Comment> comments, LocalDate documentDate, Integer partId) {
@@ -28,7 +28,7 @@ public class Document {
         this.documentName = documentName;
         this.part = part;
         this.documentRoute = documentRoute;
-        this.comments = comments;
+//        this.comments = comments;
         this.documentDate = documentDate;
         this.partId = partId;
     }
@@ -68,13 +68,13 @@ public class Document {
         this.documentRoute = documentRoute;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
     public LocalDate getDocumentDate() {
         return documentDate;
@@ -97,12 +97,12 @@ public class Document {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Document document = (Document) o;
-        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(part, document.part) && Objects.equals(documentRoute, document.documentRoute) && Objects.equals(comments, document.comments) && Objects.equals(documentDate, document.documentDate);
+        return Objects.equals(documentId, document.documentId) && Objects.equals(documentName, document.documentName) && Objects.equals(part, document.part) && Objects.equals(documentRoute, document.documentRoute) && Objects.equals(documentDate, document.documentDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(documentId, documentName, part, documentRoute, comments, documentDate);
+        return Objects.hash(documentId, documentName, part, documentRoute, documentDate);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Document {
                 ", documentName='" + documentName + '\'' +
                 ", part=" + part +
                 ", documentRoute='" + documentRoute + '\'' +
-                ", comments=" + comments +
+//                ", comments=" + comments +
                 ", documentDate=" + documentDate +
                 '}';
     }

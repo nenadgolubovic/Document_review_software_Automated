@@ -22,9 +22,5 @@ public class CommentSaveValidator implements Validator <CommentDto>{
         }
         if(commentDto.getCommentTitle().length() > 50){
             throw new ValidationException("Comment Title is too long, please keep under 100 caracters");}
-
-        if(commentDto.getDocument() == null){
-            throw new ValidationException("Not assigned Document to comment");
-        }
     }
 }

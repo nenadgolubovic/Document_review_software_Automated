@@ -4,16 +4,23 @@ import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("/user")
+
 public class UserController {
 
     private final UserService userService;
@@ -25,26 +32,52 @@ public class UserController {
     @GetMapping("/home")
     public ResponseEntity<?> home(Principal principal) {
         if (principal == null) {
-            return ResponseEntity.status(401).body("Not authenticated");
-        }
-        User user = userService.findByUsername(principal.getName());
-        if (user == null) {
-            return ResponseEntity.status(404).body("User not found");
+            return ResponseEntity.status(401).body(Map.of("error", "Not authenticated"));
         }
 
-        return ResponseEntity.ok(user);
+        User user = userService.findByUsername(principal.getName());
+        if (user == null) {
+            return ResponseEntity.status(404).body(Map.of("error", "User not found"));
+        }
+
+        return ResponseEntity.ok(Map.of(
+                "username", user.getUsername(),
+                "userId", user.getUserId()
+        ));
     }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<LoggedUserDto> loadUserByUsername(@RequestBody UserDto userDto) {
+//        try{
+//            User user = userService.loginUser(userDto);
+//            LoggedUserDto loggedUser = new LoggedUserDto(user.getUsername());
+//            return ResponseEntity.ok(loggedUser);
+//        }
+//        catch (Exception e){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
+
     @PostMapping("/login")
-    public ResponseEntity<LoggedUserDto> loadUserByUsername(@RequestBody UserDto userDto) {
+    public ResponseEntity<LoggedUserDto> login(@RequestBody UserDto userDto, HttpServletRequest request) throws EntityNotFoundException {
+
         try{
             User user = userService.loginUser(userDto);
-            LoggedUserDto loggedUser = new LoggedUserDto(user.getUsername());
-            return ResponseEntity.ok(loggedUser);
+            // kreira sesiju
+            HttpSession session = request.getSession(true);
+
+            // postavlja SecurityContext u session
+            UsernamePasswordAuthenticationToken authToken =
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), null, new ArrayList<>());
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            return ResponseEntity.ok(new LoggedUserDto(user.getUsername()));
         }
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(@RequestBody UserDto userDto, Principal principal) {

@@ -1,9 +1,11 @@
 package com.example.document_review.service;
 
+import org.springframework.core.io.Resource;
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.entity.Document;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface DocumentService {
@@ -15,5 +17,5 @@ public interface DocumentService {
     void changeStatus(Integer id, boolean status);
     void uploadDocument(MultipartFile file, DocumentDto documentDto);
     List<DocumentDto> getByPartId(Integer id);
-
+    Resource getDocumentByName(String filename) throws IOException;
 }

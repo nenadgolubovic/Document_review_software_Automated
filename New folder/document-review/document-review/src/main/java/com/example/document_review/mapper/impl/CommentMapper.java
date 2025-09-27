@@ -15,7 +15,7 @@ public class CommentMapper implements Mapper<CommentDto, Comment> {
         return new Comment(null,
                 commentDto.getCommentTitle(),
                 commentDto.getUserId(),
-                commentDto.getDocument(),
+                commentDto.getDocumentId(),
                 commentDto.getComment(),
                 commentDto.getCommentDate(),
                 commentDto.isApproved(),
@@ -31,6 +31,6 @@ public class CommentMapper implements Mapper<CommentDto, Comment> {
                 comment.getCommentDate(),
                 comment.isApproved(),
                 comment.getRate(),
-                comment.getDocument());
+                comment.getDocumentId());
     }
 }
