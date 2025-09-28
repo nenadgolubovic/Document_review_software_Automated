@@ -2,11 +2,14 @@ package com.example.document_review.entity;
 
 import com.example.document_review.entity.Enums.PartType;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuperBuilder
 @Entity
 public abstract class Part {
     @Id

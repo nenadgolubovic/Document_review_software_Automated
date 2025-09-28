@@ -3,10 +3,13 @@ package com.example.document_review.entity;
 
 import com.example.document_review.entity.Enums.PartType;
 import jakarta.persistence.Entity;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 import java.util.Objects;
 
+@SuperBuilder
 @Entity
 public class FanBlade extends Part {
     public FanBlade(Integer partId , String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, String momentWeight, List<Document> documents) {

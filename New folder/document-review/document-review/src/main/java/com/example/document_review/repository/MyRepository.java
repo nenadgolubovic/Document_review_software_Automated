@@ -9,5 +9,5 @@ public interface MyRepository <E, Id> {
     E findById(Integer id);
     List<E> findAll() throws Exception;
     void delete(Integer id) throws Exception;
-    void update(E entity);
+    void update(E entity) throws Exception;
 }

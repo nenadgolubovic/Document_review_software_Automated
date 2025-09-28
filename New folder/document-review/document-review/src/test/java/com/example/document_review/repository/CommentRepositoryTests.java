@@ -8,13 +8,10 @@ import jakarta.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class CommentRepositoryTests {
     private EntityManager entityManager;
 
     @Test
-    public void CommentRepository_Save() {
+    public void commentRepository_Save() {
 
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
@@ -62,7 +59,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void CommentRepository_FindById_ReturnComment() {
+    public void commentRepository_FindById_ReturnComment() {
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -88,7 +85,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void CommentRepository_FindAll_ReturnAllComments() throws Exception {
+    public void commentRepository_FindAll_ReturnAllComments() throws Exception {
 
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
@@ -132,7 +129,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void CommentRepository_Update_ReturnUpdatedComment(){
+    public void commentRepository_Update_ReturnUpdatedComment(){
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title 1")
                 .comment("Test comment 1")
@@ -170,7 +167,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void CommentRepository_GetAllByDocumentId_ReturnedAllCommentsByDocumentId() {
+    public void commentRepository_GetAllByDocumentId_ReturnedAllCommentsByDocumentId() {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
                 .comment("Test comment 1")

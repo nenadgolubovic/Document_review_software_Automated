@@ -23,6 +23,7 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
 
     @Override
     public Comment findById(Integer id) {
+
         return entityManager.find(Comment.class, id);
     }
 
