@@ -1,10 +1,12 @@
 package com.example.document_review.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Builder
 @Entity
 public class Comment {
     @Id
