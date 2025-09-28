@@ -23,6 +23,13 @@ public class UserMapper implements Mapper<UserDto, User> {
 
     @Override
     public UserDto toDto(User user) {
-        return null;
+        UserDto userDto = new UserDto();
+        userDto.setUsername(user.getUsername());
+        userDto.setPassword(user.getPassword());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+
+        return userDto;
     }
 }

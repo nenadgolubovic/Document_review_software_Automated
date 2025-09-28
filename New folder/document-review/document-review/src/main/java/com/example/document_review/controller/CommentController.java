@@ -26,11 +26,10 @@ public class CommentController {
         commentService.save(commentDto);
     }
 
-    @GetMapping("/getAllByDocumentIdAndUserId/{documentId}/{userId}")
-    public ResponseEntity<List<CommentDto>> getAllByDocumentIdAndUserId(
-           @PathVariable Integer documentId,
-           @PathVariable Integer userId) {
-        return new ResponseEntity<>(commentService.getAllByDocumentIdAndUserId(documentId, userId), HttpStatus.OK);
+    @GetMapping("/getAllByDocumentId/{documentId}")
+    public ResponseEntity<List<CommentDto>> getAllByDocumentId(
+           @PathVariable Integer documentId) {
+        return new ResponseEntity<>(commentService.getAllByDocumentId(documentId), HttpStatus.OK);
 
     }
 

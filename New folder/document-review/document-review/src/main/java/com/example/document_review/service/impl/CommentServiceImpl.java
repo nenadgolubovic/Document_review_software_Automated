@@ -108,8 +108,8 @@ public class CommentServiceImpl implements CommentService {
         }
 
     @Override
-    public List<CommentDto> getAllByDocumentIdAndUserId(Integer documentId, Integer userId) {
-        return commentRepository.getAllByDocumentIdAndUserId(documentId, userId).stream().map(entity -> commentMapper.toDto(entity)).collect(Collectors.toList());
+    public List<CommentDto> getAllByDocumentId(Integer documentId) {
+        return commentRepository.getAllByDocumentId(documentId).stream().map(entity -> commentMapper.toDto(entity)).collect(Collectors.toList());
     }
 }
 

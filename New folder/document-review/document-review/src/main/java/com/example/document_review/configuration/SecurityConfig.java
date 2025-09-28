@@ -27,58 +27,21 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-//        return httpSecurity
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/user/register").permitAll()
-//                        .requestMatchers("/user/login").permitAll()
-//                        .requestMatchers("/comment").permitAll()
-//                        .requestMatchers("/part/basic/save").permitAll()
-//                        .requestMatchers("/part/fanBlades/save").permitAll()
-//                        .requestMatchers("/part/fanBlades/all").permitAll()
-//                        .requestMatchers("/part/all").permitAll()
-//                        .requestMatchers("/comment/all").permitAll()
-//                        .requestMatchers("/part/{id}").permitAll()
-//                        .requestMatchers("/document/upload").permitAll()
-//                        .requestMatchers("/document/getAll").permitAll()
-//                        .requestMatchers("/document/get/part/{id}").permitAll()
-//                        .requestMatchers("/document/{filename}").permitAll()
-//                        .requestMatchers("/document/**").permitAll()
-//                        .requestMatchers("/comment/getAllByDocumentIdAndUserId/**").permitAll()
-//                        .requestMatchers("/comment/approve/{commentId}").permitAll()
-//                        .requestMatchers("/comment/rateComment/{commentId}/{newRate}").permitAll()
-//                        .requestMatchers("/user/home").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .headers(headers -> headers
-//                        .frameOptions(frameOptions -> frameOptions.disable())
-//                )
-//                .httpBasic(Customizer.withDefaults())
-//                .build();
         httpSecurity
-                .csrf(AbstractHttpConfigurer::disable) // novo, zamena za csrf().disable()
+                .csrf(AbstractHttpConfigurer::disable) // zamena za csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/register").permitAll()
-                        .requestMatchers("/user/login").permitAll()
-                        .requestMatchers("/comment").permitAll()
-                        .requestMatchers("/part/basic/save").permitAll()
-                        .requestMatchers("/part/fanBlades/save").permitAll()
-                        .requestMatchers("/part/fanBlades/all").permitAll()
-                        .requestMatchers("/part/all").permitAll()
-                        .requestMatchers("/comment/all").permitAll()
-                        .requestMatchers("/part/{id}").permitAll()
-                        .requestMatchers("/document/upload").permitAll()
-                        .requestMatchers("/document/getAll").permitAll()
-                        .requestMatchers("/document/get/part/{id}").permitAll()
-                        .requestMatchers("/document/{filename}").permitAll()
-                        .requestMatchers("/document/**").permitAll()
-                        .requestMatchers("/comment/getAllByDocumentIdAndUserId/**").permitAll()
-                        .requestMatchers("/comment/approve/{commentId}").permitAll()
-                        .requestMatchers("/comment/rateComment/{commentId}/{newRate}").permitAll()
-                        .requestMatchers("/user/home").permitAll()
+                        .requestMatchers(
+                                "/user/register",
+                                "/user/login",
+                                "/user/home"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults())
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.disable())
+                );
+
 
         return httpSecurity.build();
     }
@@ -88,13 +51,6 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() throws Exception {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setPasswordEncoder(bCryptPasswordEncoder());
-//        return provider;
-//    }
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {

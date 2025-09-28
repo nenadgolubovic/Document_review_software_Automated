@@ -40,8 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findById(long id) {
-        return null;
+    public UserDto findById(Integer id) {
+        User user = userRepository.findById(id);
+        return  userMapper.toDto(user);
     }
 
 

@@ -6,7 +6,7 @@ import com.example.document_review.exception.EntityNotFoundException;
 
 public interface UserService {
     void register(UserDto userDto);
-    UserDto findById(long id);
+    UserDto findById(Integer id);
     User loginUser(UserDto userDto) throws EntityNotFoundException;
     User findByUsername(String username);
 }

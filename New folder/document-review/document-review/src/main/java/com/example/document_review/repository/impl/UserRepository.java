@@ -24,7 +24,7 @@ public class UserRepository implements MyRepository <User, Integer>{
 
     @Override
     public User findById(Integer id) {
-        return null;
+        return em.find(User.class, id);
     }
 
     @Override

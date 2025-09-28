@@ -59,11 +59,10 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
         existingComment.setRate(comment.getRate());
     }
 
-    public List<Comment> getAllByDocumentIdAndUserId(Integer documentId, Integer userId) {
+    public List<Comment> getAllByDocumentId(Integer documentId) {
         List<Comment> comments = entityManager
-                .createQuery("select c from Comment c where c.documentId = :documentId and c.userId = :userId", Comment.class)
+                .createQuery("select c from Comment c where c.documentId = :documentId", Comment.class)
                 .setParameter("documentId", documentId)
-                .setParameter("userId", userId)
                 .getResultList();
         return comments;
     }

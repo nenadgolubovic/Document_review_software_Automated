@@ -13,5 +13,5 @@ public interface CommentService {
     void approveComment(Integer id) throws Exception;
     void rejectComment(Integer id) throws Exception;
     void rateComment(Integer commentId, Integer rate) throws Exception;
-    List<CommentDto> getAllByDocumentIdAndUserId(Integer documentId, Integer userId);
+    List<CommentDto> getAllByDocumentId(Integer documentId);
 }
