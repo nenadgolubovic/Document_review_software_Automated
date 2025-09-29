@@ -1,10 +1,12 @@
 package com.example.document_review.dto;
 
 import com.example.document_review.entity.Document;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Builder
 public class CommentDto {
     private Integer commentId;
     private String comment;

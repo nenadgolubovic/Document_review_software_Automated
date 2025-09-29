@@ -1,9 +1,13 @@
 package com.example.document_review.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.util.Objects;
 
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "app_user")
 public class User {
@@ -15,7 +19,22 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role role;
 
+
+    public User(Integer userId, String username, String password, String firstName, String lastName, Role role) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public User() {
+    }
 
     @Override
     public String toString() {
@@ -51,25 +70,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "roleId")
-    private Role role;
-
-    public User(Integer userId, String username, String password, String firstName, String lastName, Role role) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-    }
-
-    public User() {
-    }
-
 
     public Integer getUserId() {
         return userId;

@@ -57,21 +57,6 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public CommentDto findById(long id) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(long id) {
-
-    }
-
-    @Override
-    public void update(CommentDto commentDto) {
-
-    }
-
-    @Override
     @Transactional
     public void approveComment(Integer id) throws Exception
     {
@@ -110,6 +95,23 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDto> getAllByDocumentId(Integer documentId) {
         return commentRepository.getAllByDocumentId(documentId).stream().map(entity -> commentMapper.toDto(entity)).collect(Collectors.toList());
+    }
+
+
+
+    @Override
+    public CommentDto findById(long id) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(long id) {
+
+    }
+
+    @Override
+    public void update(CommentDto commentDto) {
+
     }
 }
 

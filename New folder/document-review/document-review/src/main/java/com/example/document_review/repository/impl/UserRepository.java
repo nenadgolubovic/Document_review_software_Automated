@@ -13,18 +13,18 @@ import java.util.List;
 public class UserRepository implements MyRepository <User, Integer>{
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
 
     @Override
     @Transactional
     public void save(User entity) {
-        em.persist(entity);
+        entityManager.persist(entity);
     }
 
     @Override
     public User findById(Integer id) {
-        return em.find(User.class, id);
+        return entityManager.find(User.class, id);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserRepository implements MyRepository <User, Integer>{
 
 
     public User findByUsername(String username) {
-        List<User> users = em.createQuery(
+        List<User> users = entityManager.createQuery(
                         "SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username)
                 .getResultList();
