@@ -1,11 +1,13 @@
 package com.example.document_review.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 public class Document {
@@ -23,7 +25,10 @@ public class Document {
 //    private List<Comment> comments = new ArrayList<>();
     private LocalDate documentDate;
 
-    public Document(Integer documentId, String documentName, Part part, String documentRoute, List<Comment> comments, LocalDate documentDate, Integer partId) {
+    @Builder
+    public Document(Integer documentId, String documentName, Part part, String documentRoute,
+//                    List<Comment> comments,
+                    LocalDate documentDate, Integer partId) {
         this.documentId = documentId;
         this.documentName = documentName;
         this.part = part;
