@@ -24,3 +24,7 @@ jobs:
 
       - name: Run tests
         run: mvn test
+        
+      - name: Build and run tests
+        run: mvn clean test -Dspring.profiles.active=test
+        working-directory: New folder/document-review/document-review
