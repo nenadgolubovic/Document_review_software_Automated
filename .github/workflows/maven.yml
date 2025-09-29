@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'New folder/document-review/document-review'
 
     steps:
       - name: Checkout repository
@@ -18,13 +21,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: List files
-        run: ls -R
-
       - name: Build with Maven
         run: mvn clean install
-        working-directory: 'New folder/document-review/document-review'
 
       - name: Run tests
         run: mvn test
-        working-directory: 'New folder/document-review/document-review'
