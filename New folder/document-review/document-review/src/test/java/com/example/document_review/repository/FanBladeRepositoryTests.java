@@ -176,7 +176,7 @@ public class FanBladeRepositoryTests {
 
         List<FanBlade> fanBlades = fanBladeRepository.findAll();
 
-        Assertions.assertThat(fanBlades.size()).isEqualTo(1);
+        Assertions.assertThat(fanBlades.size()).isEqualTo(8);
         Assertions.assertThat(fanBlades.get(0)).isEqualTo(fanBlade2);
 
 
