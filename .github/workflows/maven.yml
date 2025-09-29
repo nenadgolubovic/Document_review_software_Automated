@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 'New folder/document-review/document-review'
+      working-directory: 'New\ folder/document-review/document-review'
 
     steps:
       - name: Checkout repository
