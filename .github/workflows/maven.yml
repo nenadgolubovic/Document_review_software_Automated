@@ -18,12 +18,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
+        
       - name: Build with Maven
         run: mvn clean install
+        working-directory: 'New folder/document-review/document-review'
 
       - name: Run tests
         run: mvn test
+        working-directory: 'New folder/document-review/document-review'
         
       - name: Build and run tests
         run: mvn clean test -Dspring.profiles.active=test
