@@ -24,16 +24,12 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final CommentSaveValidator commentSaveValidator;
     private final DocumentRepository documentRepository;
-    private final DocumentServiceImpl documentServiceImpl;
-    private final DocumentMapper documentMapper;
     private final DocumentFileValidator documentFileValidator;
 
-    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, DocumentRepository documentRepository, CommentSaveValidator commentSaveValidator, DocumentServiceImpl documentServiceImpl, DocumentMapper documentMapper, DocumentFileValidator documentFileValidator) {
+    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, DocumentRepository documentRepository, CommentSaveValidator commentSaveValidator, DocumentFileValidator documentFileValidator) {
         this.commentMapper = commentMapper;
         this.commentRepository = commentRepository;
         this.commentSaveValidator = commentSaveValidator;
-        this.documentServiceImpl = documentServiceImpl;
-        this.documentMapper = documentMapper;
         this.documentRepository = documentRepository;
         this.documentFileValidator = documentFileValidator;
     }

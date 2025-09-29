@@ -1,20 +1,15 @@
 package com.example.document_review.repository;
 
-import com.example.document_review.entity.Comment;
 import com.example.document_review.entity.User;
-import com.example.document_review.repository.impl.BasicPartRepository;
-import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.repository.impl.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.util.ReflectionTestUtils;
 
 

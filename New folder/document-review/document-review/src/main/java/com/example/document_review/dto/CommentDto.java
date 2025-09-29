@@ -1,6 +1,5 @@
 package com.example.document_review.dto;
 
-import com.example.document_review.entity.Document;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
