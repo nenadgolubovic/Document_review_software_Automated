@@ -28,10 +28,6 @@ public class BasicPartServiceImpl implements BasicPartService {
     }
 
     @Override
-    public void update(Integer basicPartId) {
-    }
-
-    @Override
     @Transactional
     public void delete(Integer partId) throws Exception {
         basicPartRepository.delete(partId);
@@ -46,6 +42,11 @@ public class BasicPartServiceImpl implements BasicPartService {
     public BasicPartDto getById(Integer id) {
         return basicPartMapper.toDto(basicPartRepository.findById(id));
     }
+
+    @Override
+    public void update(Integer basicPartId) {
+    }
+
 }
 
 

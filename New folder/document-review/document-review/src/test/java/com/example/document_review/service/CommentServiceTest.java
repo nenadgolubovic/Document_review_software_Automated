@@ -83,7 +83,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_FindAll_ReturnComments() throws Exception {
+    public void CommentServiceImpl_FindAll_ReturnCommentDtos() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -197,7 +197,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_GetAllByDocumentId_Comments(){
+    public void CommentServiceImpl_GetAllByDocumentId_CommentDtos(){
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title1")
                 .comment("Test comment1")
