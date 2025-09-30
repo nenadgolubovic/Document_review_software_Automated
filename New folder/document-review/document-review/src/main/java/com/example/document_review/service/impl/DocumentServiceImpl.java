@@ -106,25 +106,15 @@ public class DocumentServiceImpl implements DocumentService {
         return resource;
     }
 
-    @Override
-    public void save(DocumentDto document) {
 
-    }
 
     @Override
     public List<DocumentDto> findAllDocuments() throws Exception {
         return documentRepository.findAll().stream().map(entity -> documentMapper.toDto(entity)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<Document> findAll() {
-        return List.of();
-    }
 
-    @Override
-    public DocumentDto findById(Integer id) {
-        return documentMapper.toDto(documentRepository.findById(id));
-    }
+
 
     @Override
     @Transactional
@@ -137,6 +127,18 @@ public class DocumentServiceImpl implements DocumentService {
     public void changeStatus(Integer id, boolean status) {
 
     }
+    @Override
+    public void save(DocumentDto document) {
 
+    }
+    @Override
+    public List<Document> findAll() {
+        return List.of();
+    }
+
+    @Override
+    public DocumentDto findById(Integer id) {
+        return documentMapper.toDto(documentRepository.findById(id));
+    }
 
 }

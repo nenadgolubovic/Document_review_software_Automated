@@ -4,9 +4,14 @@ package com.example.document_review.dto;
 
 
 import com.example.document_review.entity.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.util.Objects;
 
+
+@Builder
+@AllArgsConstructor
 public class UserDto {
 
     private Integer userId;
