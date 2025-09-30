@@ -151,14 +151,13 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void DocumentController_GetByPartId_DocumentsDto() throws Exception {
-
+    public void DocumentController_GetByPartId_DocumentsDto_ShouldReturnList() throws Exception {
         Integer partId = 1;
         List<DocumentDto> documents = Arrays.asList(documentDto1, documentDto2);
 
         when(documentServiceImpl.getByPartId(partId)).thenReturn(documents);
 
-        mockMvc.perform(get("/get/part/{id}", partId))
+        mockMvc.perform(get("/document/get/part/{id}", partId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].documentName").value("DocumentNameTest"))

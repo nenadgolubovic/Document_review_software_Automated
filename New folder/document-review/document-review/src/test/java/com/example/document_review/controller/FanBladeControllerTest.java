@@ -4,6 +4,7 @@ package com.example.document_review.controller;
 import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.impl.BasicPartServiceImpl;
 import com.example.document_review.service.impl.FanBladeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,10 +20,17 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FanBladeController.class)
@@ -50,10 +58,20 @@ public class FanBladeControllerTest {
                 .name("NameTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
+                .type(PartType.FanBlade)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest")
+                .build();
+        fanBladeDto2 = FanBladeDto.builder()
+                .partNumber("PartNumberTest2")
+                .name("NameTest2")
+                .description("DescriptionTest2")
+                .serialNumber("SerialNumberTest2")
+                .type(PartType.FanBlade)
+                .cyclesSinceNew("CycleSinceNewTest2")
+                .timeSinceNew("TimeSinceNewTest2")
+                .momentWeight("MomentWeightTest2")
                 .build();
     }
     @Test
@@ -68,7 +86,88 @@ public class FanBladeControllerTest {
         resultActions.andExpect(status().isOk());
 
         verify(fanBladeServiceImpl, times(1)).save(refEq(fanBladeDto1));
-
-
     }
+
+    @Test
+    public void FanBladeController_getById_FanBladeDtos() throws Exception {
+        Integer fanBladeId = 1;
+
+        when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(fanBladeDto1);
+
+        mockMvc.perform(get("/part/fanBlades/{fanBladeId}", fanBladeId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.partNumber").value("PartNumberTest"))
+                .andExpect(jsonPath("$.description").value("DescriptionTest"))
+                .andExpect(jsonPath("$.serialNumber").value("SerialNumberTest"))
+                .andExpect(jsonPath("$.type").value("FanBlade"))
+                .andExpect(jsonPath("$.cyclesSinceNew").value("CycleSinceNewTest"))
+                .andExpect(jsonPath("$.timeSinceNew").value("TimeSinceNewTest"))
+                .andExpect(jsonPath("$.momentWeight").value("MomentWeightTest"));
+
+        verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
+    }
+    @Test
+    public void FanBladeController_getById_NotFoundFanBladeDtos() throws Exception {
+        Integer fanBladeId = 99;
+
+        when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(null);
+
+        mockMvc.perform(get("/part/fanBlades/{fanBladeId}", fanBladeId))
+                .andExpect(status().isNotFound());
+
+        verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
+    }
+    @Test
+    public void FanBladeController_FindAll_FanBladeDtos() throws Exception {
+        List<FanBladeDto> fanBladeList = List.of(fanBladeDto1, fanBladeDto2);
+        when(fanBladeServiceImpl.getAll()).thenReturn(fanBladeList);
+
+        mockMvc.perform(get("/part/fanBlades/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].partNumber").value("PartNumberTest"))
+                .andExpect(jsonPath("$[1].partNumber").value("PartNumberTest2"));
+
+        verify(fanBladeServiceImpl, times(1)).getAll();
+    }
+    @Test
+    public void FanBladeController_Delete_ShouldReturnOk_WhenFanBladeExists() throws Exception {
+        Integer fanBladeId = 1;
+
+        // Mock servisa da postoji DTO
+        when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(fanBladeDto1);
+        doNothing().when(fanBladeServiceImpl).delete(fanBladeId);
+
+        mockMvc.perform(delete("/part/fanBlades/{fanBladeId}", fanBladeId))
+                .andExpect(status().isOk());
+
+        verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
+        verify(fanBladeServiceImpl, times(1)).delete(fanBladeId);
+    }
+
+    @Test
+    public void FanBladeController_Delete_ShouldReturnNotFound_WhenFanBladeDoesNotExist() throws Exception {
+        Integer fanBladeId = 99;
+
+        when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(null);
+
+        mockMvc.perform(delete("/part/fanBlades/{fanBladeId}", fanBladeId))
+                .andExpect(status().isNotFound());
+
+        verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
+        verify(fanBladeServiceImpl, never()).delete(fanBladeId);
+    }
+
+    @Test
+    public void FanBladeController_Update_ShouldCallService() throws Exception {
+        Integer basicPartId = 1;
+
+        doNothing().when(fanBladeServiceImpl).update(basicPartId);
+
+        mockMvc.perform(put("/part/fanBlades/{basicPartId}", basicPartId))
+                .andExpect(status().isOk());
+
+        verify(fanBladeServiceImpl, times(1)).update(basicPartId);
+    }
+
+
 }

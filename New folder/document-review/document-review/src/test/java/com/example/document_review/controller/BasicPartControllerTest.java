@@ -2,6 +2,7 @@ package com.example.document_review.controller;
 
 import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.CommentDto;
+import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.entity.Enums.PartType;
 import com.example.document_review.service.DocumentService;
 import com.example.document_review.service.impl.BasicPartServiceImpl;
@@ -19,10 +20,16 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = BasicPartController.class)
@@ -78,6 +85,88 @@ public class BasicPartControllerTest {
 
         verify(basicPartServiceImpl, times(1)).save(refEq(basicPartDto1));
 
+    }
+    @Test
+    public void BasicPartController_getById_BasicPartDtos() throws Exception {
+        Integer basicPartId = 1;
+
+        when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
+
+        mockMvc.perform(get("/part/basic/{basicPartId}", basicPartId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.partNumber").value("PartNumberTest1"))
+                .andExpect(jsonPath("$.description").value("DescriptionTest1"))
+                .andExpect(jsonPath("$.serialNumber").value("SerialNumberTest1"))
+                .andExpect(jsonPath("$.type").value("Basic"))
+                .andExpect(jsonPath("$.cyclesSinceNew").value("CycleSinceNewTest1"))
+                .andExpect(jsonPath("$.timeSinceNew").value("TimeSinceNewTest1"));
+
+        verify(basicPartServiceImpl, times(1)).getById(basicPartId);
+    }
+    @Test
+    public void BasicPartController_getById_NotFoundBasicPartDtos() throws Exception {
+        Integer basicPartId = 99;
+
+        when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
+
+        mockMvc.perform(get("/part/basic/{basicPartId}", basicPartId))
+                .andExpect(status().isNotFound());
+
+        verify(basicPartServiceImpl, times(1)).getById(basicPartId);
+    }
+
+
+    @Test
+    public void FanBladeController_FindAll_BasicPartDtos() throws Exception {
+        List<BasicPartDto> basicPertList = List.of(basicPartDto1, basicPartDto2);
+        when(basicPartServiceImpl.getAll()).thenReturn(basicPertList);
+
+        mockMvc.perform(get("/part/basic/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].partNumber").value("PartNumberTest1"))
+                .andExpect(jsonPath("$[1].partNumber").value("PartNumberTest2"));
+
+        verify(basicPartServiceImpl, times(1)).getAll();
+    }
+    @Test
+    public void BasicPartController_Delete_ShouldReturnOk_WhenBasicPartExists() throws Exception {
+        Integer basicPartId = 1;
+
+        when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
+        doNothing().when(basicPartServiceImpl).delete(basicPartId);
+
+        mockMvc.perform(delete("/part/basic/{fanBladeId}", basicPartId))
+                .andExpect(status().isOk());
+
+        verify(basicPartServiceImpl, times(1)).getById(basicPartId);
+        verify(basicPartServiceImpl, times(1)).delete(basicPartId);
+    }
+
+
+
+    @Test
+    public void BasicPartController_Delete_ShouldReturnNotFound_WhenBasicPartDoesNotExist() throws Exception {
+        Integer basicPartId = 99;
+
+        when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
+
+        mockMvc.perform(delete("/part/basic/{fanBladeId}", basicPartId))
+                .andExpect(status().isNotFound());
+
+        verify(basicPartServiceImpl, times(1)).getById(basicPartId);
+        verify(basicPartServiceImpl, never()).delete(basicPartId);
+    }
+
+    @Test
+    public void BasicPartController_Update_ShouldCallService() throws Exception {
+        Integer basicPartId = 1;
+
+        doNothing().when(basicPartServiceImpl).update(basicPartId);
+
+        mockMvc.perform(put("/part/basic/{basicPartId}", basicPartId))
+                .andExpect(status().isOk());
+
+        verify(basicPartServiceImpl, times(1)).update(basicPartId);
     }
 
 
