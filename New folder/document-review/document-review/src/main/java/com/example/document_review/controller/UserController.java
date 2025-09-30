@@ -23,7 +23,6 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("/user")
-
 public class UserController {
 
     private final UserService userService;
