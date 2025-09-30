@@ -2,10 +2,19 @@ package com.example.document_review.controller;
 
 import com.example.document_review.dto.UserDto;
 import com.example.document_review.entity.User;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.exception.ValidationException;
 import com.example.document_review.service.UserService;
 import com.example.document_review.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.mockito.Mockito;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.test.context.support.WithMockUser;
+import jakarta.servlet.http.HttpSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -13,15 +22,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoBeans;
 import org.springframework.test.web.servlet.MockMvc;
+import java.security.Principal;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -31,22 +45,51 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private UserDto userDto1;
+    private UserDto userDto2;
+    private User user;
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @MockitoBean
-    private UserService userServiceImpl;
+    private UserServiceImpl userServiceImpl;
+
+    @BeforeEach
+    public void init() {
+        userDto1 = UserDto.builder()
+                .username("UsernameTest1")
+                .password("PasswordTest1")
+                .firstName("FirstNameTest1")
+                .lastName("LastNameTest1")
+                .email("EmailTest@EmailTest1")
+                .build();
+
+        userDto2 = UserDto.builder()
+                .username("UsernameTest2")
+                .password("PasswordTest2")
+                .firstName("FirstNameTest2")
+                .lastName("LastNameTest2")
+                .email("EmailTest@EmailTest2")
+                .build();
+        user = User.builder()
+                .username("UsernameTest")
+                .password("PasswordTest")
+                .firstName("FirstNameTest")
+                .lastName("LastNameTest")
+                .email("EmailTest@EmailTest")
+                .build();
+    }
 
     @Test
-    public void register_ShouldReturnBadRequest_WhenUserExists() throws Exception {
-        UserDto userDto = new UserDto();
-        userDto.setUsername("existingUser");
+    public void UserController_register_ShouldReturnBadRequest_WhenUserExists() throws Exception {
 
-        when(userServiceImpl.findByUsername("existingUser")).thenReturn(new User());
+
+        when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(new User());
 
         mockMvc.perform(post("/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDto)))
+                        .content(objectMapper.writeValueAsString(userDto1)))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Username already exists"));
 
@@ -54,7 +97,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void register_ShouldReturnBadRequest_WhenValidationException() throws Exception {
+    public void UserController_register_ShouldReturnBadRequest_WhenValidationException() throws Exception {
         UserDto userDto = new UserDto();
         userDto.setUsername("newUser");
 
@@ -71,18 +114,108 @@ public class UserControllerTest {
     }
 
     @Test
-    public void register_ShouldReturnOk_WhenUserRegistered() throws Exception {
-        UserDto userDto = new UserDto();
-        userDto.setUsername("newUser");
+    public void UserController_register_ShouldReturnOk_WhenUserRegistered() throws Exception {
 
-        when(userServiceImpl.findByUsername("newUser")).thenReturn(null);
+
+        when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(null);
 
         mockMvc.perform(post("/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDto)))
+                        .content(objectMapper.writeValueAsString(userDto1)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("User registered successfully"));
 
         verify(userServiceImpl, times(1)).register(any(UserDto.class));
     }
+    @Test
+    public void UserController_Home_ShouldReturnNotAuthenticated_WhenPrincipalIsNull() throws Exception {
+        mockMvc.perform(get("/user/home"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.error").value("Not authenticated"));
+    }
+
+    @Test
+    public void UserController_Home_ShouldReturnUserNotFound_WhenUserDoesNotExist() throws Exception {
+        Principal principal = () -> "nonexistentUser";
+
+        when(userServiceImpl.findByUsername("nonexistentUser")).thenReturn(null);
+
+        mockMvc.perform(get("/user/home").principal(principal))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.error").value("User not found"));
+    }
+
+    @Test
+    void UserController_Login_ShouldReturnLoggedUserDto_WhenCredentialsAreCorrect() throws Exception {
+
+        when(userServiceImpl.loginUser(any(UserDto.class))).thenReturn(user);
+
+        mockMvc.perform(post("/user/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(userDto1)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value(user.getUsername()));
+
+        verify(userServiceImpl, times(1)).loginUser(refEq(userDto1));
+    }
+
+    @Test
+    void UserController_ShouldReturnBadRequest_WhenLoginFails() throws Exception {
+        doThrow(new EntityNotFoundException("User not found"))
+                .when(userServiceImpl).loginUser(any(UserDto.class));
+
+        mockMvc.perform(post("/user/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(userDto1)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value(containsString("User not found")));
+
+        verify(userServiceImpl, times(1)).loginUser(refEq(userDto1));
+    }
+
+
+    @Test
+    void UserController_logoutUser_ShouldReturnOk() throws Exception {
+        mockMvc.perform(post("/user/logout"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Logout successful"));
+    }
+
+    @Test
+    void UserController_logoutUser_ShouldInvalidateSessionAndRemoveCookie() throws Exception {
+
+        UserService mockUserService = Mockito.mock(UserService.class);
+
+        UserController controller = new UserController(mockUserService);
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        HttpSession session = request.getSession(true);
+
+        ResponseEntity<String> result = controller.logoutUser(request, response);
+
+        assertEquals("Logout successful", result.getBody());
+        assertNull(request.getSession(false)); // session je invalidiran
+        assertEquals(0, response.getCookie("JSESSIONID").getMaxAge()); // cookie obrisan
+    }
+
+
+    @Test
+    void findById_ShouldReturnUserDto_WhenUserExists() throws Exception {
+
+        when(userServiceImpl.findById(1)).thenReturn(userDto1);
+
+
+        mockMvc.perform(get("/user/findById/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value(userDto1.getUsername()))
+                .andExpect(jsonPath("$.email").value(userDto1.getEmail()));
+
+        verify(userServiceImpl, times(1)).findById(1);
+    }
+
+
+
 }
+
+

@@ -33,8 +33,6 @@ public class CommentController {
 
     }
 
-
-
     @GetMapping("/all")
     public ResponseEntity<List<CommentDto>> findAll() throws Exception {
         return new ResponseEntity<>(commentService.findAll(), HttpStatus.OK);
