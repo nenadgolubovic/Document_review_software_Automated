@@ -8,6 +8,6 @@ import lombok.experimental.SuperBuilder;
 public class BasicPart extends Part {
 
     public BasicPart() {
-
+        // Default constructor required by frameworks or for inheritance
     }
 }

@@ -13,7 +13,7 @@ public class FanBladeDto extends PartDto{
     private String momentWeight;
 
     public FanBladeDto() {
-        this.momentWeight = momentWeight;
+
     }
 
     public FanBladeDto(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, String momentWeight) {

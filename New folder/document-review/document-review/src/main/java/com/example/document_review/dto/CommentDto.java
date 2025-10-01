@@ -16,7 +16,14 @@ public class CommentDto {
     private Integer rate;
     private Integer documentId;
 
-    public CommentDto(Integer commentId, String comment, Integer userId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate, Integer documentId) {
+    public CommentDto(Integer commentId,
+                      String comment,
+                      Integer userId,
+                      String commentTitle,
+                      LocalDateTime commentDate,
+                      boolean isApproved,
+                      Integer rate,
+                      Integer documentId) {
         this.commentId = commentId;
         this.comment = comment;
         this.userId = userId;
