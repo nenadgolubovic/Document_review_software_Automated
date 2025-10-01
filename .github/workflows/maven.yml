@@ -38,6 +38,6 @@ jobs:
           projectBaseDir: 'New folder/document-review/document-review'
           args: >
             -Dsonar.organization=nenadgolubovic
-            -Dsonar.projectKey=nenadgolubovic
+            -Dsonar.projectKey=Document_review_software_Automated
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
             -Dsonar.java.binaries=target/classes
