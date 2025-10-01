@@ -1,5 +1,4 @@
 package com.example.document_review.controller;
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.PartService;

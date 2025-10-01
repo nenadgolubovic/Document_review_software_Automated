@@ -2,7 +2,6 @@ package com.example.document_review.entity;
 
 import com.example.document_review.entity.Enums.PartType;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;

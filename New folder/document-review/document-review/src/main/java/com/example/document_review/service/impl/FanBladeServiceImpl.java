@@ -1,6 +1,5 @@
 package com.example.document_review.service.impl;
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.mapper.impl.FanBladeMapper;
 import com.example.document_review.repository.impl.FanBladeRepository;

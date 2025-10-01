@@ -1,8 +1,5 @@
 package com.example.document_review.repository.impl;
 
-import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Document;
-import com.example.document_review.entity.FanBlade;
 import com.example.document_review.entity.Part;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;

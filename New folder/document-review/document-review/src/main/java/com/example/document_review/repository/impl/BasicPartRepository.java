@@ -1,7 +1,6 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Comment;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;

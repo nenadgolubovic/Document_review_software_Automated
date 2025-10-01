@@ -10,7 +10,6 @@ import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.impl.CommentServiceImpl;
 import com.example.document_review.validator.impl.CommentSaveValidator;
 import com.example.document_review.validator.impl.DocumentFileValidator;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

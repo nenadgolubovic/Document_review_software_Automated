@@ -1,15 +1,10 @@
 package com.example.document_review.service;
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.entity.BasicPart;
 import com.example.document_review.entity.Enums.PartType;
 import com.example.document_review.entity.FanBlade;
-import com.example.document_review.mapper.impl.BasicPartMapper;
 import com.example.document_review.mapper.impl.FanBladeMapper;
-import com.example.document_review.repository.impl.BasicPartRepository;
 import com.example.document_review.repository.impl.FanBladeRepository;
-import com.example.document_review.service.impl.BasicPartServiceImpl;
 import com.example.document_review.service.impl.FanBladeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

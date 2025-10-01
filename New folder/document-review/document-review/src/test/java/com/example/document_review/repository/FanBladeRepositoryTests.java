@@ -1,14 +1,9 @@
 package com.example.document_review.repository;
 
-import com.example.document_review.entity.Comment;
-import com.example.document_review.entity.Document;
 import com.example.document_review.entity.Enums.PartType;
 import com.example.document_review.entity.FanBlade;
-import com.example.document_review.entity.Part;
 import com.example.document_review.repository.impl.FanBladeRepository;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +12,6 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest

@@ -3,7 +3,6 @@ package com.example.document_review.validator.impl;
 import com.example.document_review.dto.CommentDto;
 import com.example.document_review.exception.ValidationException;
 import com.example.document_review.validator.Validator;
-import org.hibernate.annotations.Comment;
 import org.springframework.stereotype.Component;
 
 

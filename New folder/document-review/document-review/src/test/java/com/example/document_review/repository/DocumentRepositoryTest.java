@@ -3,26 +3,18 @@ package com.example.document_review.repository;
 import com.example.document_review.entity.Document;
 import com.example.document_review.entity.Enums.PartType;
 import com.example.document_review.entity.FanBlade;
-import com.example.document_review.entity.Part;
-import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.repository.impl.FanBladeRepository;
-import com.example.document_review.repository.impl.PartRepository;
 import jakarta.persistence.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 @DataJpaTest

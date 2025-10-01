@@ -1,14 +1,7 @@
 package com.example.document_review.dto;
-
 import com.example.document_review.entity.Comment;
 import com.example.document_review.entity.Part;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Builder;
-
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,6 @@ import com.example.document_review.entity.BasicPart;
 import com.example.document_review.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
 
 @Component
 public class BasicPartMapper implements Mapper<BasicPartDto, BasicPart> {

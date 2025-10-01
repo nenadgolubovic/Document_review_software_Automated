@@ -2,7 +2,6 @@ package com.example.document_review.controller;
 import com.example.document_review.dto.CommentDto;
 import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.service.CommentService;
-import jakarta.persistence.PostUpdate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

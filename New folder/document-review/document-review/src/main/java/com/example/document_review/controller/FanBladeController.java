@@ -2,7 +2,6 @@ package com.example.document_review.controller;
 
 import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.exception.EntityNotFoundException;
-import com.example.document_review.service.BasicPartService;
 import com.example.document_review.service.FanBladeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,9 +2,7 @@ package com.example.document_review.repository;
 
 import com.example.document_review.entity.BasicPart;
 import com.example.document_review.entity.Enums.PartType;
-import com.example.document_review.entity.FanBlade;
 import com.example.document_review.repository.impl.BasicPartRepository;
-import com.example.document_review.repository.impl.FanBladeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;

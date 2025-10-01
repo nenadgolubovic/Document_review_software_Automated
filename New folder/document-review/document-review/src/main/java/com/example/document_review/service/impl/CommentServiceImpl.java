@@ -5,7 +5,6 @@ import com.example.document_review.entity.Comment;
 import com.example.document_review.entity.Document;
 import com.example.document_review.exception.ValidationException;
 import com.example.document_review.mapper.impl.CommentMapper;
-import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.repository.impl.CommentRepository;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.CommentService;

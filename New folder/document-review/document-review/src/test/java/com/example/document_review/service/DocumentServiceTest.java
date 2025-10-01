@@ -3,7 +3,6 @@ package com.example.document_review.service;
 
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.Document;
 import com.example.document_review.entity.Enums.PartType;
 import com.example.document_review.entity.FanBlade;
@@ -14,18 +13,11 @@ import com.example.document_review.service.impl.DocumentServiceImpl;
 import com.example.document_review.service.impl.PartServiceImpl;
 import com.example.document_review.validator.impl.DocumentFileValidator;
 import com.example.document_review.validator.impl.DocumentSaveValidator;
-import jakarta.mail.Part;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.core.io.ResourceLoader;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;

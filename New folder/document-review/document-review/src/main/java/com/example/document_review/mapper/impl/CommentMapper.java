@@ -4,9 +4,6 @@ import com.example.document_review.dto.CommentDto;
 import com.example.document_review.entity.Comment;
 import com.example.document_review.mapper.Mapper;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @org.springframework.stereotype.Component
 public class CommentMapper implements Mapper<CommentDto, Comment> {
 
