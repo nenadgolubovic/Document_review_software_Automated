@@ -30,12 +30,11 @@ jobs:
         run: mvn test
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v2
+        uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
         with:
-          projectBaseDir: 'New folder/document-review/document-review'
           args: >
             -Dsonar.organization=nenadgolubovic
             -Dsonar.projectKey=Document_review_software_Automated
