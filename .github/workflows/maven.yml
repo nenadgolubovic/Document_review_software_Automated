@@ -35,6 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
         with:
+          projectBaseDir: 'New folder/document-review/document-review'
           args: >
             -Dsonar.organization=nenadgolubovic
             -Dsonar.projectKey=Document_review_software_Automated
