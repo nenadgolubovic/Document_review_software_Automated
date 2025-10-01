@@ -1,7 +1,11 @@
 name: Java CI
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - nenad_sonar_cloud_dev
+
 
 jobs:
   build:
