@@ -14,7 +14,7 @@ public class FanBladeDto extends PartDto{
     private String momentWeight;
 
     public FanBladeDto() {
-        this.momentWeight = momentWeight;
+
     }
 
     @Builder

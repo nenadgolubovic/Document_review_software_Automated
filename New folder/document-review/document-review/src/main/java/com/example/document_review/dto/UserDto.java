@@ -61,6 +61,7 @@ public class UserDto {
 
 
     public UserDto() {
+        // Empty constructor
     }
 
     public Integer getUserId() {
