@@ -35,8 +35,9 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
         with:
+          projectBaseDir: 'New folder/document-review/document-review'
           args: >
-            -Dsonar.organization=nenadgolubovic 
+            -Dsonar.organization=nenadgolubovic
             -Dsonar.projectKey=nenadgolubovic
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
             -Dsonar.java.binaries=target/classes
