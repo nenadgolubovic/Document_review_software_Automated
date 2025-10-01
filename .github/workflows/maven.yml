@@ -5,7 +5,11 @@ on:
     branches:
       - main
       - nenad_sonar_cloud_dev
-
+  pull_request:
+    branches:
+      - main
+      - nenad_sonar_cloud_dev
+  workflow_dispatch:
 
 jobs:
   build:
