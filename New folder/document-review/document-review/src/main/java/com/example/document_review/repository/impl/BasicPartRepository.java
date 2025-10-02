@@ -1,6 +1,7 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.BasicPart;
+import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -37,7 +38,7 @@ public class BasicPartRepository implements MyRepository<BasicPart, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) throws RepositoryOperationException {
         BasicPart basicPart = entityManager.find(BasicPart.class, id);
 
         if (basicPart != null) {

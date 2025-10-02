@@ -1,6 +1,7 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.User;
+import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -28,7 +29,7 @@ public class UserRepository implements MyRepository <User, Integer>{
     }
 
     @Override
-    public List findAll() throws Exception {
+    public List findAll() throws RepositoryOperationException {
         return List.of();
     }
 

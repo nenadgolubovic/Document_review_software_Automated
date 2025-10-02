@@ -1,6 +1,7 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.FanBlade;
+import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -38,7 +39,7 @@ public class FanBladeRepository implements MyRepository<FanBlade, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) throws RepositoryOperationException {
         FanBlade fanBlade = entityManager.find(FanBlade.class, id);
 
         if (fanBlade != null) {

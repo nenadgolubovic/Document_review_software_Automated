@@ -1,6 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.PartDto;
+import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.mapper.impl.PartMapper;
 import com.example.document_review.repository.impl.PartRepository;
 import com.example.document_review.service.PartService;
@@ -41,7 +42,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     @Transactional
-    public void delete(Integer partId) throws Exception {
+    public void delete(Integer partId) throws RepositoryOperationException {
         partRepository.delete(partId);
     }
 }

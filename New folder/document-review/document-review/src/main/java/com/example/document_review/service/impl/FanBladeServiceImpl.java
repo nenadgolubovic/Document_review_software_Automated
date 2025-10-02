@@ -1,6 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.FanBladeDto;
+import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.mapper.impl.FanBladeMapper;
 import com.example.document_review.repository.impl.FanBladeRepository;
 import com.example.document_review.service.FanBladeService;
@@ -26,12 +27,12 @@ public class FanBladeServiceImpl implements FanBladeService {
 
     @Override
     @Transactional
-    public void delete(Integer partId) throws Exception {
+    public void delete(Integer partId) throws RepositoryOperationException {
         fanBladeRepository.delete(partId);
     }
 
     @Override
-    public List<FanBladeDto> getAll() throws Exception {
+    public List<FanBladeDto> getAll() throws RepositoryOperationException {
         return fanBladeRepository.findAll().stream().map(fanBladeMapper::toDto).collect(Collectors.toList());
     }
     @Override
