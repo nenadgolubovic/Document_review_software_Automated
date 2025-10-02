@@ -10,6 +10,7 @@ import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.service.impl.CommentServiceImpl;
 import com.example.document_review.validator.impl.CommentSaveValidator;
 import com.example.document_review.validator.impl.DocumentFileValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,79 +44,70 @@ public class CommentServiceTest {
     @InjectMocks
     private CommentServiceImpl commentServiceImpl;
 
-    @Test
-    public void commentServiceImplSave() throws ValidationException {
+    private Comment comment1;
+    private CommentDto commentDto1;
+    private Comment comment2;
+    private CommentDto commentDto2;
+    private Document document;
 
-        Comment comment = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
+    @BeforeEach
+    public void setUp() {
+        comment1 = Comment.builder()
+                .commentTitle("Test comment title1")
+                .commentText("Test comment1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
                 .isApproved(true)
-                .rate(5).build();
-        CommentDto commentDto = CommentDto.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
+                .rate(1).build();
+        comment2 = Comment.builder()
+                .commentTitle("Test comment title2")
+                .commentText("Test comment2")
+                .commentDate(LocalDateTime.now())
+                .documentId(1)
+                .userId(1)
+                .isApproved(false)
+                .rate(null).build();
+        commentDto1 = CommentDto.builder()
+                .commentTitle("Test comment title1")
+                .commentText("Test comment1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
                 .isApproved(true)
-                .rate(5).build();
-
-        Document document = Document.builder()
+                .rate(1).build();
+        commentDto2 = CommentDto.builder()
+                .commentTitle("Test comment title2")
+                .commentText("Test comment2")
+                .commentDate(LocalDateTime.now())
+                .documentId(1)
+                .userId(1)
+                .isApproved(false)
+                .rate(null).build();
+        document = Document.builder()
                 .documentName("DocumentNameTest")
                 .partId(1)
                 .documentRoute("DocumentRouteTest.pdf")
                 .documentDate(LocalDate.now())
                 .build();
+    }
 
+    @Test
+    public void commentServiceImplSave() throws ValidationException {
 
         when(documentRepository.findById(1)).thenReturn(document);
-        when(commentMapper.toEntity(commentDto)).thenReturn(comment);
+        when(commentMapper.toEntity(commentDto1)).thenReturn(comment1);
         doNothing().when(documentFileValidator).validateDocument(document);
-        doNothing().when(commentSaveValidator).validate(commentDto);
-        commentServiceImpl.save(commentDto);
+        doNothing().when(commentSaveValidator).validate(commentDto1);
+        commentServiceImpl.save(commentDto1);
 
-        verify(commentRepository).save(comment);
+        verify(commentRepository).save(comment1);
 
     }
 
     @Test
     public void commentServiceImplFindAllReturnCommentDtos() throws Exception {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
-        Comment comment2 = Comment.builder()
-                .commentTitle("Test comment title2")
-                .commentText("Test comment2")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(2).build();
 
-        CommentDto commentDto1 = CommentDto.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
-        CommentDto commentDto2 = CommentDto.builder()
-                .commentTitle("Test comment title2")
-                .commentText("Test comment2")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(2).build();
 
         when(commentRepository.findAll()).thenReturn(List.of(comment1, comment2));
         when(commentMapper.toDto(comment1)).thenReturn(commentDto1);
@@ -128,15 +120,6 @@ public class CommentServiceTest {
 
     @Test
     public void commentServiceImplApproveComment() throws Exception {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(5).build();
-
         when(commentRepository.findById(1)).thenReturn(comment1);
         commentServiceImpl.approveComment(1);
 
@@ -165,15 +148,6 @@ public class CommentServiceTest {
 
     @Test
     public void commentServiceImplRateCommentWhenNotRated() throws Exception {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(null).build();
-
         when(commentRepository.findById(1)).thenReturn(comment1);
         commentServiceImpl.rateComment(1,5);
         assertThat(comment1.getRate()).isEqualTo(5);
@@ -181,15 +155,6 @@ public class CommentServiceTest {
 
     @Test
     public void commentServiceImplRateCommentWhenRated() throws Exception {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(5).build();
-
         when(commentRepository.findById(1)).thenReturn(comment1);
         commentServiceImpl.rateComment(1,2);
         assertThat(comment1.getRate()).isEqualTo(2);
@@ -197,38 +162,7 @@ public class CommentServiceTest {
 
     @Test
     public void commentServiceImplGetAllByDocumentIdCommentDtos(){
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title1")
-                .commentText("Test comment1")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(1).build();
-        Comment comment2 = Comment.builder()
-                .commentTitle("Test comment title2")
-                .commentText("Test comment2")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(null).build();
-        CommentDto commentDto1 = CommentDto.builder()
-                .commentTitle("Test comment title1")
-                .commentText("Test comment1")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(1).build();
-        CommentDto commentDto2 = CommentDto.builder()
-                .commentTitle("Test comment title2")
-                .commentText("Test comment2")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(false)
-                .rate(null).build();
+
 
         List<Comment> comments = Arrays.asList(comment1, comment2);
         when(commentRepository.getAllByDocumentId(1)).thenReturn(comments);

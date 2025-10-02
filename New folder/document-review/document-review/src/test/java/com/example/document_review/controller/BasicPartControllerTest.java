@@ -41,6 +41,7 @@ public class BasicPartControllerTest {
 
     private BasicPartDto basicPartDto1;
     private BasicPartDto basicPartDto2;
+    private static final String GetBasicPartIdPath = "/part/basic/{basicPartId}";
 
     @MockitoBean
     private BasicPartServiceImpl basicPartServiceImpl;
@@ -87,7 +88,7 @@ public class BasicPartControllerTest {
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
 
-        mockMvc.perform(get("/part/basic/{basicPartId}", basicPartId))
+        mockMvc.perform(get(GetBasicPartIdPath, basicPartId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.partNumber").value("PartNumberTest1"))
                 .andExpect(jsonPath("$.description").value("DescriptionTest1"))
@@ -104,7 +105,7 @@ public class BasicPartControllerTest {
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
-        mockMvc.perform(get("/part/basic/{basicPartId}", basicPartId))
+        mockMvc.perform(get(GetBasicPartIdPath, basicPartId))
                 .andExpect(status().isNotFound());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -130,7 +131,7 @@ public class BasicPartControllerTest {
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
         doNothing().when(basicPartServiceImpl).delete(basicPartId);
 
-        mockMvc.perform(delete("/part/basic/{fanBladeId}", basicPartId))
+        mockMvc.perform(delete(GetBasicPartIdPath, basicPartId))
                 .andExpect(status().isOk());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -145,7 +146,7 @@ public class BasicPartControllerTest {
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
-        mockMvc.perform(delete("/part/basic/{fanBladeId}", basicPartId))
+        mockMvc.perform(delete(GetBasicPartIdPath, basicPartId))
                 .andExpect(status().isNotFound());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -158,7 +159,7 @@ public class BasicPartControllerTest {
 
         doNothing().when(basicPartServiceImpl).update(basicPartId);
 
-        mockMvc.perform(put("/part/basic/{basicPartId}", basicPartId))
+        mockMvc.perform(put(GetBasicPartIdPath, basicPartId))
                 .andExpect(status().isOk());
 
         verify(basicPartServiceImpl, times(1)).update(basicPartId);

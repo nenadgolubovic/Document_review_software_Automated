@@ -60,7 +60,7 @@ public class DocumentServiceTest {
     private DocumentServiceImpl documentServiceImpl;
 
 
-    private FanBlade fanBlade;
+
     private FanBladeDto fanBladeDto;
     private DocumentDto documentDto;
     private MultipartFile fakeFile;
@@ -72,7 +72,7 @@ public class DocumentServiceTest {
     @BeforeEach
     public void setUp() {
 
-        fanBlade = FanBlade.builder()
+        FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
