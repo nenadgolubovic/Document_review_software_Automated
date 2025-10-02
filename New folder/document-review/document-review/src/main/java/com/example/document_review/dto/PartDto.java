@@ -17,7 +17,7 @@ public class PartDto {
     private PartType type;
 
     public PartDto() {
-
+        // Default constructor required for frameworks
     }
 
     public String getCyclesSinceNew() {

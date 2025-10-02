@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -41,7 +42,10 @@ public class BasicPartControllerTest {
 
     private BasicPartDto basicPartDto1;
     private BasicPartDto basicPartDto2;
-    private static final String BASIC_PART_ID_PATH = "/part/basic/";
+
+    @Value("${basic.part.path}")
+    private String basicPartPath;
+
     private static final String PART_NUMBER_TEST_1 = "PartNumberTest1";
 
 
@@ -88,7 +92,7 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerGetByIdBasicPartDtos() throws Exception {
         Integer basicPartId = 1;
-        String url = BASIC_PART_ID_PATH + basicPartId;
+        String url = basicPartPath + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
 
@@ -106,7 +110,7 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerGetByIdNotFoundBasicPartDtos() throws Exception {
         Integer basicPartId = 99;
-        String url = BASIC_PART_ID_PATH + basicPartId;
+        String url = basicPartPath + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
@@ -132,7 +136,7 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerDeleteShouldReturnOkWhenBasicPartExists() throws Exception {
         Integer basicPartId = 1;
-        String url = BASIC_PART_ID_PATH + basicPartId;
+        String url = basicPartPath + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
         doNothing().when(basicPartServiceImpl).delete(basicPartId);
@@ -149,7 +153,7 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerDeleteShouldReturnNotFoundWhenBasicPartDoesNotExist() throws Exception {
         Integer basicPartId = 99;
-        String url = BASIC_PART_ID_PATH + basicPartId;
+        String url = basicPartPath + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
@@ -163,7 +167,7 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerUpdateShouldCallService() throws Exception {
         Integer basicPartId = 1;
-        String url = BASIC_PART_ID_PATH + basicPartId;
+        String url = basicPartPath + basicPartId;
 
         doNothing().when(basicPartServiceImpl).update(basicPartId);
 

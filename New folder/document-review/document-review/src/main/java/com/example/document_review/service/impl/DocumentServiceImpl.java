@@ -3,6 +3,8 @@ package com.example.document_review.service.impl;
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.Document;
+import com.example.document_review.exception.DocumentServiceException;
+import com.example.document_review.exception.DocumentStorageException;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.mapper.impl.PartMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
@@ -85,7 +87,7 @@ public class DocumentServiceImpl implements DocumentService {
 
             documentRepository.save(documentMapper.toEntity(documentDto));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DocumentStorageException("Failed to store document: " + document.getOriginalFilename(), e);
         }
     }
 
@@ -95,7 +97,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public Resource getDocumentByName(String filename) throws IOException{
+    public Resource getDocumentByName(String filename) throws IOException, DocumentServiceException{
 
         Path path = Paths.get("C:/Users/Nikola/.../document/" + filename);
         Resource resource = new UrlResource(path.toUri());
@@ -109,7 +111,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 
     @Override
-    public List<DocumentDto> findAllDocuments() throws Exception {
+    public List<DocumentDto> findAllDocuments() throws Exception, DocumentServiceException {
         return documentRepository.findAll().stream().map(entity -> documentMapper.toDto(entity)).collect(Collectors.toList());
     }
 

@@ -26,7 +26,7 @@ public class Comment {
 
 
     public Comment() {
-
+        // Default constructor required for frameworks
     }
 
 

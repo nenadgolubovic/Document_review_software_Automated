@@ -155,7 +155,7 @@ public class UserControllerTest {
 
     @Test
     void userControllerShouldReturnBadRequestWhenLoginFails() throws Exception {
-        doThrow(new EntityNotFoundException("User not found"))
+        doThrow(new EntityNotFoundException(USER_NOT_FOUND_MESSAGE))
                 .when(userServiceImpl).loginUser(any(UserDto.class));
 
         mockMvc.perform(post("/user/login")

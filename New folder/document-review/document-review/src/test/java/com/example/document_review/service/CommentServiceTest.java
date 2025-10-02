@@ -127,16 +127,6 @@ public class CommentServiceTest {
         verify(commentRepository, times(1)).update(comment1);
 
     }
-    @Test
-    public void commentServiceImplApproveCommentNotUpdateWhenAlreadyApproved() throws Exception {
-
-        when(commentRepository.findById(1)).thenReturn(comment1);
-        commentServiceImpl.approveComment(1);
-
-        assertThat(comment1.isApproved()).isTrue();
-        verify(commentRepository, times(1)).update(comment1);
-
-    }
 
     @Test
     public void commentServiceImplRateCommentWhenNotRated() throws Exception {

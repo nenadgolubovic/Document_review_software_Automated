@@ -18,7 +18,9 @@ public class CommentDto {
     private Integer rate;
     private Integer documentId;
 
-    public CommentDto() {}
+    public CommentDto() {
+        // Default constructor required for frameworks
+    }
 
     @Override
     public String toString() {
