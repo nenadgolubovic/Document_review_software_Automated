@@ -41,7 +41,10 @@ public class BasicPartControllerTest {
 
     private BasicPartDto basicPartDto1;
     private BasicPartDto basicPartDto2;
-    private static final String GetBasicPartIdPath = "/part/basic/{basicPartId}";
+    private static final String BASIC_PART_ID_PATH = "/part/basic/";
+    private static final String PART_NUMBER_TEST_1 = "PartNumberTest1";
+    private static final String BasicPartIdPath = "/part/basic/";
+
 
     @MockitoBean
     private BasicPartServiceImpl basicPartServiceImpl;
@@ -49,7 +52,7 @@ public class BasicPartControllerTest {
     @BeforeEach
     public void init() {
         basicPartDto1 = BasicPartDto.builder()
-                .partNumber("PartNumberTest1")
+                .partNumber(PART_NUMBER_TEST_1)
                 .name("NameTest1")
                 .description("DescriptionTest1")
                 .serialNumber("SerialNumberTest1")
@@ -85,12 +88,13 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerGetByIdBasicPartDtos() throws Exception {
         Integer basicPartId = 1;
+        String url = BASIC_PART_ID_PATH + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
 
-        mockMvc.perform(get(GetBasicPartIdPath, basicPartId))
+        mockMvc.perform(get(url, basicPartId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.partNumber").value("PartNumberTest1"))
+                .andExpect(jsonPath("$.partNumber").value(PART_NUMBER_TEST_1))
                 .andExpect(jsonPath("$.description").value("DescriptionTest1"))
                 .andExpect(jsonPath("$.serialNumber").value("SerialNumberTest1"))
                 .andExpect(jsonPath("$.type").value("Basic"))
@@ -102,10 +106,11 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerGetByIdNotFoundBasicPartDtos() throws Exception {
         Integer basicPartId = 99;
+        String url = BASIC_PART_ID_PATH + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
-        mockMvc.perform(get(GetBasicPartIdPath, basicPartId))
+        mockMvc.perform(get(url, basicPartId))
                 .andExpect(status().isNotFound());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -119,7 +124,7 @@ public class BasicPartControllerTest {
 
         mockMvc.perform(get("/part/basic/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].partNumber").value("PartNumberTest1"))
+                .andExpect(jsonPath("$[0].partNumber").value(PART_NUMBER_TEST_1))
                 .andExpect(jsonPath("$[1].partNumber").value("PartNumberTest2"));
 
         verify(basicPartServiceImpl, times(1)).getAll();
@@ -127,11 +132,12 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerDeleteShouldReturnOkWhenBasicPartExists() throws Exception {
         Integer basicPartId = 1;
+        String url = BASIC_PART_ID_PATH + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
         doNothing().when(basicPartServiceImpl).delete(basicPartId);
 
-        mockMvc.perform(delete(GetBasicPartIdPath, basicPartId))
+        mockMvc.perform(delete(url, basicPartId))
                 .andExpect(status().isOk());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -143,10 +149,11 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerDeleteShouldReturnNotFoundWhenBasicPartDoesNotExist() throws Exception {
         Integer basicPartId = 99;
+        String url = BASIC_PART_ID_PATH + basicPartId;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
 
-        mockMvc.perform(delete(GetBasicPartIdPath, basicPartId))
+        mockMvc.perform(delete(url, basicPartId))
                 .andExpect(status().isNotFound());
 
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
@@ -156,10 +163,11 @@ public class BasicPartControllerTest {
     @Test
     public void basicPartControllerUpdateShouldCallService() throws Exception {
         Integer basicPartId = 1;
+        String url = BASIC_PART_ID_PATH + basicPartId;
 
         doNothing().when(basicPartServiceImpl).update(basicPartId);
 
-        mockMvc.perform(put(GetBasicPartIdPath, basicPartId))
+        mockMvc.perform(put(url, basicPartId))
                 .andExpect(status().isOk());
 
         verify(basicPartServiceImpl, times(1)).update(basicPartId);

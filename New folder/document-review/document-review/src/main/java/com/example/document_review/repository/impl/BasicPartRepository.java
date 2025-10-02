@@ -49,7 +49,7 @@ public class BasicPartRepository implements MyRepository<BasicPart, Integer> {
 
     @Override
     public void update(BasicPart entity) {
-
+        // This method is intentionally left empty for now.
     }
 
 }

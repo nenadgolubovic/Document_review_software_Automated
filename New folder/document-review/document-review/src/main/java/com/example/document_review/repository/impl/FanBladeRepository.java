@@ -50,6 +50,6 @@ public class FanBladeRepository implements MyRepository<FanBlade, Integer> {
 
     @Override
     public void update(FanBlade entity) {
-
+        // This method is intentionally left empty for now.
     }
 }

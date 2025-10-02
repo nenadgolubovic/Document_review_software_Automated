@@ -45,6 +45,7 @@ public class BasicPartServiceImpl implements BasicPartService {
 
     @Override
     public void update(Integer basicPartId) {
+        // This method is intentionally left empty for now.
     }
 
 }

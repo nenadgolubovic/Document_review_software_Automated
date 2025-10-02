@@ -45,6 +45,11 @@ public class CommentControllerTest {
 
     private CommentDto commentDto1;
     private CommentDto commentDto2;
+    private final String TEST_COMMENT_1 = "Test comment1";
+    private final String TEST_COMMENT_TITLE_1 = "Test comment title1";
+    private final String TEST_COMMENT_2 = "Test comment2";
+    private final String TEST_COMMENT_TITLE_2 = "Test comment title2";
+
 
     @MockitoBean
     private CommentServiceImpl commentServiceImpl;
@@ -52,8 +57,8 @@ public class CommentControllerTest {
     @BeforeEach
     public void init() {
         commentDto1 = CommentDto.builder()
-                .commentTitle("Test comment title1")
-                .commentText("Test comment1")
+                .commentTitle(TEST_COMMENT_TITLE_1)
+                .commentText(TEST_COMMENT_1)
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -61,8 +66,8 @@ public class CommentControllerTest {
                 .rate(1).build();
 
         commentDto2 = CommentDto.builder()
-                .commentTitle("Test comment title2")
-                .commentText("Test comment2")
+                .commentTitle(TEST_COMMENT_TITLE_2)
+                .commentText(TEST_COMMENT_2)
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -95,14 +100,14 @@ public class CommentControllerTest {
 
         mockMvc.perform(get("/comment/getAllByDocumentId/{documentId}", documentId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].commentTitle").value("Test comment title1"))
-                .andExpect(jsonPath("$[0].comment").value("Test comment1"))
+                .andExpect(jsonPath("$[0].commentTitle").value(TEST_COMMENT_TITLE_1))
+                .andExpect(jsonPath("$[0].comment").value(TEST_COMMENT_1))
                 .andExpect(jsonPath("$[0].documentId").value(1))
                 .andExpect(jsonPath("$[0].userId").value(1))
                 .andExpect(jsonPath("$[0].approved").value(true))
                 .andExpect(jsonPath("$[0].rate").value(1))
-                .andExpect(jsonPath("$[1].commentTitle").value("Test comment title2"))
-                .andExpect(jsonPath("$[1].comment").value("Test comment2"))
+                .andExpect(jsonPath("$[1].commentTitle").value(TEST_COMMENT_TITLE_2))
+                .andExpect(jsonPath("$[1].comment").value(TEST_COMMENT_2))
                 .andExpect(jsonPath("$[1].documentId").value(1))
                 .andExpect(jsonPath("$[1].userId").value(1))
                 .andExpect(jsonPath("$[1].approved").value(false))
@@ -117,14 +122,14 @@ public class CommentControllerTest {
 
         mockMvc.perform(get("/comment/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].commentTitle").value("Test comment title1"))
-                .andExpect(jsonPath("$[0].comment").value("Test comment1"))
+                .andExpect(jsonPath("$[0].commentTitle").value(TEST_COMMENT_TITLE_1))
+                .andExpect(jsonPath("$[0].comment").value(TEST_COMMENT_1))
                 .andExpect(jsonPath("$[0].documentId").value(1))
                 .andExpect(jsonPath("$[0].userId").value(1))
                 .andExpect(jsonPath("$[0].approved").value(true))
                 .andExpect(jsonPath("$[0].rate").value(1))
-                .andExpect(jsonPath("$[1].commentTitle").value("Test comment title2"))
-                .andExpect(jsonPath("$[1].comment").value("Test comment2"))
+                .andExpect(jsonPath("$[1].commentTitle").value(TEST_COMMENT_TITLE_2))
+                .andExpect(jsonPath("$[1].comment").value(TEST_COMMENT_2))
                 .andExpect(jsonPath("$[1].documentId").value(1))
                 .andExpect(jsonPath("$[1].userId").value(1))
                 .andExpect(jsonPath("$[1].approved").value(false))

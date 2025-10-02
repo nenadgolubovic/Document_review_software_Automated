@@ -54,6 +54,9 @@ public class UserControllerTest {
     @MockitoBean
     private UserServiceImpl userServiceImpl;
 
+    private final String USER_NOT_FOUND_MESSAGE = "User not found";
+    private final String URL_REGISTER = "/user/register";
+
     @BeforeEach
     public void init() {
         userDto1 = UserDto.builder()
@@ -78,7 +81,7 @@ public class UserControllerTest {
 
         when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(new User());
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post(URL_REGISTER)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto1)))
                 .andExpect(status().isBadRequest())
@@ -95,7 +98,7 @@ public class UserControllerTest {
         when(userServiceImpl.findByUsername("newUser")).thenReturn(null);
         doThrow(new ValidationException("Invalid data")).when(userServiceImpl).register(any(UserDto.class));
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post(URL_REGISTER)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isBadRequest())
@@ -110,7 +113,7 @@ public class UserControllerTest {
 
         when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(null);
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post(URL_REGISTER)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto1)))
                 .andExpect(status().isOk())
@@ -133,7 +136,7 @@ public class UserControllerTest {
 
         mockMvc.perform(get("/user/home").principal(principal))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.error").value("User not found"));
+                .andExpect(jsonPath("$.error").value(USER_NOT_FOUND_MESSAGE));
     }
 
     @Test
@@ -159,7 +162,7 @@ public class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(userDto1)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.detail").value(containsString("User not found")));
+                .andExpect(jsonPath("$.detail").value(containsString(USER_NOT_FOUND_MESSAGE)));
 
         verify(userServiceImpl, times(1)).loginUser(refEq(userDto1));
     }

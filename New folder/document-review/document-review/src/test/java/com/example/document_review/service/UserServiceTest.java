@@ -38,40 +38,46 @@ public class UserServiceTest {
 
     private User user;
     private UserDto userDto;
+    private final String USERNAME_TEST = "UsernameTest";
+    private final String PASSWORD_TEST = "PasswordTest";
+    private final String FIRST_NAME = "FirstNameTest";
+    private final String LAST_NAME = "LastNameTest";
+    private final String EMAIL = "EmailTest@EmailTest";
+    private final String ENCODED_PASSWORD = "encodedPassword";
 
     @BeforeEach
     public void setUp() {
         user = User.builder()
-            .username("UsernameTest")
-            .password("PasswordTest")
-            .firstName("FirstNameTest")
-            .lastName("LastNameTest")
-            .email("EmailTest@EmailTest")
+            .username(USERNAME_TEST)
+            .password(PASSWORD_TEST)
+            .firstName(FIRST_NAME)
+            .lastName(LAST_NAME)
+            .email(EMAIL)
             .build();
         userDto = UserDto.builder()
-            .username("UsernameTest")
-            .password("PasswordTest")
-            .firstName("FirstNameTest")
-            .lastName("LastNameTest")
-            .email("EmailTest@EmailTest")
+            .username(USERNAME_TEST)
+            .password(PASSWORD_TEST)
+            .firstName(FIRST_NAME)
+            .lastName(LAST_NAME)
+            .email(EMAIL)
             .build();
     }
 
     @Test
     public void userServiceRegister() {
 
-        when(bCryptPasswordEncoder.encode("PasswordTest")).thenReturn("encodedPassword");
+        when(bCryptPasswordEncoder.encode(PASSWORD_TEST)).thenReturn(ENCODED_PASSWORD);
         when(userMapper.toEntity(userDto)).thenReturn(user);
 
         userServiceImpl.register(userDto);
 
         verify(registrationValidator).validate(userDto);
-        verify(bCryptPasswordEncoder).encode("PasswordTest");
-        assertThat(userDto.getPassword()).isEqualTo("encodedPassword");
+        verify(bCryptPasswordEncoder).encode(PASSWORD_TEST);
+        assertThat(userDto.getPassword()).isEqualTo(ENCODED_PASSWORD);
         verify(userMapper).toEntity(userDto);
         verify(userRepository).save(user);
 
-        assertThat(userDto.getPassword()).isEqualTo("encodedPassword");
+        assertThat(userDto.getPassword()).isEqualTo(ENCODED_PASSWORD);
 
     }
 
@@ -87,30 +93,30 @@ public class UserServiceTest {
         verify(userMapper).toDto(user);
 
         assertThat(result).isNotNull();
-        assertThat(result.getUsername()).isEqualTo("UsernameTest");
-        assertThat(result.getFirstName()).isEqualTo("FirstNameTest");
-        assertThat(result.getLastName()).isEqualTo("LastNameTest");
-        assertThat(result.getEmail()).isEqualTo("EmailTest@EmailTest");
-        assertThat(result.getPassword()).isEqualTo("PasswordTest");
+        assertThat(result.getUsername()).isEqualTo(USERNAME_TEST);
+        assertThat(result.getFirstName()).isEqualTo(FIRST_NAME);
+        assertThat(result.getLastName()).isEqualTo(LAST_NAME);
+        assertThat(result.getEmail()).isEqualTo(EMAIL);
+        assertThat(result.getPassword()).isEqualTo(PASSWORD_TEST);
 
     }
     @Test
     public void userServiceLoginUserUser(){
         User user = User.builder()
-                .username("UsernameTest")
-                .password("EncodedPassword")
+                .username(USERNAME_TEST)
+                .password(ENCODED_PASSWORD)
                 .build();
         UserDto userDto = UserDto.builder()
-                .username("UsernameTest")
-                .password("PasswordTest")
+                .username(USERNAME_TEST)
+                .password(PASSWORD_TEST)
                 .build();
-        when(userRepository.findByUsername("UsernameTest")).thenReturn(user);
-        when(bCryptPasswordEncoder.matches("PasswordTest", "EncodedPassword"))
+        when(userRepository.findByUsername(USERNAME_TEST)).thenReturn(user);
+        when(bCryptPasswordEncoder.matches(PASSWORD_TEST, ENCODED_PASSWORD))
                 .thenReturn(true);
 
         User result = userServiceImpl.loginUser(userDto);
-        verify(userRepository).findByUsername("UsernameTest");
-        verify(bCryptPasswordEncoder).matches("PasswordTest", "EncodedPassword");
+        verify(userRepository).findByUsername(USERNAME_TEST);
+        verify(bCryptPasswordEncoder).matches(PASSWORD_TEST, ENCODED_PASSWORD);
 
         assertThat(result).isEqualTo(user);
     }
@@ -122,10 +128,10 @@ public class UserServiceTest {
         verify(userRepository).findByUsername(user.getUsername());
         assertThat(result).isNotNull();
         assertThat(result.getUsername()).isEqualTo(user.getUsername());
-        assertThat(result.getPassword()).isEqualTo("PasswordTest");
-        assertThat(result.getFirstName()).isEqualTo("FirstNameTest");
-        assertThat(result.getLastName()).isEqualTo("LastNameTest");
-        assertThat(result.getEmail()).isEqualTo("EmailTest@EmailTest");
+        assertThat(result.getPassword()).isEqualTo(PASSWORD_TEST);
+        assertThat(result.getFirstName()).isEqualTo(FIRST_NAME);
+        assertThat(result.getLastName()).isEqualTo(LAST_NAME);
+        assertThat(result.getEmail()).isEqualTo(EMAIL);
 
     }
 }

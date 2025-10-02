@@ -44,7 +44,7 @@ public class DocumentRepository implements MyRepository <Document, Integer>{
 
     @Override
     public void update(Document entity) {
-
+        // This method is intentionally left empty for now.
     }
 
     public List<Document> getByPartId(Integer id) {

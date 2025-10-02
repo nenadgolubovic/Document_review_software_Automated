@@ -48,6 +48,6 @@ public class FanBladeServiceImpl implements FanBladeService {
 
     @Override
     public void update(Integer fanBladeId) {
-
+        // This method is intentionally left empty for now.
     }
 }

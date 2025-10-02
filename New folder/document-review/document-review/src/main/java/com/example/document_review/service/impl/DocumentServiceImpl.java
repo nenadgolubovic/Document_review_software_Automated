@@ -125,11 +125,11 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void changeStatus(Integer id, boolean status) {
-
+        // This method is intentionally left empty for now.
     }
     @Override
     public void save(DocumentDto document) {
-
+        // This method is intentionally left empty for now.
     }
     @Override
     public List<Document> findAll() {

@@ -13,7 +13,7 @@ public class PartMapper implements Mapper<PartDto, Part> {
     @Override
     public Part toEntity(PartDto partDto) {
 
-        if(partDto.getType()== PartType.Basic){
+        if(partDto.getType()== PartType.BASIC){
             FanBlade part = new FanBlade();
             part.setPartId(partDto.getPartId());
             part.setName(partDto.getName());
@@ -22,7 +22,7 @@ public class PartMapper implements Mapper<PartDto, Part> {
             part.setSerialNumber(partDto.getSerialNumber());
             return part;
         }
-        if(partDto.getType()==PartType.FanBlade){
+        if(partDto.getType()==PartType.FAN_BLADE){
 
             BasicPart part = new BasicPart();
             part.setPartId(partDto.getPartId());

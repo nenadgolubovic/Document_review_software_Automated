@@ -99,12 +99,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteById(long id) {
-
+        // This method is intentionally left empty for now.
     }
 
     @Override
     public void update(CommentDto commentDto) {
-
+        // This method is intentionally left empty for now.
     }
 }
 

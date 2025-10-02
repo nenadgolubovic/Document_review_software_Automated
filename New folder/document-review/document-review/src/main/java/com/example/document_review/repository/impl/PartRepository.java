@@ -43,6 +43,6 @@ public class PartRepository implements MyRepository <Part, Integer> {
 
     @Override
     public void update(Part entity) {
-
+        // This method is intentionally left empty for now.
     }
 }

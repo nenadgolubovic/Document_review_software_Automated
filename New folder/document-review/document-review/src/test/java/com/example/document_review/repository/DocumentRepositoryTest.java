@@ -24,20 +24,17 @@ public class DocumentRepositoryTest {
     DocumentRepository documentRepository;
     FanBladeRepository fanBladeRepository;
 
+    private FanBlade fanBlade;
+    private Document document;
+    private Document document2;
+
     @BeforeEach
     void setUp() {
         documentRepository = new DocumentRepository();
         fanBladeRepository = new FanBladeRepository();
         ReflectionTestUtils.setField(documentRepository, "entityManager", entityManager);
         ReflectionTestUtils.setField(fanBladeRepository, "entityManager", entityManager);
-    }
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Test
-    public void documentRepositorySave() {
-
-        FanBlade fanBlade = FanBlade.builder()
+        fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
@@ -47,12 +44,25 @@ public class DocumentRepositoryTest {
                 .momentWeight("MomentWeightTest").build();
 
 
-        Document document = Document.builder()
+        document = Document.builder()
                 .documentName("DocumentNameTest")
                 .partId(fanBlade.getPartId())
                 .documentRoute("DocumentRouteTest.pdf")
                 .documentDate(LocalDate.now())
                 .build();
+
+        Document document2 = Document.builder()
+                .documentName("DocumentNameTest2")
+                .partId(fanBlade.getPartId())
+                .documentRoute("DocumentRouteTest2.pdf")
+                .documentDate(LocalDate.now())
+                .build();
+    }
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Test
+    public void documentRepositorySave() {
 
         fanBladeRepository.save(fanBlade);
         documentRepository.save(document);
@@ -69,22 +79,6 @@ public class DocumentRepositoryTest {
     }
     @Test
     public void documentRepositoryFindByIdReturnDocument() {
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-
-
-        Document document = Document.builder()
-                .documentName("DocumentNameTest")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest.pdf")
-                .documentDate(LocalDate.now())
-                .build();
 
         fanBladeRepository.save(fanBlade);
         documentRepository.save(document);
@@ -98,60 +92,18 @@ public class DocumentRepositoryTest {
     @Test
     public void documentRepositoryFindAllReturnAllDocuments() throws Exception {
 
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest")
-                .build();
-
-
-        Document document1 = Document.builder()
-                .documentName("DocumentNameTest")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
-        Document document2 = Document.builder()
-                .documentName("DocumentNameTest2")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest2.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
         fanBladeRepository.save(fanBlade);
-        documentRepository.save(document1);
+        documentRepository.save(document);
         documentRepository.save(document2);
 
         List<Document> foundDocuments = documentRepository.findAll();
 
         Assertions.assertThat(foundDocuments.size()).isEqualTo(2);
-        Assertions.assertThat(foundDocuments.get(0)).isEqualTo(document1);
+        Assertions.assertThat(foundDocuments.get(0)).isEqualTo(document);
         Assertions.assertThat(foundDocuments.get(1)).isEqualTo(document2);
     }
     @Test
     public void documentRepositoryDelete() {
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-
-
-        Document document = Document.builder()
-                .documentName("DocumentNameTest")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
 
         fanBladeRepository.save(fanBlade);
         documentRepository.save(document);

@@ -44,6 +44,9 @@ public class DocumentControllerTest {
 
     private DocumentDto documentDto1;
     private DocumentDto documentDto2;
+    private final String DOCUMENT_ROUTE_TEST = "DocumentRouteTest.pdf";
+    private final String DOCUMENT_NAME_TEST = "DocumentNameTest";
+
 
     @MockitoBean
     private DocumentServiceImpl documentServiceImpl;
@@ -51,9 +54,9 @@ public class DocumentControllerTest {
     @BeforeEach
     public void init() {
         documentDto1 = DocumentDto.builder()
-                .documentName("DocumentNameTest")
+                .documentName(DOCUMENT_NAME_TEST)
                 .partId(1)
-                .documentRoute("DocumentRouteTest.pdf")
+                .documentRoute(DOCUMENT_ROUTE_TEST)
                 .documentDate(LocalDate.now())
                 .build();
         documentDto2 = DocumentDto.builder()
@@ -141,9 +144,9 @@ public class DocumentControllerTest {
         mockMvc.perform(get("/document/get/part/{id}", partId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].documentName").value("DocumentNameTest"))
+                .andExpect(jsonPath("$[0].documentName").value(DOCUMENT_NAME_TEST))
                 .andExpect(jsonPath("$[0].partId").value(1))
-                .andExpect(jsonPath("$[0].documentRoute").value("DocumentRouteTest.pdf"))
+                .andExpect(jsonPath("$[0].documentRoute").value(DOCUMENT_ROUTE_TEST))
                 .andExpect(jsonPath("$[1].documentName").value("DocumentNameTest2"))
                 .andExpect(jsonPath("$[1].documentRoute").value("DocumentRouteTest2.pdf"));
 
@@ -157,9 +160,9 @@ public class DocumentControllerTest {
 
         mockMvc.perform(get("/document/get/{id}", documentId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.documentName").value("DocumentNameTest"))
+                .andExpect(jsonPath("$.documentName").value(DOCUMENT_NAME_TEST))
                 .andExpect(jsonPath("$.partId").value(1))
-                .andExpect(jsonPath("$.documentRoute").value("DocumentRouteTest.pdf"));
+                .andExpect(jsonPath("$.documentRoute").value(DOCUMENT_ROUTE_TEST));
 
         verify(documentServiceImpl, times(1)).findById(documentId);
     }

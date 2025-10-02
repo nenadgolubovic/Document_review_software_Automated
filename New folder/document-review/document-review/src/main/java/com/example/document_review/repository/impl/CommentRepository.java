@@ -37,7 +37,7 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
 
     @Override
     public void delete(Integer id) {
-
+        // This method is intentionally left empty for now.
     }
 
 

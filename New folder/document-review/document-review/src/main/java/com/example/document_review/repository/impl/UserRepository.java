@@ -34,12 +34,12 @@ public class UserRepository implements MyRepository <User, Integer>{
 
     @Override
     public void delete(Integer id) {
-
+        // This method is intentionally left empty for now.
     }
 
     @Override
     public void update(User entity) {
-
+        // This method is intentionally left empty for now.
     }
 
 
