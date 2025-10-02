@@ -56,7 +56,7 @@ public class BasicPartControllerTest {
                 .name("NameTest1")
                 .description("DescriptionTest1")
                 .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest1")
                 .timeSinceNew("TimeSinceNewTest1")
                 .build();
@@ -65,7 +65,7 @@ public class BasicPartControllerTest {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .build();
@@ -97,7 +97,7 @@ public class BasicPartControllerTest {
                 .andExpect(jsonPath("$.partNumber").value(PART_NUMBER_TEST_1))
                 .andExpect(jsonPath("$.description").value("DescriptionTest1"))
                 .andExpect(jsonPath("$.serialNumber").value("SerialNumberTest1"))
-                .andExpect(jsonPath("$.type").value("Basic"))
+                .andExpect(jsonPath("$.type").value("BASIC"))
                 .andExpect(jsonPath("$.cyclesSinceNew").value("CycleSinceNewTest1"))
                 .andExpect(jsonPath("$.timeSinceNew").value("TimeSinceNewTest1"));
 

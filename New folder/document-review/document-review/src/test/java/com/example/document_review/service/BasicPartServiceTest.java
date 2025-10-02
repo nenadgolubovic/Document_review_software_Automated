@@ -41,7 +41,7 @@ public class BasicPartServiceTest {
                 .name("NameTest1")
                 .description("DescriptionTest1")
                 .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest1")
                 .timeSinceNew("TimeSinceNewTest1")
                 .build();
@@ -50,7 +50,7 @@ public class BasicPartServiceTest {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .build();
@@ -59,7 +59,7 @@ public class BasicPartServiceTest {
                 .name("NameTest1")
                 .description("DescriptionTest1")
                 .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest1")
                 .timeSinceNew("TimeSinceNewTest1")
                 .build();
@@ -68,7 +68,7 @@ public class BasicPartServiceTest {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .build();
@@ -94,7 +94,7 @@ public class BasicPartServiceTest {
                 .name("NameTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .build();

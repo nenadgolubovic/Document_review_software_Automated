@@ -38,7 +38,7 @@ public class DocumentRepositoryTest {
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
+                .type(PartType.FAN_BLADE)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest").build();
@@ -51,7 +51,7 @@ public class DocumentRepositoryTest {
                 .documentDate(LocalDate.now())
                 .build();
 
-        Document document2 = Document.builder()
+        document2 = Document.builder()
                 .documentName("DocumentNameTest2")
                 .partId(fanBlade.getPartId())
                 .documentRoute("DocumentRouteTest2.pdf")

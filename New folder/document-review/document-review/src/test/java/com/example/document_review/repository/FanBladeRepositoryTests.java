@@ -37,7 +37,7 @@ public class FanBladeRepositoryTests {
                 .name("NameTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
+                .type(PartType.FAN_BLADE)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest").build();
@@ -46,7 +46,7 @@ public class FanBladeRepositoryTests {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.FanBlade)
+                .type(PartType.FAN_BLADE)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .momentWeight("MomentWeightTest2").build();

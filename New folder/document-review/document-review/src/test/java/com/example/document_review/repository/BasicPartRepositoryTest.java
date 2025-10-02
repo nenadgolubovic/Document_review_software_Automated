@@ -38,7 +38,7 @@ public class BasicPartRepositoryTest {
                 .name("NameTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .build();
@@ -47,7 +47,7 @@ public class BasicPartRepositoryTest {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
+                .type(PartType.BASIC)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .build();

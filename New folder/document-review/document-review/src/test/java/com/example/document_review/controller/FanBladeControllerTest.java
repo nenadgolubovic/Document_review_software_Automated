@@ -55,7 +55,7 @@ public class FanBladeControllerTest {
                 .name("NameTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
+                .type(PartType.FAN_BLADE)
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest")
@@ -65,7 +65,7 @@ public class FanBladeControllerTest {
                 .name("NameTest2")
                 .description("DescriptionTest2")
                 .serialNumber("SerialNumberTest2")
-                .type(PartType.FanBlade)
+                .type(PartType.FAN_BLADE)
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .momentWeight("MomentWeightTest2")
@@ -97,7 +97,7 @@ public class FanBladeControllerTest {
                 .andExpect(jsonPath("$.partNumber").value(PART_NUMBER_TEST))
                 .andExpect(jsonPath("$.description").value("DescriptionTest"))
                 .andExpect(jsonPath("$.serialNumber").value("SerialNumberTest"))
-                .andExpect(jsonPath("$.type").value("FanBlade"))
+                .andExpect(jsonPath("$.type").value("FAN_BLADE"))
                 .andExpect(jsonPath("$.cyclesSinceNew").value("CycleSinceNewTest"))
                 .andExpect(jsonPath("$.timeSinceNew").value("TimeSinceNewTest"))
                 .andExpect(jsonPath("$.momentWeight").value("MomentWeightTest"));
@@ -159,15 +159,15 @@ public class FanBladeControllerTest {
 
     @Test
     public void fanBladeControllerUpdateShouldCallService() throws Exception {
-        Integer basicPartId = 1;
+        Integer fanBladeId = 1;
         String url = URL_GETFANBLADEID + fanBladeId;
 
-        doNothing().when(fanBladeServiceImpl).update(basicPartId);
+        doNothing().when(fanBladeServiceImpl).update(fanBladeId);
 
-        mockMvc.perform(put(url, basicPartId))
+        mockMvc.perform(put(url, fanBladeId))
                 .andExpect(status().isOk());
 
-        verify(fanBladeServiceImpl, times(1)).update(basicPartId);
+        verify(fanBladeServiceImpl, times(1)).update(fanBladeId);
     }
 
 
