@@ -31,7 +31,7 @@ public class FanBladeRepositoryTests {
     }
 
     @Test
-    public void FanBladeRepositorySave() {
+    public void fanBladeRepositorySave() {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -62,7 +62,7 @@ public class FanBladeRepositoryTests {
     }
 
     @Test
-    public void FanBladeRepository_FindAll_ReturnFanBlades() throws Exception {
+    public void fanBladeRepositoryFindAllReturnFanBlades() throws Exception {
         FanBlade fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -112,7 +112,7 @@ public class FanBladeRepositoryTests {
     }
 
     @Test
-    public void FanBladeRepositoryFindByIdReturnFanBlade() {
+    public void fanBladeRepositoryFindByIdReturnFanBlade() {
         FanBlade fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")

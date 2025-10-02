@@ -26,9 +26,8 @@ public class PartRepository implements MyRepository <Part, Integer> {
 
     @Override
     public List<Part> findAll() throws Exception {
-        List<Part> parts = entityManager.createQuery("select bp from Part bp", Part.class)
+        return entityManager.createQuery("select bp from Part bp", Part.class)
                 .getResultList();
-        return parts;
     }
 
     @Override

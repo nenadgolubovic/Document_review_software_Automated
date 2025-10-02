@@ -63,15 +63,6 @@ public class DocumentServiceTest {
     @Test
     void uploadDocumentShouldSaveDocument() throws IOException {
 
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest")
-                .build();
         FanBladeDto fanBladeDto = FanBladeDto.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
@@ -80,13 +71,6 @@ public class DocumentServiceTest {
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest")
-                .build();
-
-        Document document1 = Document.builder()
-                .documentName("DocumentNameTest")
-                .partId(1)
-                .documentRoute("DocumentRouteTest.pdf")
-                .documentDate(LocalDate.now())
                 .build();
 
         DocumentDto documentDto = DocumentDto.builder()
@@ -134,7 +118,6 @@ public class DocumentServiceTest {
 
         when(multipartFile.isEmpty()).thenReturn(true);
 
-        // Act & Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 documentServiceImpl.uploadDocument(multipartFile, documentDto)
         );

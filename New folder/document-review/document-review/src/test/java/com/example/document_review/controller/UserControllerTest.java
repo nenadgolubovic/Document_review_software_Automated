@@ -182,7 +182,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void userController_logoutUser_ShouldInvalidateSessionAndRemoveCookie() throws Exception {
+    void userControllerLogoutUserShouldInvalidateSessionAndRemoveCookie() throws Exception {
 
         UserService mockUserService = Mockito.mock(UserService.class);
 
@@ -201,7 +201,7 @@ public class UserControllerTest {
 
 
     @Test
-    void findById_ShouldReturnUserDto_WhenUserExists() throws Exception {
+    void findByIdShouldReturnUserDtoWhenUserExists() throws Exception {
 
         when(userServiceImpl.findById(1)).thenReturn(userDto1);
 

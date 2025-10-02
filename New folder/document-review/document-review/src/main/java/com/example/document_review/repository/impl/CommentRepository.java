@@ -59,10 +59,9 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
     }
 
     public List<Comment> getAllByDocumentId(Integer documentId) {
-        List<Comment> comments = entityManager
+        return entityManager
                 .createQuery("select c from Comment c where c.documentId = :documentId", Comment.class)
                 .setParameter("documentId", documentId)
                 .getResultList();
-        return comments;
     }
 }

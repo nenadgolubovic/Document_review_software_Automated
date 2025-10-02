@@ -38,19 +38,15 @@ public class UserRepositoryTest {
                 .email("EmailTest@EmailTest")
                 .build();
 
-        // Save će sada raditi jer je @Transactional aktivan kroz Spring proxy
+
         userRepository.save(user);
 
-        // Provera da li je entitet sačuvan
+
         User savedUser = entityManager.find(User.class, user.getUserId());
 
         Assertions.assertThat(savedUser).isNotNull();
         Assertions.assertThat(savedUser.getUsername()).isEqualTo(user.getUsername());
         Assertions.assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
-    }
-    @Test
-    public void UserRepositoryFindByIdReturnUser() {
-
     }
 
 

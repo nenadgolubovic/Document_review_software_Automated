@@ -213,14 +213,6 @@ public class CommentServiceTest {
                 .userId(1)
                 .isApproved(false)
                 .rate(null).build();
-        Comment comment3 = Comment.builder()
-                .commentTitle("Test comment title3")
-                .comment("Test comment3")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
         CommentDto commentDto1 = CommentDto.builder()
                 .commentTitle("Test comment title1")
                 .comment("Test comment1")
@@ -237,14 +229,6 @@ public class CommentServiceTest {
                 .userId(1)
                 .isApproved(false)
                 .rate(null).build();
-        CommentDto commentDto3 = CommentDto.builder()
-                .commentTitle("Test comment title3")
-                .comment("Test comment3")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
 
         List<Comment> comments = Arrays.asList(comment1, comment2);
         when(commentRepository.getAllByDocumentId(1)).thenReturn(comments);
