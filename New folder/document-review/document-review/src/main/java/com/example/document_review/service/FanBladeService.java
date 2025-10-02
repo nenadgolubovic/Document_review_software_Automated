@@ -1,6 +1,5 @@
 package com.example.document_review.service;
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
 
 import java.util.List;

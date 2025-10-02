@@ -1,14 +1,8 @@
 package com.example.document_review.controller;
 
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.DocumentDto;
-import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.entity.Document;
-import com.example.document_review.entity.Enums.PartType;
-import com.example.document_review.service.impl.BasicPartServiceImpl;
 import com.example.document_review.service.impl.DocumentServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,14 +21,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -52,7 +44,6 @@ public class DocumentControllerTest {
 
     private DocumentDto documentDto1;
     private DocumentDto documentDto2;
-    private DocumentDto documentDto3;
 
     @MockitoBean
     private DocumentServiceImpl documentServiceImpl;

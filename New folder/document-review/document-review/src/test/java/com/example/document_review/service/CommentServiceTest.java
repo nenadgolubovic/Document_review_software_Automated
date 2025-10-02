@@ -48,7 +48,7 @@ public class CommentServiceTest {
 
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -56,7 +56,7 @@ public class CommentServiceTest {
                 .rate(5).build();
         CommentDto commentDto = CommentDto.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -85,7 +85,7 @@ public class CommentServiceTest {
     public void commentServiceImplFindAllReturnCommentDtos() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -93,7 +93,7 @@ public class CommentServiceTest {
                 .rate(5).build();
         Comment comment2 = Comment.builder()
                 .commentTitle("Test comment title2")
-                .comment("Test comment2")
+                .commentText("Test comment2")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -102,7 +102,7 @@ public class CommentServiceTest {
 
         CommentDto commentDto1 = CommentDto.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -110,7 +110,7 @@ public class CommentServiceTest {
                 .rate(5).build();
         CommentDto commentDto2 = CommentDto.builder()
                 .commentTitle("Test comment title2")
-                .comment("Test comment2")
+                .commentText("Test comment2")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)

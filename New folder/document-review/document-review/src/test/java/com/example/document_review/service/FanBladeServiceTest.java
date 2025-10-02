@@ -1,7 +1,7 @@
 package com.example.document_review.service;
 
 import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.entity.FanBlade;
 import com.example.document_review.mapper.impl.FanBladeMapper;
 import com.example.document_review.repository.impl.FanBladeRepository;

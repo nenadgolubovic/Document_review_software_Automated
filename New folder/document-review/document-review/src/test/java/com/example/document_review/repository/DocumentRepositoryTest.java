@@ -1,7 +1,7 @@
 package com.example.document_review.repository;
 
 import com.example.document_review.entity.Document;
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.entity.FanBlade;
 import com.example.document_review.repository.impl.DocumentRepository;
 import com.example.document_review.repository.impl.FanBladeRepository;

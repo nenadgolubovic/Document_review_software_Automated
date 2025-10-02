@@ -34,7 +34,7 @@ public class CommentRepositoryTests {
 
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -62,7 +62,7 @@ public class CommentRepositoryTests {
     public void commentRepositoryFindByIdReturnComment() {
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
-                .comment("Test comment")
+                .commentText("Test comment")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -89,7 +89,7 @@ public class CommentRepositoryTests {
 
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
-                .comment("Test comment 1")
+                .commentText("Test comment 1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -98,7 +98,7 @@ public class CommentRepositoryTests {
 
         Comment comment2 = Comment.builder()
                 .commentTitle("Test comment title 2")
-                .comment("Test comment 2")
+                .commentText("Test comment 2")
                 .commentDate(LocalDateTime.now())
                 .documentId(2)
                 .userId(1)
@@ -132,7 +132,7 @@ public class CommentRepositoryTests {
     public void commentRepositoryUpdateReturnUpdatedComment(){
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title 1")
-                .comment("Test comment 1")
+                .commentText("Test comment 1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -170,7 +170,7 @@ public class CommentRepositoryTests {
     public void commentRepositoryGetAllByDocumentIdReturnedAllCommentsByDocumentId() {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
-                .comment("Test comment 1")
+                .commentText("Test comment 1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -179,7 +179,7 @@ public class CommentRepositoryTests {
 
         Comment comment2 = Comment.builder()
                 .commentTitle("Test comment title 2")
-                .comment("Test comment 2")
+                .commentText("Test comment 2")
                 .commentDate(LocalDateTime.now())
                 .documentId(2)
                 .userId(1)
@@ -188,7 +188,7 @@ public class CommentRepositoryTests {
 
         Comment comment3 = Comment.builder()
                 .commentTitle("Test comment title 3")
-                .comment("Test comment 3")
+                .commentText("Test comment 3")
                 .commentDate(LocalDateTime.now())
                 .documentId(2)
                 .userId(2)

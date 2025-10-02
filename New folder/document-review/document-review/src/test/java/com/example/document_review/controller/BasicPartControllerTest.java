@@ -1,12 +1,8 @@
 package com.example.document_review.controller;
 
 import com.example.document_review.dto.BasicPartDto;
-import com.example.document_review.dto.CommentDto;
-import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.entity.Enums.PartType;
-import com.example.document_review.service.DocumentService;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.service.impl.BasicPartServiceImpl;
-import com.example.document_review.service.impl.CommentServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +41,6 @@ public class BasicPartControllerTest {
 
     private BasicPartDto basicPartDto1;
     private BasicPartDto basicPartDto2;
-    private BasicPartDto basicPartDto3;
 
     @MockitoBean
     private BasicPartServiceImpl basicPartServiceImpl;

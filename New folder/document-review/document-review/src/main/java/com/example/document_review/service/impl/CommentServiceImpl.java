@@ -41,7 +41,6 @@ public class CommentServiceImpl implements CommentService {
         documentFileValidator.validateDocument(document);
         commentSaveValidator.validate(commentDto);
         Comment comment = commentMapper.toEntity(commentDto);
-//        comment.setDocument(document);
         commentRepository.save(comment);
     }
 

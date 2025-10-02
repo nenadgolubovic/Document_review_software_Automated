@@ -1,6 +1,6 @@
 package com.example.document_review.repository;
 
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.entity.FanBlade;
 import com.example.document_review.repository.impl.FanBladeRepository;
 import jakarta.persistence.EntityManager;

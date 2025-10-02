@@ -4,7 +4,7 @@ package com.example.document_review.service;
 import com.example.document_review.dto.DocumentDto;
 import com.example.document_review.dto.FanBladeDto;
 import com.example.document_review.entity.Document;
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.entity.FanBlade;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.mapper.impl.PartMapper;

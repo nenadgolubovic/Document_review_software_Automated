@@ -2,7 +2,7 @@ package com.example.document_review.mapper.impl;
 
 import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.entity.FanBlade;
 import com.example.document_review.entity.Part;
 import com.example.document_review.mapper.Mapper;

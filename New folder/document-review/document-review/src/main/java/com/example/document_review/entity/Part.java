@@ -1,6 +1,6 @@
 package com.example.document_review.entity;
 
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 
@@ -25,7 +25,7 @@ public abstract class Part {
     private List<Document> documents = new ArrayList<>();
 
 
-    public Part(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
+    protected Part(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
         this.partId = partId;
         this.name = name;
         this.partNumber = partNumber;
@@ -38,7 +38,7 @@ public abstract class Part {
     }
 
 
-    public Part() {
+    protected Part() {
 
     }
 

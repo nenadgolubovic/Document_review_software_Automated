@@ -19,8 +19,6 @@ public class Document {
     @Column(name = "part_id")
     private Integer partId;
     private String documentRoute;
-//    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Comment> comments = new ArrayList<>();
     private LocalDate documentDate;
 
     @Builder
@@ -71,13 +69,6 @@ public class Document {
         this.documentRoute = documentRoute;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
 
     public LocalDate getDocumentDate() {
         return documentDate;
@@ -115,7 +106,6 @@ public class Document {
                 ", documentName='" + documentName + '\'' +
                 ", part=" + part +
                 ", documentRoute='" + documentRoute + '\'' +
-//                ", comments=" + comments +
                 ", documentDate=" + documentDate +
                 '}';
     }

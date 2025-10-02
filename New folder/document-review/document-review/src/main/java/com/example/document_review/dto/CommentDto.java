@@ -8,7 +8,7 @@ import java.util.Objects;
 @Builder
 public class CommentDto {
     private Integer commentId;
-    private String comment;
+    private String commentText;
     private Integer userId;
     private String commentTitle;
     private LocalDateTime commentDate;
@@ -25,7 +25,7 @@ public class CommentDto {
                       Integer rate,
                       Integer documentId) {
         this.commentId = commentId;
-        this.comment = comment;
+        this.commentText = comment;
         this.userId = userId;
         this.commentTitle = commentTitle;
         this.commentDate = commentDate;
@@ -40,7 +40,7 @@ public class CommentDto {
     public String toString() {
         return "CommentDto{" +
                 "commentId=" + commentId +
-                ", comment='" + comment + '\'' +
+                ", comment='" + commentText + '\'' +
                 ", userId=" + userId +
                 ", commentTitle='" + commentTitle + '\'' +
                 ", commentDate=" + commentDate +
@@ -54,12 +54,12 @@ public class CommentDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentDto that = (CommentDto) o;
-        return isApproved == that.isApproved && Objects.equals(commentId, that.commentId) && Objects.equals(comment, that.comment) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate) && Objects.equals(rate, that.rate) ;
+        return isApproved == that.isApproved && Objects.equals(commentId, that.commentId) && Objects.equals(commentText, that.commentText) && Objects.equals(userId, that.userId) && Objects.equals(commentTitle, that.commentTitle) && Objects.equals(commentDate, that.commentDate) && Objects.equals(rate, that.rate) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, comment, userId, commentTitle, commentDate, isApproved, rate, documentId);
+        return Objects.hash(commentId, commentText, userId, commentTitle, commentDate, isApproved, rate, documentId);
     }
 
 
@@ -72,11 +72,11 @@ public class CommentDto {
     }
 
     public String getComment() {
-        return comment;
+        return commentText;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.commentText = comment;
     }
 
     public Integer getUserId() {

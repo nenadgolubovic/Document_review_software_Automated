@@ -1,6 +1,6 @@
 package com.example.document_review.dto;
 
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import lombok.Builder;
 
 

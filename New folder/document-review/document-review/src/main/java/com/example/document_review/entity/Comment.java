@@ -12,7 +12,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
-    private String comment;
+    private String commentText;
     private Integer userId;
     @Column(name = "document_id", nullable = false)
     private Integer documentId;
@@ -21,9 +21,9 @@ public class Comment {
     private boolean isApproved;
     private Integer rate;
 
-    public Comment(Integer commentId, String comment, Integer userId, Integer documentId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
+    public Comment(Integer commentId, String commentText, Integer userId, Integer documentId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
         this.commentId = commentId;
-        this.comment = comment;
+        this.commentText = commentText;
         this.userId = userId;
         this.documentId = documentId;
         this.commentTitle = commentTitle;
@@ -55,11 +55,11 @@ public class Comment {
     }
 
     public String getComment() {
-        return comment;
+        return commentText;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.commentText = comment;
     }
 
     public Integer getUserId() {
@@ -109,19 +109,19 @@ public class Comment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment1 = (Comment) o;
-        return isApproved == comment1.isApproved && Objects.equals(commentId, comment1.commentId) && Objects.equals(comment, comment1.comment) && Objects.equals(userId, comment1.userId) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate) && Objects.equals(rate, comment1.rate);
+        return isApproved == comment1.isApproved && Objects.equals(commentId, comment1.commentId) && Objects.equals(commentText, comment1.commentText) && Objects.equals(userId, comment1.userId) && Objects.equals(commentTitle, comment1.commentTitle) && Objects.equals(commentDate, comment1.commentDate) && Objects.equals(rate, comment1.rate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commentId, comment, userId, documentId, commentTitle, commentDate, isApproved, rate);
+        return Objects.hash(commentId, commentText, userId, documentId, commentTitle, commentDate, isApproved, rate);
     }
 
     @Override
     public String toString() {
         return "Comment{" +
                 "commentId=" + commentId +
-                ", comment='" + comment + '\'' +
+                ", comment='" + commentText + '\'' +
                 ", userId=" + userId +
                 ", documentId=" + documentId +
                 ", commentTitle='" + commentTitle + '\'' +

@@ -1,7 +1,7 @@
 package com.example.document_review.entity;
 
 
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import jakarta.persistence.Entity;
 import lombok.experimental.SuperBuilder;
 

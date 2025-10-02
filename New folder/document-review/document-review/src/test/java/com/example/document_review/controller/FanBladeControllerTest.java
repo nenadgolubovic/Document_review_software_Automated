@@ -1,11 +1,8 @@
 package com.example.document_review.controller;
 
 
-import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.dto.FanBladeDto;
-import com.example.document_review.entity.Enums.PartType;
-import com.example.document_review.exception.EntityNotFoundException;
-import com.example.document_review.service.impl.BasicPartServiceImpl;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.service.impl.FanBladeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +43,6 @@ public class FanBladeControllerTest {
 
     private FanBladeDto fanBladeDto1;
     private FanBladeDto fanBladeDto2;
-    private FanBladeDto fanBladeDto3;
 
     @MockitoBean
     private FanBladeServiceImpl fanBladeServiceImpl;

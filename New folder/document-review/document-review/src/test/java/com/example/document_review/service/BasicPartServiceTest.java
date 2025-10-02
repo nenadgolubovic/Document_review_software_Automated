@@ -2,7 +2,7 @@ package com.example.document_review.service;
 
 import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.entity.BasicPart;
-import com.example.document_review.entity.Enums.PartType;
+import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.mapper.impl.BasicPartMapper;
 import com.example.document_review.repository.impl.BasicPartRepository;
 import com.example.document_review.service.impl.BasicPartServiceImpl;
