@@ -73,7 +73,7 @@ public class BasicPartControllerTest {
     }
 
     @Test
-    public void BasicPartControllerSaveShouldCallService() throws Exception {
+    public void basicPartControllerSaveShouldCallService() throws Exception {
 
         doNothing().when(basicPartServiceImpl).save(any(BasicPartDto.class));
 
@@ -87,7 +87,7 @@ public class BasicPartControllerTest {
 
     }
     @Test
-    public void BasicPartControllerGetByIdBasicPartDtos() throws Exception {
+    public void basicPartControllerGetByIdBasicPartDtos() throws Exception {
         Integer basicPartId = 1;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
@@ -104,7 +104,7 @@ public class BasicPartControllerTest {
         verify(basicPartServiceImpl, times(1)).getById(basicPartId);
     }
     @Test
-    public void BasicPartControllerGetByIdNotFoundBasicPartDtos() throws Exception {
+    public void basicPartControllerGetByIdNotFoundBasicPartDtos() throws Exception {
         Integer basicPartId = 99;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
@@ -117,7 +117,7 @@ public class BasicPartControllerTest {
 
 
     @Test
-    public void FanBladeControllerFindAllBasicPartDtos() throws Exception {
+    public void basicPartControllerFindAllBasicPartDtos() throws Exception {
         List<BasicPartDto> basicPertList = List.of(basicPartDto1, basicPartDto2);
         when(basicPartServiceImpl.getAll()).thenReturn(basicPertList);
 
@@ -129,7 +129,7 @@ public class BasicPartControllerTest {
         verify(basicPartServiceImpl, times(1)).getAll();
     }
     @Test
-    public void BasicPartControllerDeleteShouldReturnOkWhenBasicPartExists() throws Exception {
+    public void basicPartControllerDeleteShouldReturnOkWhenBasicPartExists() throws Exception {
         Integer basicPartId = 1;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(basicPartDto1);
@@ -145,7 +145,7 @@ public class BasicPartControllerTest {
 
 
     @Test
-    public void BasicPartControllerDeleteShouldReturnNotFound_WhenBasicPartDoesNotExist() throws Exception {
+    public void basicPartControllerDeleteShouldReturnNotFound_WhenBasicPartDoesNotExist() throws Exception {
         Integer basicPartId = 99;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);
@@ -158,7 +158,7 @@ public class BasicPartControllerTest {
     }
 
     @Test
-    public void BasicPartControllerUpdateShouldCallService() throws Exception {
+    public void basicPartControllerUpdateShouldCallService() throws Exception {
         Integer basicPartId = 1;
 
         doNothing().when(basicPartServiceImpl).update(basicPartId);
