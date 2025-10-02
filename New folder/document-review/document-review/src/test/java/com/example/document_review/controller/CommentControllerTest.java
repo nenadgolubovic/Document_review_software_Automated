@@ -53,7 +53,7 @@ public class CommentControllerTest {
     public void init() {
         commentDto1 = CommentDto.builder()
                 .commentTitle("Test comment title1")
-                .comment("Test comment1")
+                .commentText("Test comment1")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
@@ -62,7 +62,7 @@ public class CommentControllerTest {
 
         commentDto2 = CommentDto.builder()
                 .commentTitle("Test comment title2")
-                .comment("Test comment2")
+                .commentText("Test comment2")
                 .commentDate(LocalDateTime.now())
                 .documentId(1)
                 .userId(1)
