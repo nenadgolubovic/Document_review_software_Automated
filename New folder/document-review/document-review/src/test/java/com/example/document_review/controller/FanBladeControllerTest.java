@@ -75,7 +75,7 @@ public class FanBladeControllerTest {
                 .build();
     }
     @Test
-    public void FanBladeControllerSaveShouldCallService() throws Exception {
+    public void fanBladeControllerSaveShouldCallService() throws Exception {
 
         doNothing().when(fanBladeServiceImpl).save(any(FanBladeDto.class));
 
@@ -89,7 +89,7 @@ public class FanBladeControllerTest {
     }
 
     @Test
-    public void FanBladeControllerGetByIdFanBladeDtos() throws Exception {
+    public void fanBladeControllerGetByIdFanBladeDtos() throws Exception {
         Integer fanBladeId = 1;
 
         when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(fanBladeDto1);
@@ -107,7 +107,7 @@ public class FanBladeControllerTest {
         verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
     }
     @Test
-    public void FanBladeControllerGetByIdNotFoundFanBladeDtos() throws Exception {
+    public void fanBladeControllerGetByIdNotFoundFanBladeDtos() throws Exception {
         Integer fanBladeId = 99;
 
         when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(null);
@@ -118,7 +118,7 @@ public class FanBladeControllerTest {
         verify(fanBladeServiceImpl, times(1)).getById(fanBladeId);
     }
     @Test
-    public void FanBladeControllerFindAllFanBladeDtos() throws Exception {
+    public void fanBladeControllerFindAllFanBladeDtos() throws Exception {
         List<FanBladeDto> fanBladeList = List.of(fanBladeDto1, fanBladeDto2);
         when(fanBladeServiceImpl.getAll()).thenReturn(fanBladeList);
 
@@ -130,7 +130,7 @@ public class FanBladeControllerTest {
         verify(fanBladeServiceImpl, times(1)).getAll();
     }
     @Test
-    public void FanBladeControllerDeleteShouldReturnOk_WhenFanBladeExists() throws Exception {
+    public void fanBladeControllerDeleteShouldReturnOk_WhenFanBladeExists() throws Exception {
         Integer fanBladeId = 1;
 
         // Mock servisa da postoji DTO
@@ -145,7 +145,7 @@ public class FanBladeControllerTest {
     }
 
     @Test
-    public void FanBladeControllerDeleteShouldReturnNotFound_WhenFanBladeDoesNotExist() throws Exception {
+    public void fanBladeControllerDeleteShouldReturnNotFound_WhenFanBladeDoesNotExist() throws Exception {
         Integer fanBladeId = 99;
 
         when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(null);
@@ -158,7 +158,7 @@ public class FanBladeControllerTest {
     }
 
     @Test
-    public void FanBladeControllerUpdateShouldCallService() throws Exception {
+    public void fanBladeControllerUpdateShouldCallService() throws Exception {
         Integer basicPartId = 1;
 
         doNothing().when(fanBladeServiceImpl).update(basicPartId);

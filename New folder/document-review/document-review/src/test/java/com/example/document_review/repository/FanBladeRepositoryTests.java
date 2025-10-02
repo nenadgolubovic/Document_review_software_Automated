@@ -142,7 +142,7 @@ public class FanBladeRepositoryTests {
     }
 
     @Test
-    public void FanBladeRepositoryDelete() throws Exception {
+    public void fanBladeRepositoryDelete() throws Exception {
         FanBlade fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")

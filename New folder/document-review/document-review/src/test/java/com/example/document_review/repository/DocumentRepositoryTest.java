@@ -35,7 +35,7 @@ public class DocumentRepositoryTest {
     private EntityManager entityManager;
 
     @Test
-    public void DocumentRepositorySave() {
+    public void documentRepositorySave() {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -68,7 +68,7 @@ public class DocumentRepositoryTest {
 
     }
     @Test
-    public void DocumentRepositoryFindByIdReturnDocument() {
+    public void documentRepositoryFindByIdReturnDocument() {
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
@@ -96,7 +96,7 @@ public class DocumentRepositoryTest {
         Assertions.assertThat(foundDocument.getDocumentRoute()).isEqualTo(document.getDocumentRoute());
     }
     @Test
-    public void DocumentRepositoryFindAllReturnAllDocuments() throws Exception {
+    public void documentRepositoryFindAllReturnAllDocuments() throws Exception {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -134,7 +134,7 @@ public class DocumentRepositoryTest {
         Assertions.assertThat(foundDocuments.get(1)).isEqualTo(document2);
     }
     @Test
-    public void DocumentRepositoryDelete() {
+    public void documentRepositoryDelete() {
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")

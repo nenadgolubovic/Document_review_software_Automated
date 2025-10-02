@@ -81,7 +81,7 @@ public class CommentControllerTest {
     }
 
     @Test
-    public void CommentControllerSaveShouldCallService() throws Exception {
+    public void commentControllerSaveShouldCallService() throws Exception {
 
         doNothing().when(commentServiceImpl).save(any(CommentDto.class));
 
@@ -95,7 +95,7 @@ public class CommentControllerTest {
     }
 
     @Test
-    public void CommentControllerGetAllByDocumentIdShouldReturnListOfComments() throws Exception {
+    public void commentControllerGetAllByDocumentIdShouldReturnListOfComments() throws Exception {
 
         Integer documentId = 1;
         List<CommentDto> commentList = List.of(commentDto1, commentDto2);
@@ -120,7 +120,7 @@ public class CommentControllerTest {
         verify(commentServiceImpl, times(1)).getAllByDocumentId(documentId);
     }
     @Test
-    public void CommentControllerFindAllShouldReturnListOfComments() throws Exception {
+    public void commentControllerFindAllShouldReturnListOfComments() throws Exception {
 
         when(commentServiceImpl.findAll()).thenReturn(List.of(commentDto1, commentDto2));
 
@@ -143,7 +143,7 @@ public class CommentControllerTest {
     }
 
     @Test
-    public void CommentControllerApproveCommentShouldReturnSuccessMessage() throws Exception {
+    public void commentControllerApproveCommentShouldReturnSuccessMessage() throws Exception {
         Integer commentId = 1;
 
         doNothing().when(commentServiceImpl).approveComment(commentId);
@@ -155,7 +155,7 @@ public class CommentControllerTest {
         verify(commentServiceImpl, times(1)).approveComment(commentId);
     }
     @Test
-    public void CommentControllerRejectCommentShouldReturnSuccessMessage() throws Exception {
+    public void commentControllerRejectCommentShouldReturnSuccessMessage() throws Exception {
         Integer commentId = 1;
 
         doNothing().when(commentServiceImpl).rejectComment(commentId);

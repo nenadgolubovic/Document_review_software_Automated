@@ -143,7 +143,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentServiceGetByIdDocumentDtos(){
+    public void documentServiceGetByIdDocumentDtos(){
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
@@ -202,7 +202,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentServiceGetDocumentsByNameResource() throws IOException {
+    public void documentServiceImplGetDocumentsByNameResource() throws IOException {
         String filename = "test.pdf";
 
         Path path = Paths.get("C:/Users/Nikola/.../document/" + filename);
@@ -218,7 +218,7 @@ public class DocumentServiceTest {
         }
     }
     @Test
-    void testGetDocumentByNameFileDoesNotExist() throws IOException {
+    void documentServiceImplGetDocumentByNameFileDoesNotExist() throws IOException {
         String filename = "nonexistent.pdf";
 
         Resource result = documentServiceImpl.getDocumentByName(filename);
@@ -227,7 +227,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentServiceFindAllDocumentsDocumentDtos() throws Exception {
+    public void documentServiceFindAllDocumentsDocumentDtos() throws Exception {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -279,7 +279,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentServiceDeleteByIdDocumentDto(){
+    public void documentServiceDeleteByIdDocumentDto(){
         Integer documentId = 1;
         DocumentDto result = documentServiceImpl.deleteById(documentId);
 

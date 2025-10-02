@@ -83,7 +83,7 @@ public class DocumentControllerTest {
                 .build();
     }
     @Test
-    public void DocumentControllerUploadShouldCallService() throws Exception {
+    public void documentControllerUploadShouldCallService() throws Exception {
 
         MockMultipartFile mockFile = new MockMultipartFile(
                 "document",
@@ -117,7 +117,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void DocumentControllerGetAllDocumentsDto() throws Exception {
+    public void documentControllerGetAllDocumentsDto() throws Exception {
         List<DocumentDto> documents = Arrays.asList(documentDto1, documentDto2);
 
         when(documentServiceImpl.findAllDocuments()).thenReturn(documents);
@@ -129,7 +129,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void DocumentControllerGetDocumentResource() throws Exception {
+    public void documentControllerGetDocumentResource() throws Exception {
         String filename = "test.pdf";
         Resource resource = new ByteArrayResource("dummy pdf content".getBytes());
 
@@ -141,7 +141,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void DocumentControllerGetDocumentShouldReturnBadRequest() throws Exception {
+    public void documentControllerGetDocumentShouldReturnBadRequest() throws Exception {
         String filename = "missing.pdf";
 
         when(documentServiceImpl.getDocumentByName(filename)).thenReturn(null);
@@ -151,7 +151,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void DocumentControllerGetByPartIdDocumentsDtoShouldReturnList() throws Exception {
+    public void documentControllerGetByPartIdDocumentsDtoShouldReturnList() throws Exception {
         Integer partId = 1;
         List<DocumentDto> documents = Arrays.asList(documentDto1, documentDto2);
 
@@ -169,7 +169,7 @@ public class DocumentControllerTest {
         verify(documentServiceImpl, times(1)).getByPartId(partId);
     }
     @Test
-    public void DocumentControllerGetByIdDocumentsDtoShouldReturnDocument() throws Exception {
+    public void documentControllerGetByIdDocumentsDtoShouldReturnDocument() throws Exception {
         Integer documentId = 1;
 
         when(documentServiceImpl.findById(documentId)).thenReturn(documentDto1);
@@ -183,7 +183,7 @@ public class DocumentControllerTest {
         verify(documentServiceImpl, times(1)).findById(documentId);
     }
     @Test
-    public void DocumentControllerGetByIdDocumentsDtoShouldReturnNotFound() throws Exception {
+    public void documentControllerGetByIdDocumentsDtoShouldReturnNotFound() throws Exception {
         Integer documentId = 99;
 
         when(documentServiceImpl.findById(documentId)).thenReturn(null);
@@ -194,7 +194,7 @@ public class DocumentControllerTest {
         verify(documentServiceImpl, times(1)).findById(documentId);
     }
     @Test
-    public void DocumentControllerDeleteByIdShouldReturnOk() throws Exception {
+    public void documentControllerDeleteByIdShouldReturnOk() throws Exception {
         Integer documentId = 1;
 
         when(documentServiceImpl.deleteById(documentId)).thenReturn(documentDto1);
@@ -207,7 +207,7 @@ public class DocumentControllerTest {
 
 
     @Test
-    public void DocumentControllerDeleteByIdShouldReturnClientErrorWhenExceptionThrown() throws Exception {
+    public void documentControllerDeleteByIdShouldReturnClientErrorWhenExceptionThrown() throws Exception {
         Integer documentId = 99;
 
         // Kada deleteById baci exception

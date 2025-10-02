@@ -31,7 +31,7 @@ public class FanBladeServiceTest {
     FanBladeServiceImpl fanBladeServiceImpl;
 
     @Test
-    public void FanBladeServiceSave() {
+    public void fanBladeServiceSave() {
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -64,7 +64,7 @@ public class FanBladeServiceTest {
     }
 
     @Test
-    public void FanBladeServiceDelete() throws Exception {
+    public void fanBladeServiceDelete() throws Exception {
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -82,7 +82,7 @@ public class FanBladeServiceTest {
     }
 
     @Test
-    public void FanBladeServiceGetAllFanBladeDtos() throws Exception {
+    public void fanBladeServiceGetAllFanBladeDtos() throws Exception {
         FanBlade fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest1")
                 .name("NameTest1")
@@ -135,7 +135,7 @@ public class FanBladeServiceTest {
 
     }
     @Test
-    public void FanBladeServiceGetByIdFanBladeDto() {
+    public void fanBladeServiceGetByIdFanBladeDto() {
         FanBlade fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest1")
                 .name("NameTest1")

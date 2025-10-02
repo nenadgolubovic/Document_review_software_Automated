@@ -55,7 +55,7 @@ public class UserRepositoryTest {
 
 
     @Test
-    public void UserRepositoryFindByUsernameReturnUser() {
+    public void userRepositoryFindByUsernameReturnUser() {
 
         User user = User.builder()
                 .username("UsernameTest")

@@ -82,7 +82,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void UserControllerRegisterShouldReturnBadRequestWhenUserExists() throws Exception {
+    public void userControllerRegisterShouldReturnBadRequestWhenUserExists() throws Exception {
 
 
         when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(new User());
@@ -97,7 +97,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void UserControllerRegisterShouldReturnBadRequestWhenValidationException() throws Exception {
+    public void userControllerRegisterShouldReturnBadRequestWhenValidationException() throws Exception {
         UserDto userDto = new UserDto();
         userDto.setUsername("newUser");
 
@@ -114,7 +114,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void UserControllerRegisterShouldReturnOkWhenUserRegistered() throws Exception {
+    public void userControllerRegisterShouldReturnOkWhenUserRegistered() throws Exception {
 
 
         when(userServiceImpl.findByUsername(userDto1.getUsername())).thenReturn(null);
@@ -128,14 +128,14 @@ public class UserControllerTest {
         verify(userServiceImpl, times(1)).register(any(UserDto.class));
     }
     @Test
-    public void UserControllerHomeShouldReturnNotAuthenticated_WhenPrincipalIsNull() throws Exception {
+    public void userControllerHomeShouldReturnNotAuthenticated_WhenPrincipalIsNull() throws Exception {
         mockMvc.perform(get("/user/home"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.error").value("Not authenticated"));
     }
 
     @Test
-    public void UserControllerHomeShouldReturnUserNotFoundWhenUserDoesNotExist() throws Exception {
+    public void userControllerHomeShouldReturnUserNotFoundWhenUserDoesNotExist() throws Exception {
         Principal principal = () -> "nonexistentUser";
 
         when(userServiceImpl.findByUsername("nonexistentUser")).thenReturn(null);
@@ -146,7 +146,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void UserControllerLoginShouldReturnLoggedUserDtoWhenCredentialsAreCorrect() throws Exception {
+    void userControllerLoginShouldReturnLoggedUserDtoWhenCredentialsAreCorrect() throws Exception {
 
         when(userServiceImpl.loginUser(any(UserDto.class))).thenReturn(user);
 
@@ -160,7 +160,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void UserControllerShouldReturnBadRequestWhenLoginFails() throws Exception {
+    void userControllerShouldReturnBadRequestWhenLoginFails() throws Exception {
         doThrow(new EntityNotFoundException("User not found"))
                 .when(userServiceImpl).loginUser(any(UserDto.class));
 
@@ -175,14 +175,14 @@ public class UserControllerTest {
 
 
     @Test
-    void UserControllerLogoutUserShouldReturnOk() throws Exception {
+    void userControllerLogoutUserShouldReturnOk() throws Exception {
         mockMvc.perform(post("/user/logout"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Logout successful"));
     }
 
     @Test
-    void UserController_logoutUser_ShouldInvalidateSessionAndRemoveCookie() throws Exception {
+    void userController_logoutUser_ShouldInvalidateSessionAndRemoveCookie() throws Exception {
 
         UserService mockUserService = Mockito.mock(UserService.class);
 

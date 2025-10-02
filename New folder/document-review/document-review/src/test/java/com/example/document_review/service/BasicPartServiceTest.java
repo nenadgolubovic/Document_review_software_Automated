@@ -29,7 +29,7 @@ public class BasicPartServiceTest {
     BasicPartServiceImpl basicPartServiceImpl;
 
     @Test
-    public void BasicPartServiceSave() {
+    public void basicPartServiceSave() {
         BasicPart basicPart = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -60,7 +60,7 @@ public class BasicPartServiceTest {
     }
 
     @Test
-    public void BasicPartServiceDelete() throws Exception {
+    public void basicPartServiceDelete() throws Exception {
         BasicPart basicPart = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -77,7 +77,7 @@ public class BasicPartServiceTest {
     }
 
     @Test
-    public void BasicPartServiceGetAllBasicPartDtos() throws Exception {
+    public void basicPartServiceGetAllBasicPartDtos() throws Exception {
         BasicPart basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest1")
                 .name("NameTest1")
@@ -127,7 +127,7 @@ public class BasicPartServiceTest {
     }
 
     @Test
-    public void BasicPartServiceGetByIdBasicPartDto() {
+    public void basicPartServiceGetByIdBasicPartDto() {
         BasicPart basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest1")
                 .name("NameTest1")
