@@ -47,9 +47,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> findAll() throws Exception {
-        return commentRepository.findAll().stream().map(entity -> commentMapper.toDto(entity)).collect(Collectors.toList());
+        return commentRepository.findAll().stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
-
 
     @Override
     @Transactional
@@ -89,7 +88,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> getAllByDocumentId(Integer documentId) {
-        return commentRepository.getAllByDocumentId(documentId).stream().map(entity -> commentMapper.toDto(entity)).collect(Collectors.toList());
+        return commentRepository.getAllByDocumentId(documentId).stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
 

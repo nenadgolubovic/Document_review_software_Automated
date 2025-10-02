@@ -32,7 +32,7 @@ public class FanBladeServiceImpl implements FanBladeService {
 
     @Override
     public List<FanBladeDto> getAll() throws Exception {
-        return fanBladeRepository.findAll().stream().map(entity -> fanBladeMapper.toDto(entity)).collect(Collectors.toList());
+        return fanBladeRepository.findAll().stream().map(fanBladeMapper::toDto).collect(Collectors.toList());
     }
     @Override
     public FanBladeDto getById(Integer id) {

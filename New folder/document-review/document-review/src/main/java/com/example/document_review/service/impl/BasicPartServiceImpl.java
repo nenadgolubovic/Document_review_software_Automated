@@ -35,7 +35,7 @@ public class BasicPartServiceImpl implements BasicPartService {
 
     @Override
     public List<BasicPartDto> getAll() throws Exception {
-        return basicPartRepository.findAll().stream().map(entity -> basicPartMapper.toDto(entity)).collect(Collectors.toList());
+        return basicPartRepository.findAll().stream().map(basicPartMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

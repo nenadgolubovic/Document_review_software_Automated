@@ -145,7 +145,7 @@ public class FanBladeControllerTest {
     }
 
     @Test
-    public void fanBladeControllerDeleteShouldReturnNotFound_WhenFanBladeDoesNotExist() throws Exception {
+    public void fanBladeControllerDeleteShouldReturnNotFoundWhenFanBladeDoesNotExist() throws Exception {
         Integer fanBladeId = 99;
 
         when(fanBladeServiceImpl.getById(fanBladeId)).thenReturn(null);

@@ -145,7 +145,7 @@ public class BasicPartControllerTest {
 
 
     @Test
-    public void basicPartControllerDeleteShouldReturnNotFound_WhenBasicPartDoesNotExist() throws Exception {
+    public void basicPartControllerDeleteShouldReturnNotFoundWhenBasicPartDoesNotExist() throws Exception {
         Integer basicPartId = 99;
 
         when(basicPartServiceImpl.getById(basicPartId)).thenReturn(null);

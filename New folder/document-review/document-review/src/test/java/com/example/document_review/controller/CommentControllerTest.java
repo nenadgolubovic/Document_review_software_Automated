@@ -45,7 +45,6 @@ public class CommentControllerTest {
 
     private CommentDto commentDto1;
     private CommentDto commentDto2;
-    private CommentDto commentDto3;
 
     @MockitoBean
     private CommentServiceImpl commentServiceImpl;
@@ -70,14 +69,6 @@ public class CommentControllerTest {
                 .isApproved(false)
                 .rate(null).build();
 
-        commentDto3 = CommentDto.builder()
-                .commentTitle("Test comment title3")
-                .comment("Test comment3")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
     }
 
     @Test

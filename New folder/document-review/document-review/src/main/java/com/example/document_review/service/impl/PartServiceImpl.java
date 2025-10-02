@@ -35,7 +35,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public List<PartDto> getAll() throws Exception {
-        return partRepository.findAll().stream().map(entity -> partMapper.toDto(entity)).collect(Collectors.toList());
+        return partRepository.findAll().stream().map(partMapper::toDto).collect(Collectors.toList());
 
     }
 

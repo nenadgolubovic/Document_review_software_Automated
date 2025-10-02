@@ -119,7 +119,7 @@ public class UserControllerTest {
         verify(userServiceImpl, times(1)).register(any(UserDto.class));
     }
     @Test
-    public void userControllerHomeShouldReturnNotAuthenticated_WhenPrincipalIsNull() throws Exception {
+    public void userControllerHomeShouldReturnNotAuthenticatedWhenPrincipalIsNull() throws Exception {
         mockMvc.perform(get("/user/home"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.error").value("Not authenticated"));
