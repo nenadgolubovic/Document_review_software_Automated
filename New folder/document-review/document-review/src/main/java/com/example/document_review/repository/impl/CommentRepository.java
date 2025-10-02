@@ -26,11 +26,11 @@ public class CommentRepository implements MyRepository<Comment, Integer> {
     }
 
     @Override
-    public List<Comment> findAll() throws Exception {
+    public List<Comment> findAll() throws EntityNotFoundException {
         List<Comment> comments = entityManager.createQuery("select c from Comment c", Comment.class)
                 .getResultList();
         if (comments.isEmpty()) {
-            throw new Exception("Comment not found");
+            throw new EntityNotFoundException("Comment not found");
         }
         return comments;
     }

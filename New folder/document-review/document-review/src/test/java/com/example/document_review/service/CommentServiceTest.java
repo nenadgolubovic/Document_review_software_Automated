@@ -129,14 +129,6 @@ public class CommentServiceTest {
     }
     @Test
     public void commentServiceImplApproveCommentNotUpdateWhenAlreadyApproved() throws Exception {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title")
-                .commentText("Test comment")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
 
         when(commentRepository.findById(1)).thenReturn(comment1);
         commentServiceImpl.approveComment(1);

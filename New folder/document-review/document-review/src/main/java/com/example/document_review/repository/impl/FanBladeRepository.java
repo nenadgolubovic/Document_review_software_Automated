@@ -28,11 +28,11 @@ public class FanBladeRepository implements MyRepository<FanBlade, Integer> {
     }
 
     @Override
-    public List<FanBlade> findAll() throws Exception {
+    public List<FanBlade> findAll() throws EntityNotFoundException {
         List<FanBlade> fanBlades = entityManager.createQuery("select bp from FanBlade bp", FanBlade.class)
                 .getResultList();
         if (fanBlades.isEmpty()) {
-            throw new Exception("Comment not found");
+            throw new EntityNotFoundException("Comment not found");
         }
         return fanBlades;
     }

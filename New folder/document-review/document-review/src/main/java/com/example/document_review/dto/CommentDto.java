@@ -1,11 +1,13 @@
 package com.example.document_review.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Builder
+@AllArgsConstructor
 public class CommentDto {
     private Integer commentId;
     private String commentText;
@@ -15,24 +17,6 @@ public class CommentDto {
     private boolean isApproved;
     private Integer rate;
     private Integer documentId;
-
-    public CommentDto(Integer commentId,
-                      String comment,
-                      Integer userId,
-                      String commentTitle,
-                      LocalDateTime commentDate,
-                      boolean isApproved,
-                      Integer rate,
-                      Integer documentId) {
-        this.commentId = commentId;
-        this.commentText = comment;
-        this.userId = userId;
-        this.commentTitle = commentTitle;
-        this.commentDate = commentDate;
-        this.isApproved = isApproved;
-        this.rate = rate;
-        this.documentId = documentId;
-    }
 
     public CommentDto() {}
 

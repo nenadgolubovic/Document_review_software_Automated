@@ -164,9 +164,6 @@ public class DocumentServiceTest {
     @Test
     void uploadDocumentShouldThrowExceptionWhenFileIsEmpty() {
         MultipartFile multipartFile = mock(MultipartFile.class);
-        DocumentDto documentDto = new DocumentDto();
-        documentDto.setPartId(1);
-
         when(multipartFile.isEmpty()).thenReturn(true);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->

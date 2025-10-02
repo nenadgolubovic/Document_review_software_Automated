@@ -102,23 +102,23 @@ public class UserServiceTest {
     }
     @Test
     public void userServiceLoginUserUser(){
-        User user = User.builder()
+        User userLogin = User.builder()
                 .username(USERNAME_TEST)
                 .password(ENCODED_PASSWORD)
                 .build();
-        UserDto userDto = UserDto.builder()
+        UserDto userLoginDto = UserDto.builder()
                 .username(USERNAME_TEST)
                 .password(PASSWORD_TEST)
                 .build();
-        when(userRepository.findByUsername(USERNAME_TEST)).thenReturn(user);
+        when(userRepository.findByUsername(USERNAME_TEST)).thenReturn(userLogin);
         when(bCryptPasswordEncoder.matches(PASSWORD_TEST, ENCODED_PASSWORD))
                 .thenReturn(true);
 
-        User result = userServiceImpl.loginUser(userDto);
+        User result = userServiceImpl.loginUser(userLoginDto);
         verify(userRepository).findByUsername(USERNAME_TEST);
         verify(bCryptPasswordEncoder).matches(PASSWORD_TEST, ENCODED_PASSWORD);
 
-        assertThat(result).isEqualTo(user);
+        assertThat(result).isEqualTo(userLogin);
     }
     @Test
     public void userServiceFindByUsernameUser(){

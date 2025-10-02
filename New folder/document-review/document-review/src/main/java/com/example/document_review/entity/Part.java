@@ -2,6 +2,7 @@ package com.example.document_review.entity;
 
 import com.example.document_review.entity.enums.PartType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @SuperBuilder
 @Entity
+@AllArgsConstructor
 public abstract class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,20 +26,7 @@ public abstract class Part {
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
 
-
-    protected Part(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew, List<Document> documents) {
-        this.partId = partId;
-        this.name = name;
-        this.partNumber = partNumber;
-        this.description = description;
-        this.serialNumber = serialNumber;
-        this.type = type;
-        this.cyclesSinceNew = cyclesSinceNew;
-        this.timeSinceNew = timeSinceNew;
-        this.documents = documents;
-    }
-
-
+    
     protected Part() {
 
     }

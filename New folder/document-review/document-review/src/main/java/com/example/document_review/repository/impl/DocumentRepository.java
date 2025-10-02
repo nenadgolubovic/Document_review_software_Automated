@@ -1,6 +1,7 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.Document;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -28,11 +29,11 @@ public class DocumentRepository implements MyRepository <Document, Integer>{
     }
 
     @Override
-    public List<Document> findAll() throws Exception {
+    public List<Document> findAll() throws EntityNotFoundException {
         List<Document> documents = entityManager.createQuery("select d from Document d", Document.class)
                 .getResultList();
         if (documents.isEmpty()) {
-            throw new Exception("Documents not found");
+            throw new EntityNotFoundException("Documents not found");
         }
         return documents;
     }

@@ -27,11 +27,11 @@ public class BasicPartRepository implements MyRepository<BasicPart, Integer> {
     }
 
     @Override
-    public List<BasicPart> findAll() throws Exception {
+    public List<BasicPart> findAll() throws EntityNotFoundException {
     List<BasicPart> basicParts = entityManager.createQuery("select bp from BasicPart bp", BasicPart.class)
             .getResultList();
         if (basicParts.isEmpty()) {
-            throw new Exception("Comment not found");
+            throw new EntityNotFoundException("Comment not found");
         }
         return basicParts;
     }

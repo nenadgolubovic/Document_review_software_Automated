@@ -23,13 +23,11 @@ public class Document {
 
     @Builder
     public Document(Integer documentId, String documentName, Part part, String documentRoute,
-//                    List<Comment> comments,
                     LocalDate documentDate, Integer partId) {
         this.documentId = documentId;
         this.documentName = documentName;
         this.part = part;
         this.documentRoute = documentRoute;
-//        this.comments = comments;
         this.documentDate = documentDate;
         this.partId = partId;
     }

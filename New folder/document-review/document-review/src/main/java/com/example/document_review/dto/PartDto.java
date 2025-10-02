@@ -1,9 +1,11 @@
 package com.example.document_review.dto;
 
 import com.example.document_review.entity.enums.PartType;
+import lombok.AllArgsConstructor;
 
 import java.util.Objects;
 
+@AllArgsConstructor
 public class PartDto {
 
 
@@ -86,17 +88,6 @@ public class PartDto {
     private String timeSinceNew;
 
 
-
-    public PartDto(Integer partId, String name, String partNumber, String description, String serialNumber, PartType type, String cyclesSinceNew, String timeSinceNew) {
-        this.partId = partId;
-        this.name = name;
-        this.partNumber = partNumber;
-        this.description = description;
-        this.serialNumber = serialNumber;
-        this.type = type;
-        this.cyclesSinceNew = cyclesSinceNew;
-        this.timeSinceNew = timeSinceNew;
-    }
     @Override
     public String
     toString() {
