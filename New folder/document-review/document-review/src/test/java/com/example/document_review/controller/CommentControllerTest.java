@@ -45,10 +45,10 @@ public class CommentControllerTest {
 
     private CommentDto commentDto1;
     private CommentDto commentDto2;
-    private final String TEST_COMMENT_1 = "Test comment1";
-    private final String TEST_COMMENT_TITLE_1 = "Test comment title1";
-    private final String TEST_COMMENT_2 = "Test comment2";
-    private final String TEST_COMMENT_TITLE_2 = "Test comment title2";
+    private static final String TEST_COMMENT_1 = "Test comment1";
+    private static final String TEST_COMMENT_TITLE_1 = "Test comment title1";
+    private static final String TEST_COMMENT_2 = "Test comment2";
+    private static final String TEST_COMMENT_TITLE_2 = "Test comment title2";
 
 
     @MockitoBean

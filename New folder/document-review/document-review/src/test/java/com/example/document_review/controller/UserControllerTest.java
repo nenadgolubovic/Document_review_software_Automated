@@ -54,8 +54,8 @@ public class UserControllerTest {
     @MockitoBean
     private UserServiceImpl userServiceImpl;
 
-    private final String USER_NOT_FOUND_MESSAGE = "User not found";
-    private final String URL_REGISTER = "/user/register";
+    private static final String USER_NOT_FOUND_MESSAGE = "User not found";
+    private static final String URL_REGISTER = "/user/register";
 
     @BeforeEach
     public void init() {

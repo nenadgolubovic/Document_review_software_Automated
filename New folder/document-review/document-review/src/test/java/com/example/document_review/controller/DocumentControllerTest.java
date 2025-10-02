@@ -44,8 +44,8 @@ public class DocumentControllerTest {
 
     private DocumentDto documentDto1;
     private DocumentDto documentDto2;
-    private final String DOCUMENT_ROUTE_TEST = "DocumentRouteTest.pdf";
-    private final String DOCUMENT_NAME_TEST = "DocumentNameTest";
+    private static final String DOCUMENT_ROUTE_TEST = "DocumentRouteTest.pdf";
+    private static final String DOCUMENT_NAME_TEST = "DocumentNameTest";
 
 
     @MockitoBean

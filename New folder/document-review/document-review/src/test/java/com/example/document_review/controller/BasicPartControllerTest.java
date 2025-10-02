@@ -43,7 +43,7 @@ public class BasicPartControllerTest {
     private BasicPartDto basicPartDto2;
     private static final String BASIC_PART_ID_PATH = "/part/basic/";
     private static final String PART_NUMBER_TEST_1 = "PartNumberTest1";
-    private static final String BasicPartIdPath = "/part/basic/";
+
 
 
     @MockitoBean

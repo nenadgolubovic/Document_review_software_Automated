@@ -38,12 +38,12 @@ public class UserServiceTest {
 
     private User user;
     private UserDto userDto;
-    private final String USERNAME_TEST = "UsernameTest";
-    private final String PASSWORD_TEST = "PasswordTest";
-    private final String FIRST_NAME = "FirstNameTest";
-    private final String LAST_NAME = "LastNameTest";
-    private final String EMAIL = "EmailTest@EmailTest";
-    private final String ENCODED_PASSWORD = "encodedPassword";
+    private static final String USERNAME_TEST = "UsernameTest";
+    private static final String PASSWORD_TEST = "PasswordTest";
+    private static final String FIRST_NAME = "FirstNameTest";
+    private static final String LAST_NAME = "LastNameTest";
+    private static final String EMAIL = "EmailTest@EmailTest";
+    private static final String ENCODED_PASSWORD = "encodedPassword";
 
     @BeforeEach
     public void setUp() {

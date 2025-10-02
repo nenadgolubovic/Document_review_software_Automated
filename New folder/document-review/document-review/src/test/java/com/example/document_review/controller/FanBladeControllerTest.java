@@ -43,8 +43,8 @@ public class FanBladeControllerTest {
 
     private FanBladeDto fanBladeDto1;
     private FanBladeDto fanBladeDto2;
-    private final String URL_GETFANBLADEID = "/part/fanBlades/";
-    private final String PART_NUMBER_TEST= "PartNumberTest";
+    private static final String URL_GETFANBLADEID = "/part/fanBlades/";
+    private static final String PART_NUMBER_TEST= "PartNumberTest";
     @MockitoBean
     private FanBladeServiceImpl fanBladeServiceImpl;
 
