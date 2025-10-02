@@ -21,10 +21,40 @@ public class CommentRepositoryTests {
 
     CommentRepository commentRepository;
 
+    private Comment comment1;
+    private Comment comment2;
+    private Comment comment3;
+
     @BeforeEach
     void setUp() {
         commentRepository = new CommentRepository();
         ReflectionTestUtils.setField(commentRepository, "entityManager", entityManager);
+        comment1 = Comment.builder()
+            .commentTitle("Test comment title 1")
+            .commentText("Test comment 1")
+            .commentDate(LocalDateTime.now())
+            .documentId(1)
+            .userId(1)
+            .isApproved(true)
+            .rate(5).build();
+
+        comment2 = Comment.builder()
+            .commentTitle("Test comment title 2")
+            .commentText("Test comment 2")
+            .commentDate(LocalDateTime.now())
+            .documentId(2)
+            .userId(1)
+            .isApproved(false)
+            .rate(1).build();
+
+        comment3 = Comment.builder()
+            .commentTitle("Test comment title 3")
+            .commentText("Test comment 3")
+            .commentDate(LocalDateTime.now())
+            .documentId(2)
+            .userId(2)
+            .isApproved(true)
+            .rate(2).build();
     }
     @PersistenceContext
     private EntityManager entityManager;
@@ -87,25 +117,6 @@ public class CommentRepositoryTests {
     @Test
     public void commentRepositoryFindAllReturnAllComments() throws Exception {
 
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title 1")
-                .commentText("Test comment 1")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
-
-        Comment comment2 = Comment.builder()
-                .commentTitle("Test comment title 2")
-                .commentText("Test comment 2")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(1)
-                .isApproved(false)
-                .rate(1).build();
-
-
         commentRepository.save(comment1);
         commentRepository.save(comment2);
 
@@ -130,18 +141,10 @@ public class CommentRepositoryTests {
 
     @Test
     public void commentRepositoryUpdateReturnUpdatedComment(){
-        Comment comment = Comment.builder()
-                .commentTitle("Test comment title 1")
-                .commentText("Test comment 1")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
 
-        commentRepository.save(comment);
+        commentRepository.save(comment1);
 
-        Comment newComment = commentRepository.findById(comment.getCommentId());
+        Comment newComment = commentRepository.findById(comment1.getCommentId());
 
         newComment.setComment("Updated comment");
         newComment.setCommentDate(LocalDateTime.now());
@@ -153,7 +156,7 @@ public class CommentRepositoryTests {
 
         commentRepository.update(newComment);
 
-        Comment changedComment = commentRepository.findById(comment.getCommentId());
+        Comment changedComment = commentRepository.findById(comment1.getCommentId());
 
         Assertions.assertThat(changedComment).isNotNull();
         Assertions.assertThat(changedComment.getCommentTitle()).isEqualTo(newComment.getCommentTitle());
@@ -168,33 +171,6 @@ public class CommentRepositoryTests {
 
     @Test
     public void commentRepositoryGetAllByDocumentIdReturnedAllCommentsByDocumentId() {
-        Comment comment1 = Comment.builder()
-                .commentTitle("Test comment title 1")
-                .commentText("Test comment 1")
-                .commentDate(LocalDateTime.now())
-                .documentId(1)
-                .userId(1)
-                .isApproved(true)
-                .rate(5).build();
-
-        Comment comment2 = Comment.builder()
-                .commentTitle("Test comment title 2")
-                .commentText("Test comment 2")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(1)
-                .isApproved(false)
-                .rate(1).build();
-
-        Comment comment3 = Comment.builder()
-                .commentTitle("Test comment title 3")
-                .commentText("Test comment 3")
-                .commentDate(LocalDateTime.now())
-                .documentId(2)
-                .userId(2)
-                .isApproved(true)
-                .rate(2).build();
-
 
         commentRepository.save(comment1);
         commentRepository.save(comment2);

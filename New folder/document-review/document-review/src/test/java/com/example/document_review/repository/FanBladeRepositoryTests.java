@@ -24,16 +24,15 @@ public class FanBladeRepositoryTests {
     @PersistenceContext
     EntityManager entityManager;
 
+
+    private FanBlade fanBlade1;
+    private FanBlade fanBlade2;
+
     @BeforeEach
     void setUp() {
         fanBladeRepository = new FanBladeRepository();
         ReflectionTestUtils.setField(fanBladeRepository, "entityManager", entityManager);
-    }
-
-    @Test
-    public void fanBladeRepositorySave() {
-
-        FanBlade fanBlade = FanBlade.builder()
+        fanBlade1 = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
                 .description("DescriptionTest")
@@ -42,37 +41,7 @@ public class FanBladeRepositoryTests {
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .momentWeight("MomentWeightTest").build();
-
-        fanBladeRepository.save(fanBlade);
-
-        FanBlade savedFanBlade = entityManager.find(FanBlade.class, fanBlade.getPartId());
-
-        Assertions.assertThat(savedFanBlade).isNotNull();
-        Assertions.assertThat(savedFanBlade.getPartNumber()).isEqualTo(fanBlade.getPartNumber());
-        Assertions.assertThat(savedFanBlade.getName()).isEqualTo(fanBlade.getName());
-        Assertions.assertThat(savedFanBlade.getDescription()).isEqualTo(fanBlade.getDescription());
-        Assertions.assertThat(savedFanBlade.getSerialNumber()).isEqualTo(fanBlade.getSerialNumber());
-        Assertions.assertThat(savedFanBlade.getType()).isEqualTo(fanBlade.getType());
-        Assertions.assertThat(savedFanBlade.getCyclesSinceNew()).isEqualTo(fanBlade.getCyclesSinceNew());
-        Assertions.assertThat(savedFanBlade.getTimeSinceNew()).isEqualTo(fanBlade.getTimeSinceNew());
-        Assertions.assertThat(savedFanBlade.getMomentWeight()).isEqualTo(fanBlade.getMomentWeight());
-
-
-
-    }
-
-    @Test
-    public void fanBladeRepositoryFindAllReturnFanBlades() throws Exception {
-        FanBlade fanBlade1 = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-        FanBlade fanBlade2 = FanBlade.builder()
+        fanBlade2 = FanBlade.builder()
                 .partNumber("PartNumberTest2")
                 .name("NameTest2")
                 .description("DescriptionTest2")
@@ -81,6 +50,33 @@ public class FanBladeRepositoryTests {
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .momentWeight("MomentWeightTest2").build();
+
+    }
+
+    @Test
+    public void fanBladeRepositorySave() {
+
+
+        fanBladeRepository.save(fanBlade1);
+
+        FanBlade savedFanBlade = entityManager.find(FanBlade.class, fanBlade1.getPartId());
+
+        Assertions.assertThat(savedFanBlade).isNotNull();
+        Assertions.assertThat(savedFanBlade.getPartNumber()).isEqualTo(fanBlade1.getPartNumber());
+        Assertions.assertThat(savedFanBlade.getName()).isEqualTo(fanBlade1.getName());
+        Assertions.assertThat(savedFanBlade.getDescription()).isEqualTo(fanBlade1.getDescription());
+        Assertions.assertThat(savedFanBlade.getSerialNumber()).isEqualTo(fanBlade1.getSerialNumber());
+        Assertions.assertThat(savedFanBlade.getType()).isEqualTo(fanBlade1.getType());
+        Assertions.assertThat(savedFanBlade.getCyclesSinceNew()).isEqualTo(fanBlade1.getCyclesSinceNew());
+        Assertions.assertThat(savedFanBlade.getTimeSinceNew()).isEqualTo(fanBlade1.getTimeSinceNew());
+        Assertions.assertThat(savedFanBlade.getMomentWeight()).isEqualTo(fanBlade1.getMomentWeight());
+
+
+
+    }
+
+    @Test
+    public void fanBladeRepositoryFindAllReturnFanBlades() throws Exception {
 
         fanBladeRepository.save(fanBlade1);
         fanBladeRepository.save(fanBlade2);
@@ -113,25 +109,6 @@ public class FanBladeRepositoryTests {
 
     @Test
     public void fanBladeRepositoryFindByIdReturnFanBlade() {
-        FanBlade fanBlade1 = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-        FanBlade fanBlade2 = FanBlade.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .momentWeight("MomentWeightTest2").build();
-
         fanBladeRepository.save(fanBlade1);
         fanBladeRepository.save(fanBlade2);
 
@@ -143,24 +120,6 @@ public class FanBladeRepositoryTests {
 
     @Test
     public void fanBladeRepositoryDelete() throws Exception {
-        FanBlade fanBlade1 = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-        FanBlade fanBlade2 = FanBlade.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .momentWeight("MomentWeightTest2").build();
 
         fanBladeRepository.save(fanBlade1);
         fanBladeRepository.save(fanBlade2);

@@ -6,6 +6,7 @@ import com.example.document_review.mapper.impl.UserMapper;
 import com.example.document_review.repository.impl.UserRepository;
 import com.example.document_review.service.impl.UserServiceImpl;
 import com.example.document_review.validator.impl.RegistrationValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,24 +36,29 @@ public class UserServiceTest {
     @InjectMocks
     private UserServiceImpl userServiceImpl;
 
+    private User user;
+    private UserDto userDto;
+
+    @BeforeEach
+    public void setUp() {
+        user = User.builder()
+            .username("UsernameTest")
+            .password("PasswordTest")
+            .firstName("FirstNameTest")
+            .lastName("LastNameTest")
+            .email("EmailTest@EmailTest")
+            .build();
+        userDto = UserDto.builder()
+            .username("UsernameTest")
+            .password("PasswordTest")
+            .firstName("FirstNameTest")
+            .lastName("LastNameTest")
+            .email("EmailTest@EmailTest")
+            .build();
+    }
 
     @Test
     public void userServiceRegister() {
-
-        User user = User.builder()
-                .username("UsernameTest")
-                .password("PasswordTest")
-                .firstName("FirstNameTest")
-                .lastName("LastNameTest")
-                .email("EmailTest@EmailTest")
-                .build();
-        UserDto userDto = UserDto.builder()
-                .username("UsernameTest")
-                .password("PasswordTest")
-                .firstName("FirstNameTest")
-                .lastName("LastNameTest")
-                .email("EmailTest@EmailTest")
-                .build();
 
         when(bCryptPasswordEncoder.encode("PasswordTest")).thenReturn("encodedPassword");
         when(userMapper.toEntity(userDto)).thenReturn(user);
@@ -71,20 +77,6 @@ public class UserServiceTest {
 
     @Test
     public void userServiceFindByIdUserDto(){
-        User user = User.builder()
-                .username("UsernameTest")
-                .password("PasswordTest")
-                .firstName("FirstNameTest")
-                .lastName("LastNameTest")
-                .email("EmailTest@EmailTest")
-                .build();
-        UserDto userDto = UserDto.builder()
-                .username("UsernameTest")
-                .password("PasswordTest")
-                .firstName("FirstNameTest")
-                .lastName("LastNameTest")
-                .email("EmailTest@EmailTest")
-                .build();
 
         when(userRepository.findById(1)).thenReturn(user);
         when(userMapper.toDto(user)).thenReturn(userDto);
@@ -125,13 +117,6 @@ public class UserServiceTest {
     @Test
     public void userServiceFindByUsernameUser(){
 
-        User user = User.builder()
-                .username("UserNameTest")
-                .password("PasswordTest")
-                .firstName("FirstNameTest")
-                .lastName("LastNameTest")
-                .email("EmailTest@EmailTest")
-                .build();
         when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
         User result = userServiceImpl.findByUsername(user.getUsername());
         verify(userRepository).findByUsername(user.getUsername());

@@ -6,6 +6,7 @@ import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.mapper.impl.BasicPartMapper;
 import com.example.document_review.repository.impl.BasicPartRepository;
 import com.example.document_review.service.impl.BasicPartServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,35 +29,62 @@ public class BasicPartServiceTest {
     @InjectMocks
     BasicPartServiceImpl basicPartServiceImpl;
 
+    private BasicPart basicPart1;
+    private  BasicPart basicPart2;
+    private BasicPartDto basicPartDto1;
+    private BasicPartDto basicPartDto2;
+
+    @BeforeEach
+    public void setUp() {
+        basicPart1 = BasicPart.builder()
+                .partNumber("PartNumberTest1")
+                .name("NameTest1")
+                .description("DescriptionTest1")
+                .serialNumber("SerialNumberTest1")
+                .type(PartType.Basic)
+                .cyclesSinceNew("CycleSinceNewTest1")
+                .timeSinceNew("TimeSinceNewTest1")
+                .build();
+        basicPart2 = BasicPart.builder()
+                .partNumber("PartNumberTest2")
+                .name("NameTest2")
+                .description("DescriptionTest2")
+                .serialNumber("SerialNumberTest2")
+                .type(PartType.Basic)
+                .cyclesSinceNew("CycleSinceNewTest2")
+                .timeSinceNew("TimeSinceNewTest2")
+                .build();
+        basicPartDto1 = BasicPartDto.builder()
+                .partNumber("PartNumberTest1")
+                .name("NameTest1")
+                .description("DescriptionTest1")
+                .serialNumber("SerialNumberTest1")
+                .type(PartType.Basic)
+                .cyclesSinceNew("CycleSinceNewTest1")
+                .timeSinceNew("TimeSinceNewTest1")
+                .build();
+        basicPartDto2 = BasicPartDto.builder()
+                .partNumber("PartNumberTest2")
+                .name("NameTest2")
+                .description("DescriptionTest2")
+                .serialNumber("SerialNumberTest2")
+                .type(PartType.Basic)
+                .cyclesSinceNew("CycleSinceNewTest2")
+                .timeSinceNew("TimeSinceNewTest2")
+                .build();
+    }
+
     @Test
     public void basicPartServiceSave() {
-        BasicPart basicPart = BasicPart.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .build();
-        BasicPartDto basicPartDto = BasicPartDto.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .build();
 
-        when(basicPartMapper.toEntity(basicPartDto)).thenReturn(basicPart);
+        when(basicPartMapper.toEntity(basicPartDto1)).thenReturn(basicPart1);
 
-        basicPartServiceImpl.save(basicPartDto);
+        basicPartServiceImpl.save(basicPartDto1);
 
-        verify(basicPartMapper, times(1)).toEntity(basicPartDto);
+        verify(basicPartMapper, times(1)).toEntity(basicPartDto1);
 
-        verify(basicPartMapper, times(1)).toEntity(basicPartDto);
-        verify(basicPartRepository, times(1)).save(basicPart);
+        verify(basicPartMapper, times(1)).toEntity(basicPartDto1);
+        verify(basicPartRepository, times(1)).save(basicPart1);
     }
 
     @Test
@@ -78,42 +106,6 @@ public class BasicPartServiceTest {
 
     @Test
     public void basicPartServiceGetAllBasicPartDtos() throws Exception {
-        BasicPart basicPart1 = BasicPart.builder()
-                .partNumber("PartNumberTest1")
-                .name("NameTest1")
-                .description("DescriptionTest1")
-                .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest1")
-                .timeSinceNew("TimeSinceNewTest1")
-                .build();
-        BasicPart basicPart2 = BasicPart.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
-        BasicPartDto basicPartDto1 = BasicPartDto.builder()
-                .partNumber("PartNumberTest1")
-                .name("NameTest1")
-                .description("DescriptionTest1")
-                .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest1")
-                .timeSinceNew("TimeSinceNewTest1")
-                .build();
-        BasicPartDto basicPartDto2 = BasicPartDto.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
 
         when(basicPartRepository.findAll()).thenReturn(List.of(basicPart1,basicPart2));
         when(basicPartMapper.toDto(basicPart1)).thenReturn(basicPartDto1);
@@ -128,42 +120,6 @@ public class BasicPartServiceTest {
 
     @Test
     public void basicPartServiceGetByIdBasicPartDto() {
-        BasicPart basicPart1 = BasicPart.builder()
-                .partNumber("PartNumberTest1")
-                .name("NameTest1")
-                .description("DescriptionTest1")
-                .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest1")
-                .timeSinceNew("TimeSinceNewTest1")
-                .build();
-        BasicPart basicPart2 = BasicPart.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
-        BasicPartDto basicPartDto1 = BasicPartDto.builder()
-                .partNumber("PartNumberTest1")
-                .name("NameTest1")
-                .description("DescriptionTest1")
-                .serialNumber("SerialNumberTest1")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest1")
-                .timeSinceNew("TimeSinceNewTest1")
-                .build();
-        BasicPartDto basicPartDto2 = BasicPartDto.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
 
         when(basicPartRepository.findById(1)).thenReturn(basicPart1);
         when(basicPartMapper.toDto(basicPart1)).thenReturn(basicPartDto1);

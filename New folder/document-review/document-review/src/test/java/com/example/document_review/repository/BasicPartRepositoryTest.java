@@ -1,5 +1,6 @@
 package com.example.document_review.repository;
 
+import com.example.document_review.dto.BasicPartDto;
 import com.example.document_review.entity.BasicPart;
 import com.example.document_review.entity.enums.PartType;
 import com.example.document_review.repository.impl.BasicPartRepository;
@@ -25,16 +26,14 @@ public class BasicPartRepositoryTest {
     @PersistenceContext
     EntityManager entityManager;
 
+    private BasicPart basicPart1;
+    private BasicPart basicPart2;
+
     @BeforeEach
     void setUp() {
         basicPartRepository = new BasicPartRepository();
         ReflectionTestUtils.setField(basicPartRepository, "entityManager", entityManager);
-    }
-
-    @Test
-    public void basicPartRepositorySave() {
-
-        BasicPart basicPart = BasicPart.builder()
+        basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
                 .description("DescriptionTest")
@@ -43,34 +42,7 @@ public class BasicPartRepositoryTest {
                 .cyclesSinceNew("CycleSinceNewTest")
                 .timeSinceNew("TimeSinceNewTest")
                 .build();
-
-        basicPartRepository.save(basicPart);
-
-        BasicPart savedBasicPart = entityManager.find(BasicPart.class, basicPart.getPartId());
-
-        Assertions.assertThat(savedBasicPart).isNotNull();
-        Assertions.assertThat(savedBasicPart.getPartNumber()).isEqualTo(basicPart.getPartNumber());
-        Assertions.assertThat(savedBasicPart.getName()).isEqualTo(basicPart.getName());
-        Assertions.assertThat(savedBasicPart.getDescription()).isEqualTo(basicPart.getDescription());
-        Assertions.assertThat(savedBasicPart.getSerialNumber()).isEqualTo(basicPart.getSerialNumber());
-        Assertions.assertThat(savedBasicPart.getType()).isEqualTo(basicPart.getType());
-        Assertions.assertThat(savedBasicPart.getCyclesSinceNew()).isEqualTo(basicPart.getCyclesSinceNew());
-        Assertions.assertThat(savedBasicPart.getTimeSinceNew()).isEqualTo(basicPart.getTimeSinceNew());
-
-    }
-
-    @Test
-    public void basicPartRepositoryFindAllReturnFanBlades() throws Exception {
-        BasicPart basicPart1 = BasicPart.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .build();
-        BasicPart basicPart2 = BasicPart.builder()
+        basicPart2 = BasicPart.builder()
                 .partNumber("PartNumberTest2")
                 .name("NameTest2")
                 .description("DescriptionTest2")
@@ -79,6 +51,28 @@ public class BasicPartRepositoryTest {
                 .cyclesSinceNew("CycleSinceNewTest2")
                 .timeSinceNew("TimeSinceNewTest2")
                 .build();
+    }
+
+    @Test
+    public void basicPartRepositorySave() {
+
+        basicPartRepository.save(basicPart1);
+
+        BasicPart savedBasicPart = entityManager.find(BasicPart.class, basicPart1.getPartId());
+
+        Assertions.assertThat(savedBasicPart).isNotNull();
+        Assertions.assertThat(savedBasicPart.getPartNumber()).isEqualTo(basicPart1.getPartNumber());
+        Assertions.assertThat(savedBasicPart.getName()).isEqualTo(basicPart1.getName());
+        Assertions.assertThat(savedBasicPart.getDescription()).isEqualTo(basicPart1.getDescription());
+        Assertions.assertThat(savedBasicPart.getSerialNumber()).isEqualTo(basicPart1.getSerialNumber());
+        Assertions.assertThat(savedBasicPart.getType()).isEqualTo(basicPart1.getType());
+        Assertions.assertThat(savedBasicPart.getCyclesSinceNew()).isEqualTo(basicPart1.getCyclesSinceNew());
+        Assertions.assertThat(savedBasicPart.getTimeSinceNew()).isEqualTo(basicPart1.getTimeSinceNew());
+
+    }
+
+    @Test
+    public void basicPartRepositoryFindAllReturnFanBlades() throws Exception {
 
         basicPartRepository.save(basicPart1);
         basicPartRepository.save(basicPart2);
@@ -109,24 +103,6 @@ public class BasicPartRepositoryTest {
 
     @Test
     public void basicPartRepositoryFindByIdReturnFanBlade() {
-        BasicPart basicPart1 = BasicPart.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .build();
-        BasicPart basicPart2 = BasicPart.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
 
         basicPartRepository.save(basicPart1);
         basicPartRepository.save(basicPart2);
@@ -139,24 +115,7 @@ public class BasicPartRepositoryTest {
 
     @Test
     public void fanBladeRepositoryDelete() throws Exception {
-        BasicPart basicPart1 = BasicPart.builder()
-                .partNumber("PartNumberTest")
-                .name("NameTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .build();
-        BasicPart basicPart2 = BasicPart.builder()
-                .partNumber("PartNumberTest2")
-                .name("NameTest2")
-                .description("DescriptionTest2")
-                .serialNumber("SerialNumberTest2")
-                .type(PartType.Basic)
-                .cyclesSinceNew("CycleSinceNewTest2")
-                .timeSinceNew("TimeSinceNewTest2")
-                .build();
+
 
         basicPartRepository.save(basicPart1);
         basicPartRepository.save(basicPart2);

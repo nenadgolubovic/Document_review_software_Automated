@@ -13,6 +13,7 @@ import com.example.document_review.service.impl.DocumentServiceImpl;
 import com.example.document_review.service.impl.PartServiceImpl;
 import com.example.document_review.validator.impl.DocumentFileValidator;
 import com.example.document_review.validator.impl.DocumentSaveValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -59,11 +60,18 @@ public class DocumentServiceTest {
     private DocumentServiceImpl documentServiceImpl; // koristi mokove
 
 
+    private FanBlade fanBlade;
+    private FanBladeDto fanBladeDto;
+    private DocumentDto documentDto;
+    private MultipartFile fakeFile;
+    private Document document1;
+    private Document document2;
+    private DocumentDto documentDto1;
+    private DocumentDto documentDto2;
 
-    @Test
-    void uploadDocumentShouldSaveDocument() throws IOException {
-
-        FanBladeDto fanBladeDto = FanBladeDto.builder()
+    @BeforeEach
+    public void setUp() {
+        fanBladeDto = FanBladeDto.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
                 .serialNumber("SerialNumberTest")
@@ -73,19 +81,60 @@ public class DocumentServiceTest {
                 .momentWeight("MomentWeightTest")
                 .build();
 
-        DocumentDto documentDto = DocumentDto.builder()
+        documentDto = DocumentDto.builder()
                 .documentName("DocumentNameTest")
                 .partId(1)
                 .documentRoute("DocumentRouteTest.pdf")
                 .documentDate(LocalDate.now())
                 .build();
+        document1 = Document.builder()
+                .documentName("DocumentNameTest")
+                .partId(fanBlade.getPartId())
+                .documentRoute("DocumentRouteTest.pdf")
+                .documentDate(LocalDate.now())
+                .build();
 
-        MultipartFile fakeFile = new MockMultipartFile(
+        document2 = Document.builder()
+                .documentName("DocumentNameTest2")
+                .partId(fanBlade.getPartId())
+                .documentRoute("DocumentRouteTest2.pdf")
+                .documentDate(LocalDate.now())
+                .build();
+        documentDto1 = DocumentDto.builder()
+                .documentName("DocumentNameTest1")
+                .partId(fanBlade.getPartId())
+                .documentRoute("DocumentRouteTest1.pdf")
+                .documentDate(LocalDate.now())
+                .build();
+
+        documentDto2 = DocumentDto.builder()
+                .documentName("DocumentNameTest2")
+                .partId(fanBlade.getPartId())
+                .documentRoute("DocumentRouteTest2.pdf")
+                .documentDate(LocalDate.now())
+                .build();
+        fanBlade = FanBlade.builder()
+                .partNumber("PartNumberTest")
+                .description("DescriptionTest")
+                .serialNumber("SerialNumberTest")
+                .type(PartType.FanBlade)
+                .cyclesSinceNew("CycleSinceNewTest")
+                .timeSinceNew("TimeSinceNewTest")
+                .momentWeight("MomentWeightTest")
+                .build();
+        fakeFile = new MockMultipartFile(
                 "document",
                 "test.pdf",
                 "application/pdf",
                 "Dummy PDF content".getBytes()
+
         );
+
+    }
+
+
+    @Test
+    void uploadDocumentShouldSaveDocument() throws IOException {
 
 
         when(partServiceImpl.getById(documentDto.getPartId())).thenReturn(fanBladeDto);
@@ -127,44 +176,6 @@ public class DocumentServiceTest {
 
     @Test
     public void documentServiceGetByIdDocumentDtos(){
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest")
-                .build();
-
-
-        Document document1 = Document.builder()
-                .documentName("DocumentNameTest")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
-        Document document2 = Document.builder()
-                .documentName("DocumentNameTest2")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest2.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-        DocumentDto documentDto1 = DocumentDto.builder()
-                .documentName("DocumentNameTest1")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest1.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
-        DocumentDto documentDto2 = DocumentDto.builder()
-                .documentName("DocumentNameTest2")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest2.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
 
         List<Document> documents = Arrays.asList(document1, document2);
 
@@ -212,40 +223,6 @@ public class DocumentServiceTest {
     @Test
     public void documentServiceFindAllDocumentsDocumentDtos() throws Exception {
 
-        FanBlade fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest").build();
-
-        Document document1 = Document.builder()
-                .documentName("DocumentNameTest1")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest1.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-        Document document2 = Document.builder()
-                .documentName("DocumentNameTest2")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest2.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-
-        DocumentDto documentDto1 = DocumentDto.builder()
-                .documentName("DocumentNameTest1")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest1.pdf")
-                .documentDate(LocalDate.now())
-                .build();
-        DocumentDto documentDto2 = DocumentDto.builder()
-                .documentName("DocumentNameTest2")
-                .partId(fanBlade.getPartId())
-                .documentRoute("DocumentRouteTest2.pdf")
-                .documentDate(LocalDate.now())
-                .build();
 
         List<Document> documents = Arrays.asList(document1, document2);
         when(documentRepository.findAll()).thenReturn(documents);
