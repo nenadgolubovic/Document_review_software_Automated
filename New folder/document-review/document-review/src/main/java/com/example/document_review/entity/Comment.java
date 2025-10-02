@@ -1,6 +1,7 @@
 package com.example.document_review.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Builder
 @Entity
+@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +23,6 @@ public class Comment {
     private boolean isApproved;
     private Integer rate;
 
-    public Comment(Integer commentId, String commentText, Integer userId, Integer documentId, String commentTitle, LocalDateTime commentDate, boolean isApproved, Integer rate) {
-        this.commentId = commentId;
-        this.commentText = commentText;
-        this.userId = userId;
-        this.documentId = documentId;
-        this.commentTitle = commentTitle;
-        this.commentDate = commentDate;
-        this.isApproved = isApproved;
-        this.rate = rate;
-    }
 
 
     public Comment() {
