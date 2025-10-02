@@ -37,7 +37,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void UserService_Register() {
+    public void UserServiceRegister() {
 
         User user = User.builder()
                 .username("UsernameTest")
@@ -70,7 +70,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void UserService_findById_UserDto(){
+    public void UserServiceFindByIdUserDto(){
         User user = User.builder()
                 .username("UsernameTest")
                 .password("PasswordTest")
@@ -103,7 +103,7 @@ public class UserServiceTest {
 
     }
     @Test
-    public void UserService_loginUser_User(){
+    public void UserServiceLoginUserUser(){
         User user = User.builder()
                 .username("UsernameTest")
                 .password("EncodedPassword")
@@ -123,7 +123,7 @@ public class UserServiceTest {
         assertThat(result).isEqualTo(user);
     }
     @Test
-    public void UserService_findByUsername_User(){
+    public void UserServiceFindByUsernameUser(){
 
         User user = User.builder()
                 .username("UserNameTest")

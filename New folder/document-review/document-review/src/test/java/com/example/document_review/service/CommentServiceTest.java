@@ -44,7 +44,7 @@ public class CommentServiceTest {
     private CommentServiceImpl commentServiceImpl;
 
     @Test
-    public void CommentServiceImpl_Save() throws ValidationException {
+    public void CommentServiceImplSave() throws ValidationException {
 
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
@@ -82,7 +82,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_FindAll_ReturnCommentDtos() throws Exception {
+    public void CommentServiceImplFindAllReturnCommentDtos() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -127,7 +127,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_ApproveComment() throws Exception {
+    public void CommentServiceImplApproveComment() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -145,7 +145,7 @@ public class CommentServiceTest {
 
     }
     @Test
-    public void CommentServiceImpl_ApproveComment_NotUpdateWhenAlreadyApproved() throws Exception {
+    public void CommentServiceImplApproveCommentNotUpdateWhenAlreadyApproved() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -164,7 +164,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_RateComment_WhenNotRated() throws Exception {
+    public void CommentServiceImplRateCommentWhenNotRated() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -180,7 +180,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_RateComment_WhenRated() throws Exception {
+    public void CommentServiceImplRateCommentWhenRated() throws Exception {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -196,7 +196,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void CommentServiceImpl_GetAllByDocumentId_CommentDtos(){
+    public void CommentServiceImplGetAllByDocumentIdCommentDtos(){
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title1")
                 .comment("Test comment1")

@@ -32,7 +32,7 @@ public class BasicPartRepositoryTest {
     }
 
     @Test
-    public void FanBladeRepository_Save() {
+    public void FanBladeRepositorySave() {
 
         BasicPart basicPart = BasicPart.builder()
                 .partNumber("PartNumberTest")
@@ -60,7 +60,7 @@ public class BasicPartRepositoryTest {
     }
 
     @Test
-    public void FanBladeRepository_FindAll_ReturnFanBlades() throws Exception {
+    public void FanBladeRepositoryFindAllReturnFanBlades() throws Exception {
         BasicPart basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -108,7 +108,7 @@ public class BasicPartRepositoryTest {
     }
 
     @Test
-    public void FanBladeRepository_FindById_ReturnFanBlade() {
+    public void FanBladeRepositoryFindById_ReturnFanBlade() {
         BasicPart basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")
@@ -138,7 +138,7 @@ public class BasicPartRepositoryTest {
     }
 
     @Test
-    public void FanBladeRepository_Delete() throws Exception {
+    public void FanBladeRepositoryDelete() throws Exception {
         BasicPart basicPart1 = BasicPart.builder()
                 .partNumber("PartNumberTest")
                 .name("NameTest")

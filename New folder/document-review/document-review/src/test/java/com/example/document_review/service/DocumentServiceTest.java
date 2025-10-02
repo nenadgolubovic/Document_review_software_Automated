@@ -61,7 +61,7 @@ public class DocumentServiceTest {
 
 
     @Test
-    void uploadDocument_ShouldSaveDocument() throws IOException {
+    void uploadDocumentShouldSaveDocument() throws IOException {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -127,7 +127,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    void uploadDocument_ShouldThrowException_WhenFileIsEmpty() {
+    void uploadDocumentShouldThrowExceptionWhenFileIsEmpty() {
         MultipartFile multipartFile = mock(MultipartFile.class);
         DocumentDto documentDto = new DocumentDto();
         documentDto.setPartId(1);
@@ -143,7 +143,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentService_GetById_DocumentDtos(){
+    public void DocumentServiceGetByIdDocumentDtos(){
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
@@ -202,7 +202,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentService_GetDocumentsByName_Resource() throws IOException {
+    public void DocumentServiceGetDocumentsByNameResource() throws IOException {
         String filename = "test.pdf";
 
         Path path = Paths.get("C:/Users/Nikola/.../document/" + filename);
@@ -218,7 +218,7 @@ public class DocumentServiceTest {
         }
     }
     @Test
-    void testGetDocumentByName_FileDoesNotExist() throws IOException {
+    void testGetDocumentByNameFileDoesNotExist() throws IOException {
         String filename = "nonexistent.pdf";
 
         Resource result = documentServiceImpl.getDocumentByName(filename);
@@ -227,7 +227,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentService_findAllDocuments_DocumentDtos() throws Exception {
+    public void DocumentServiceFindAllDocumentsDocumentDtos() throws Exception {
 
         FanBlade fanBlade = FanBlade.builder()
                 .partNumber("PartNumberTest")
@@ -279,7 +279,7 @@ public class DocumentServiceTest {
     }
 
     @Test
-    public void DocumentService_DeleteById_DocumentDto(){
+    public void DocumentServiceDeleteByIdDocumentDto(){
         Integer documentId = 1;
         DocumentDto result = documentServiceImpl.deleteById(documentId);
 

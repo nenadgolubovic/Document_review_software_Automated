@@ -29,7 +29,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void userRepository_Save() {
+    public void userRepositorySave() {
         User user = User.builder()
                 .username("UsernameTest")
                 .password("PasswordTest")
@@ -49,13 +49,13 @@ public class UserRepositoryTest {
         Assertions.assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
     }
     @Test
-    public void UserRepository_FindById_ReturnUser() {
+    public void UserRepositoryFindByIdReturnUser() {
 
     }
 
 
     @Test
-    public void UserRepository_FindByUsername_ReturnUser() {
+    public void UserRepositoryFindByUsernameReturnUser() {
 
         User user = User.builder()
                 .username("UsernameTest")

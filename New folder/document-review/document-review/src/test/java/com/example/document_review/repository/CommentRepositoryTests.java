@@ -30,7 +30,7 @@ public class CommentRepositoryTests {
     private EntityManager entityManager;
 
     @Test
-    public void commentRepository_Save() {
+    public void commentRepositorySave() {
 
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
@@ -59,7 +59,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void commentRepository_FindById_ReturnComment() {
+    public void commentRepositoryFindByIdReturnComment() {
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title")
                 .comment("Test comment")
@@ -85,7 +85,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void commentRepository_FindAll_ReturnAllComments() throws Exception {
+    public void commentRepositoryFindAllReturnAllComments() throws Exception {
 
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
@@ -129,7 +129,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void commentRepository_Update_ReturnUpdatedComment(){
+    public void commentRepositoryUpdateReturnUpdatedComment(){
         Comment comment = Comment.builder()
                 .commentTitle("Test comment title 1")
                 .comment("Test comment 1")
@@ -167,7 +167,7 @@ public class CommentRepositoryTests {
     }
 
     @Test
-    public void commentRepository_GetAllByDocumentId_ReturnedAllCommentsByDocumentId() {
+    public void commentRepositoryGetAllByDocumentIdReturnedAllCommentsByDocumentId() {
         Comment comment1 = Comment.builder()
                 .commentTitle("Test comment title 1")
                 .comment("Test comment 1")
