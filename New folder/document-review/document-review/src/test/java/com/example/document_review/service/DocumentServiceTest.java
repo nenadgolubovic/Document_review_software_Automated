@@ -57,7 +57,7 @@ public class DocumentServiceTest {
     private DocumentMapper documentMapper;
 
     @InjectMocks
-    private DocumentServiceImpl documentServiceImpl; // koristi mokove
+    private DocumentServiceImpl documentServiceImpl;
 
 
     private FanBlade fanBlade;
@@ -71,6 +71,17 @@ public class DocumentServiceTest {
 
     @BeforeEach
     public void setUp() {
+
+        fanBlade = FanBlade.builder()
+                .partNumber("PartNumberTest")
+                .description("DescriptionTest")
+                .serialNumber("SerialNumberTest")
+                .type(PartType.FanBlade)
+                .cyclesSinceNew("CycleSinceNewTest")
+                .timeSinceNew("TimeSinceNewTest")
+                .momentWeight("MomentWeightTest")
+                .build();
+
         fanBladeDto = FanBladeDto.builder()
                 .partNumber("PartNumberTest")
                 .description("DescriptionTest")
@@ -112,15 +123,6 @@ public class DocumentServiceTest {
                 .partId(fanBlade.getPartId())
                 .documentRoute("DocumentRouteTest2.pdf")
                 .documentDate(LocalDate.now())
-                .build();
-        fanBlade = FanBlade.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest")
                 .build();
         fakeFile = new MockMultipartFile(
                 "document",
