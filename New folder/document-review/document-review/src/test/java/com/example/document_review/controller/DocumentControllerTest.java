@@ -59,16 +59,6 @@ public class DocumentControllerTest {
 
     @BeforeEach
     public void init() {
-        FanBladeDto fanBladeDto = FanBladeDto.builder()
-                .partNumber("PartNumberTest")
-                .description("DescriptionTest")
-                .serialNumber("SerialNumberTest")
-                .type(PartType.FanBlade)
-                .cyclesSinceNew("CycleSinceNewTest")
-                .timeSinceNew("TimeSinceNewTest")
-                .momentWeight("MomentWeightTest")
-                .build();
-
         documentDto1 = DocumentDto.builder()
                 .documentName("DocumentNameTest")
                 .partId(1)

@@ -130,7 +130,7 @@ public class FanBladeControllerTest {
         verify(fanBladeServiceImpl, times(1)).getAll();
     }
     @Test
-    public void fanBladeControllerDeleteShouldReturnOk_WhenFanBladeExists() throws Exception {
+    public void fanBladeControllerDeleteShouldReturnOkWhenFanBladeExists() throws Exception {
         Integer fanBladeId = 1;
 
         // Mock servisa da postoji DTO

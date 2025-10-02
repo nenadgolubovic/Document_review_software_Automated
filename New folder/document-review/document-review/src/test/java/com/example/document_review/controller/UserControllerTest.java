@@ -46,7 +46,6 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     private UserDto userDto1;
-    private UserDto userDto2;
     private User user;
 
     @Autowired
@@ -63,14 +62,6 @@ public class UserControllerTest {
                 .firstName("FirstNameTest1")
                 .lastName("LastNameTest1")
                 .email("EmailTest@EmailTest1")
-                .build();
-
-        userDto2 = UserDto.builder()
-                .username("UsernameTest2")
-                .password("PasswordTest2")
-                .firstName("FirstNameTest2")
-                .lastName("LastNameTest2")
-                .email("EmailTest@EmailTest2")
                 .build();
         user = User.builder()
                 .username("UsernameTest")
@@ -190,7 +181,6 @@ public class UserControllerTest {
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        HttpSession session = request.getSession(true);
 
         ResponseEntity<String> result = controller.logoutUser(request, response);
 
