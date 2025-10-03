@@ -27,12 +27,12 @@ public class PartController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<PartDto>> findAll() throws Exception {
+    public ResponseEntity<List<PartDto>> findAll() throws EntityNotFoundException {
         return new ResponseEntity<>(partService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/getById")
-    public PartDto getById(@RequestParam int id) {
+    public PartDto getById(@RequestParam int id) throws EntityNotFoundException {
         return partService.getById(id);
     }
 

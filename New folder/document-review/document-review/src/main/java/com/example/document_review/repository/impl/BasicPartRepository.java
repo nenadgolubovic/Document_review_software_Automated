@@ -1,10 +1,9 @@
 package com.example.document_review.repository.impl;
 
 import com.example.document_review.entity.BasicPart;
-import com.example.document_review.exception.RepositoryOperationException;
 import com.example.document_review.repository.MyRepository;
+import com.example.document_review.exception.EntityNotFoundException;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -38,7 +37,7 @@ public class BasicPartRepository implements MyRepository<BasicPart, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws RepositoryOperationException {
+    public void delete(Integer id) throws EntityNotFoundException {
         BasicPart basicPart = entityManager.find(BasicPart.class, id);
 
         if (basicPart != null) {

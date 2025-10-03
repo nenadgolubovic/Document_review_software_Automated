@@ -3,7 +3,7 @@ package com.example.document_review.repository.impl;
 import com.example.document_review.entity.Part;
 import com.example.document_review.repository.MyRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.document_review.exception.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -25,13 +25,13 @@ public class PartRepository implements MyRepository <Part, Integer> {
     }
 
     @Override
-    public List<Part> findAll() throws Exception {
+    public List<Part> findAll() throws EntityNotFoundException {
         return entityManager.createQuery("select bp from Part bp", Part.class)
                 .getResultList();
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws EntityNotFoundException {
         Part part = entityManager.find(Part.class, id);
 
         if (part != null) {

@@ -10,7 +10,7 @@ import java.util.List;
 public interface MyRepository <E, I> {
     void save(E entity) throws RepositoryOperationException;
     E findById(I id) throws EntityNotFoundException;
-    List<E> findAll() throws Exception;
-    void delete(I id) throws RepositoryOperationException;
+    List<E> findAll() throws EntityNotFoundException;
+    void delete(I id) throws EntityNotFoundException;
     void update(E entity) throws RepositoryOperationException;
 }

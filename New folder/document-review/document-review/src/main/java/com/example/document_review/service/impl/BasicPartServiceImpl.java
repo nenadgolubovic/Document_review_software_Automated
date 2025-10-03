@@ -1,7 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.BasicPartDto;
-import com.example.document_review.exception.BasicPartServiceException;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.BasicPartMapper;
 import com.example.document_review.repository.impl.BasicPartRepository;
 import com.example.document_review.service.BasicPartService;
@@ -30,12 +30,12 @@ public class BasicPartServiceImpl implements BasicPartService {
 
     @Override
     @Transactional
-    public void delete(Integer partId) throws BasicPartServiceException {
+    public void delete(Integer partId) throws EntityNotFoundException {
         basicPartRepository.delete(partId);
     }
 
     @Override
-    public List<BasicPartDto> getAll() throws BasicPartServiceException {
+    public List<BasicPartDto> getAll() throws EntityNotFoundException {
         return basicPartRepository.findAll().stream().map(basicPartMapper::toDto).collect(Collectors.toList());
     }
 

@@ -1,7 +1,7 @@
 package com.example.document_review.service.impl;
 
 import com.example.document_review.dto.PartDto;
-import com.example.document_review.exception.RepositoryOperationException;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.PartMapper;
 import com.example.document_review.repository.impl.PartRepository;
 import com.example.document_review.service.PartService;
@@ -35,14 +35,14 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<PartDto> getAll() throws Exception {
+    public List<PartDto> getAll() throws EntityNotFoundException {
         return partRepository.findAll().stream().map(partMapper::toDto).collect(Collectors.toList());
 
     }
 
     @Override
     @Transactional
-    public void delete(Integer partId) throws RepositoryOperationException {
+    public void delete(Integer partId) throws EntityNotFoundException {
         partRepository.delete(partId);
     }
 }
