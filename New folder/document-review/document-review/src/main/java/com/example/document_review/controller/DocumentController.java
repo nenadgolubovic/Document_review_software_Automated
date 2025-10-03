@@ -83,7 +83,7 @@ public class DocumentController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<DocumentDto> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<DocumentDto> deleteById(@PathVariable Integer id) throws EntityNotFoundException{
         documentService.deleteById(id);
         return ResponseEntity.ok().build();
     }

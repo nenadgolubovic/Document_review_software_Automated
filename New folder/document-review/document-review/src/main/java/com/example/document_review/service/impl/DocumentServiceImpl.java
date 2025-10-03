@@ -5,6 +5,7 @@ import com.example.document_review.dto.PartDto;
 import com.example.document_review.entity.Document;
 import com.example.document_review.exception.DocumentServiceException;
 import com.example.document_review.exception.DocumentStorageException;
+import com.example.document_review.exception.EntityNotFoundException;
 import com.example.document_review.mapper.impl.DocumentMapper;
 import com.example.document_review.mapper.impl.PartMapper;
 import com.example.document_review.repository.impl.DocumentRepository;
@@ -111,7 +112,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 
     @Override
-    public List<DocumentDto> findAllDocuments() throws Exception, DocumentServiceException {
+    public List<DocumentDto> findAllDocuments() throws EntityNotFoundException{
         return documentRepository.findAll().stream().map(entity -> documentMapper.toDto(entity)).collect(Collectors.toList());
     }
 

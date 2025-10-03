@@ -8,6 +8,6 @@ import java.util.List;
 public interface PartService{
     void save(PartDto partDto) throws PartServiceException;
     PartDto getById(int id)throws PartServiceException;
-    List<PartDto> getAll() throws PartServiceException, Exception;
+    List<PartDto> getAll() throws PartServiceException;
     void delete(Integer id) throws PartServiceException;
 }

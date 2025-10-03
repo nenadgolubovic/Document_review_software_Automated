@@ -3,7 +3,7 @@ package com.example.document_review.service.impl;
 import com.example.document_review.dto.CommentDto;
 import com.example.document_review.entity.Comment;
 import com.example.document_review.entity.Document;
-import com.example.document_review.exception.CommentOperationException;
+import com.example.document_review.exception.CommentServiceException;
 import com.example.document_review.exception.ValidationException;
 import com.example.document_review.mapper.impl.CommentMapper;
 import com.example.document_review.repository.impl.CommentRepository;
@@ -46,13 +46,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> findAll() throws CommentOperationException {
+    public List<CommentDto> findAll() throws CommentServiceException {
         return commentRepository.findAll().stream().map(commentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public void approveComment(Integer id) throws CommentOperationException
+    public void approveComment(Integer id) throws CommentServiceException
     {
 
         Comment comment = commentRepository.findById(id);
@@ -64,7 +64,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void rejectComment(Integer id) throws CommentOperationException{
+    public void rejectComment(Integer id) throws CommentServiceException{
         try{
             Comment comment = commentRepository.findById(id);
             if (comment.isApproved()) {
@@ -72,7 +72,7 @@ public class CommentServiceImpl implements CommentService {
             }
             commentRepository.update(comment);
         }catch (Exception e){
-            throw new CommentOperationException("Failed to reject comment with id: " + id, e);
+            throw new CommentServiceException("Failed to reject comment with id: " + id, e);
         }
 
 
@@ -80,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void rateComment(Integer commentId, Integer rate) throws CommentOperationException{
+    public void rateComment(Integer commentId, Integer rate) throws CommentServiceException{
         Comment comment = commentRepository.findById(commentId);
         comment.setRate(rate);
 

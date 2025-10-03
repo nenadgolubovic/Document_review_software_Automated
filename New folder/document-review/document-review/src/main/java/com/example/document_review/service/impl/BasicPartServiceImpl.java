@@ -30,7 +30,7 @@ public class BasicPartServiceImpl implements BasicPartService {
 
     @Override
     @Transactional
-    public void delete(Integer partId) throws Exception, BasicPartServiceException {
+    public void delete(Integer partId) throws BasicPartServiceException {
         basicPartRepository.delete(partId);
     }
 
